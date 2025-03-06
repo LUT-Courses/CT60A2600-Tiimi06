@@ -10,7 +10,10 @@ int main(void) {
     char *luettavaTNimi = NULL;
     int iValinta = 0;
 
-    
+    int iTestiInt = 0;
+
+
+
     do
     {
         /* code */
