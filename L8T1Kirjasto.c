@@ -23,6 +23,20 @@ char *kysyNimi(char *pPromtti) {
     return(valiaikainenTaulukko);
 }
 
+int valikko() {
+    int iValinta=0;
+    printf("Valitse haluamasi toiminto:\n");
+    printf("1) Lue tiedosto\n");
+    printf("2) Tallenna lista etuperin\n");
+    printf("3) Tallenna lista takaperin\n");
+    printf("4) Tyhjennä lista\n");
+    printf("0) Lopeta\n");
+    printf("Anna valintasi: ");
+    scanf("%d", &iValinta);
+    getchar();
+    return(iValinta);
+}
+
 TIETO *lisaaAlkio(TIETO *pAlku, char *sukuNimi, int lkm) {
     TIETO *pUusi = NULL, *ptr = NULL; //luodaan uusi alkio talennetaan sen pUusi. Ptr on liukuri, joka auttaa meitä lisäämään uusi alkio listaan.
 
