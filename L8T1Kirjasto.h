@@ -17,6 +17,7 @@ char *kysyNimi(char *pPromtti);
 TIETO *lisaaAlkio(TIETO *pAlku, char *sukuNimi, int lkm);
 TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi);
 void tulostaAlkiot(TIETO *pA);
+TIETO *tyhjennaLista(TIETO *pA);
 
 
 
