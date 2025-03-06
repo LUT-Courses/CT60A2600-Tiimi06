@@ -8,6 +8,17 @@ int main(void) {
     // osoittaa linkitetty listaan ensimmäiseen alkion osoiteeseen
     TIETO *pAlku = NULL;
     char *luettavaTNimi = NULL;
+    int iValinta = 0;
+
+    int iTestiInt = 0;
+
+
+
+    do
+    {
+        /* code */
+    } while (iValinta == 0);
+    
 
     luettavaTNimi = kysyNimi("Anna luettavan tiedoston nimi");
     printf("\n");
