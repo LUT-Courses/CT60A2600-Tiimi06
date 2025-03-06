@@ -103,6 +103,8 @@ TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi) {
     
 }
 
+
+
 void tulostaAlkiot(TIETO *pA) {
     TIETO *ptr = pA;
 
