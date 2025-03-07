@@ -2,7 +2,7 @@
 
 # Pääohjelma
 L8T1: L8T1.o L8T1Kirjasto.o
-	gcc -o Projekti L8T1.o L8T1Kirjasto.o
+	gcc -o projekti L8T1.o L8T1Kirjasto.o
 
 # Pääohjelman objektitiedosto
 L8T1.o: L8T1.c L8T1Kirjasto.h
