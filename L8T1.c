@@ -46,12 +46,10 @@ int main(void) {
     printf("\n");
 
    
-    
-
-
    
     // vapautetaan muistit
-
+    free(iValinta);
+    iValinta = NULL;
     free(luettavaTNimi);
     luettavaTNimi = NULL;
 
