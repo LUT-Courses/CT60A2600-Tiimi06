@@ -139,7 +139,6 @@ void tallennaEtuperin(TIETO *pA) {
         fprintf(Tiedosto, "%s,%d\n", ptr->sukunimi, ptr->lukumaara);
         ptr = ptr->pSeuraava;
     }
-    free(aTiedNimi);
 
     fclose(Tiedosto);
 
@@ -173,7 +172,6 @@ void tallennaTakaperin(TIETO *pA) {
         ptr = ptr->pEdellinen;
     }
     fclose(Tiedosto);
-    free(aTiedNimi);
     return;
 
 }

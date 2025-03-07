@@ -48,8 +48,6 @@ int main(void) {
    
    
     // vapautetaan muistit
-    free(iValinta);
-    iValinta = NULL;
     free(luettavaTNimi);
     luettavaTNimi = NULL;
 
