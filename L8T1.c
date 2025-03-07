@@ -22,12 +22,14 @@ int main(void) {
             pAlku = lueTiedosto(pAlku, luettavaTNimi);
         }else if (iValinta == 2)
         {
-                // kokeillaan tulosta
-               void tallennaEtuperin(TIETO *pA);
+            printf("Main tallennetaan etuperin");
+            tallennaEtuperin(pAlku);
 
         } else if(iValinta == 3){
+            printf("Main tallennetaan takaperin");
 
-            printf("Valinta3");
+            tallennaTakaperin(pAlku);
+
         }else if(iValinta == 4){
             // kokeillaan vapauta
             pAlku = tyhjennaLista(pAlku);

@@ -18,6 +18,7 @@ int valikko();
 TIETO *lisaaAlkio(TIETO *pAlku, char *sukuNimi, int lkm);
 TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi);
 void tallennaEtuperin(TIETO *pA) ;
+void tallennaTakaperin(TIETO *pA);
 TIETO *tyhjennaLista(TIETO *pA);
 
 

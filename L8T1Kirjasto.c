@@ -110,6 +110,7 @@ TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi) {
             // luo sellainen aliohjelma lisaaAlkio(TIETO *pA, char *sukuNimi, int lukuMaara), tämä palauta pA
         }
     }
+    printf("Tiedosto '%s' luettu.\n", tiedostonNimi);
 
     fclose(Tiedosto);
 
@@ -121,20 +122,21 @@ void tallennaEtuperin(TIETO *pA) {
     TIETO *ptr = pA;
     FILE *Tiedosto = NULL;
     char aTiedNimi [TIEDOSTONKOKO];
+    printf("Tallennetan etuperin");
 
     //Kysytään ja tallennetaan tiedoston nimi
     printf("Anna kirjoitettavan tiedoston nimi: ");
     scanf("%s", aTiedNimi);
     getchar();
     //Virheentarkistus
-    if ((Tiedosto = fopen(aTiedNimi, "r")) == NULL) {
+    if ((Tiedosto = fopen(aTiedNimi, "w")) == NULL) {
         perror("Tiedoston avaaminen lukemiseen varten ei onnistunut, lopetetaan.");
         exit(0);
     }
 
     // While loop jolla tallennetaan tiedot tiedostoon
     while (ptr != NULL) {
-        fprintf("%s,%d\n", ptr->sukunimi, ptr->lukumaara);
+        fprintf(Tiedosto, "%s,%d\n", ptr->sukunimi, ptr->lukumaara);
         ptr = ptr->pSeuraava;
     }
 
@@ -145,21 +147,27 @@ void tallennaTakaperin(TIETO *pA) {
     TIETO *ptr = pA;
     FILE *Tiedosto = NULL;
     char aTiedNimi [TIEDOSTONKOKO];
+        printf("Tallennetan takaperin");
+
     //Kysytään ja tallennetaan tiedoston nimi
     printf("Anna kirjoitettavan tiedoston nimi: ");
     scanf("%s", aTiedNimi);
     getchar();
     //Virheentarkistus
-    if ((Tiedosto = fopen(aTiedNimi, "r")) == NULL) {
+    if ((Tiedosto = fopen(aTiedNimi, "w")) == NULL) {
         perror("Tiedoston avaaminen lukemiseen varten ei onnistunut, lopetetaan.");
         exit(0);
     }
-
-    // While loop jolla tallennetaan tiedot tiedostoon
-    //SAMPPA MUUTA TÄÄ TOIMIMAAN TAKAPERIN
-    while (ptr != NULL) {
-        fprintf("%s,%d\n", ptr->sukunimi, ptr->lukumaara);
+    // Loopilla siirrytään listan perälle
+    while (ptr->pSeuraava != NULL) {
         ptr = ptr->pSeuraava;
+    }
+
+    
+    // While loop jolla tallennetaan tiedot tiedostoon takaperin
+    while (ptr != NULL) {
+        fprintf(Tiedosto, "%s,%d\n", ptr->sukunimi, ptr->lukumaara);
+        ptr = ptr->pEdellinen;
     }
 
     return;
