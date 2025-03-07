@@ -22,6 +22,7 @@ int main(void) {
             pAlku = lueTiedosto(pAlku, luettavaTNimi);
         }else if (iValinta == 2)
         {
+            
             tallennaEtuperin(pAlku);
 
         } else if(iValinta == 3){
