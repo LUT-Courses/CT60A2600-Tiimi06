@@ -117,18 +117,54 @@ TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi) {
     
 }
 
-void tulostaAlkiot(TIETO *pA) {
+void tallennaEtuperin(TIETO *pA) {
     TIETO *ptr = pA;
+    FILE *Tiedosto = NULL;
+    char aTiedNimi [TIEDOSTONKOKO];
 
+    //Kysytään ja tallennetaan tiedoston nimi
+    printf("Anna kirjoitettavan tiedoston nimi: ");
+    scanf("%s", aTiedNimi);
+    getchar();
+    //Virheentarkistus
+    if ((Tiedosto = fopen(aTiedNimi, "r")) == NULL) {
+        perror("Tiedoston avaaminen lukemiseen varten ei onnistunut, lopetetaan.");
+        exit(0);
+    }
+
+    // While loop jolla tallennetaan tiedot tiedostoon
     while (ptr != NULL) {
-        printf("Sukunimi: %s, Määrä: %d.\n", ptr->sukunimi, ptr->lukumaara);
+        fprintf("%s,%d\n", ptr->sukunimi, ptr->lukumaara);
         ptr = ptr->pSeuraava;
     }
 
     return;
 
 }
+void tallennaTakaperin(TIETO *pA) {
+    TIETO *ptr = pA;
+    FILE *Tiedosto = NULL;
+    char aTiedNimi [TIEDOSTONKOKO];
+    //Kysytään ja tallennetaan tiedoston nimi
+    printf("Anna kirjoitettavan tiedoston nimi: ");
+    scanf("%s", aTiedNimi);
+    getchar();
+    //Virheentarkistus
+    if ((Tiedosto = fopen(aTiedNimi, "r")) == NULL) {
+        perror("Tiedoston avaaminen lukemiseen varten ei onnistunut, lopetetaan.");
+        exit(0);
+    }
 
+    // While loop jolla tallennetaan tiedot tiedostoon
+    //SAMPPA MUUTA TÄÄ TOIMIMAAN TAKAPERIN
+    while (ptr != NULL) {
+        fprintf("%s,%d\n", ptr->sukunimi, ptr->lukumaara);
+        ptr = ptr->pSeuraava;
+    }
+
+    return;
+
+}
 
 TIETO *tyhjennaLista(TIETO *pA) {
     TIETO *ptr = pA;

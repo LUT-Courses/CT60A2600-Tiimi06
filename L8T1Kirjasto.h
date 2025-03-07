@@ -17,7 +17,7 @@ char *kysyNimi(char *pPromtti);
 int valikko();
 TIETO *lisaaAlkio(TIETO *pAlku, char *sukuNimi, int lkm);
 TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi);
-void tulostaAlkiot(TIETO *pA);
+void tallennaEtuperin(TIETO *pA) ;
 TIETO *tyhjennaLista(TIETO *pA);
 
 

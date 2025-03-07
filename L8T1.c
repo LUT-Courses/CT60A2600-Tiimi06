@@ -17,15 +17,20 @@ int main(void) {
     {
         iValinta = valikko();
         if(iValinta == 1){
-            printf("Valinta1");
+            luettavaTNimi = kysyNimi("Anna luettavan tiedoston nimi");
+             // tämä aliohjlema pitää palauta osoitinmuutuja joka osoittaa linkitettylistaan ensimmäiseen alkion osoteesee
+            pAlku = lueTiedosto(pAlku, luettavaTNimi);
         }else if (iValinta == 2)
         {
-            printf("valinta2");
+                // kokeillaan tulosta
+               void tallennaEtuperin(TIETO *pA);
 
         } else if(iValinta == 3){
+
             printf("Valinta3");
         }else if(iValinta == 4){
-            printf("Valinta4");
+            // kokeillaan vapauta
+            pAlku = tyhjennaLista(pAlku);
         } else if(iValinta == 0){
             printf("Lopetetaan.\n");
             exit(0);
@@ -36,20 +41,15 @@ int main(void) {
     } while (iValinta != 0);
     
 
-    luettavaTNimi = kysyNimi("Anna luettavan tiedoston nimi");
     printf("\n");
 
-    // tämä aliohjlema pitää palauta osoitinmuutuja joka osoittaa linkitettylistaan ensimmäiseen alkion osoteesee
-    pAlku = lueTiedosto(pAlku, luettavaTNimi);
+   
     
-    // kokeillaan tulosta
-    tulostaAlkiot(pAlku);
 
-    // kokeillaan vapauta
-    pAlku = tyhjennaLista(pAlku);
+
+   
     // vapautetaan muistit
-    free(pAlku);
-    pAlku = NULL;
+
     free(luettavaTNimi);
     luettavaTNimi = NULL;
 
