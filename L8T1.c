@@ -41,7 +41,6 @@ int main(void) {
     } while (iValinta != 0);
     
 
-    printf("\n");
 
    
     printf("Kiitos ohjelman käytöstä.\n");
