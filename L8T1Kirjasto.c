@@ -23,6 +23,20 @@ char *kysyNimi(char *pPromtti) {
     return(valiaikainenTaulukko);
 }
 
+int valikko() {
+    int iValinta=0;
+    printf("Valitse haluamasi toiminto:\n");
+    printf("1) Lue tiedosto\n");
+    printf("2) Tallenna lista etuperin\n");
+    printf("3) Tallenna lista takaperin\n");
+    printf("4) Tyhjennä lista\n");
+    printf("0) Lopeta\n");
+    printf("Anna valintasi: ");
+    scanf("%d", &iValinta);
+    getchar();
+    return(iValinta);
+}
+
 TIETO *lisaaAlkio(TIETO *pAlku, char *sukuNimi, int lkm) {
     TIETO *pUusi = NULL, *ptr = NULL; //luodaan uusi alkio talennetaan sen pUusi. Ptr on liukuri, joka auttaa meitä lisäämään uusi alkio listaan.
 
@@ -96,6 +110,7 @@ TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi) {
             // luo sellainen aliohjelma lisaaAlkio(TIETO *pA, char *sukuNimi, int lukuMaara), tämä palauta pA
         }
     }
+    printf("Tiedosto '%s' luettu.\n", tiedostonNimi);
 
     fclose(Tiedosto);
 
@@ -103,20 +118,59 @@ TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi) {
     
 }
 
+<<<<<<< HEAD
 
 
 void tulostaAlkiot(TIETO *pA) {
+=======
+void tallennaEtuperin(TIETO *pA, char *tiedostonNimi) {
+>>>>>>> 4ff6f3bf831959665ddda4aa44d5b6b535d72f6a
     TIETO *ptr = pA;
+    FILE *Tiedosto = NULL;
 
+    
+ 
+    //Virheentarkistus
+    if ((Tiedosto = fopen(tiedostonNimi, "w")) == NULL) {
+        perror("Tiedoston avaaminen lukemiseen varten ei onnistunut, lopetetaan.");
+        exit(0);
+    }
+
+    // While loop jolla tallennetaan tiedot tiedostoon
     while (ptr != NULL) {
-        printf("Sukunimi: %s, Määrä: %d.\n", ptr->sukunimi, ptr->lukumaara);
+        fprintf(Tiedosto, "%s,%d\n", ptr->sukunimi, ptr->lukumaara);
         ptr = ptr->pSeuraava;
     }
+
+    fclose(Tiedosto);
 
     return;
 
 }
+void tallennaTakaperin(TIETO *pA, char *tiedostonNimi) {
+    TIETO *ptr = pA;
+    FILE *Tiedosto = NULL;
 
+    //Virheentarkistus
+    if ((Tiedosto = fopen(tiedostonNimi, "w")) == NULL) {
+        perror("Tiedoston avaaminen lukemiseen varten ei onnistunut, lopetetaan.");
+        exit(0);
+    }
+    // Loopilla siirrytään listan perälle
+    while (ptr->pSeuraava != NULL) {
+        ptr = ptr->pSeuraava;
+    }
+
+    
+    // While loop jolla tallennetaan tiedot tiedostoon takaperin
+    while (ptr != NULL) {
+        fprintf(Tiedosto, "%s,%d\n", ptr->sukunimi, ptr->lukumaara);
+        ptr = ptr->pEdellinen;
+    }
+    fclose(Tiedosto);
+    return;
+
+}
 
 TIETO *tyhjennaLista(TIETO *pA) {
     TIETO *ptr = pA;

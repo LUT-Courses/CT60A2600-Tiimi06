@@ -7,7 +7,7 @@
 int main(void) {
     // osoittaa linkitetty listaan ensimmäiseen alkion osoiteeseen
     TIETO *pAlku = NULL;
-    char *luettavaTNimi = NULL;
+    char *luettavaTNimi = NULL, *kirjoitettavaTNimiEtu = NULL, *kirjoitettavaTNimiTaka = NULL;
     int iValinta = 0;
 
 
@@ -15,25 +15,56 @@ int main(void) {
 
     do
     {
-        /* code */
-    } while (iValinta == 0);
+        iValinta = valikko();
+        if(iValinta == 1){
+            luettavaTNimi = kysyNimi("Anna luettavan tiedoston nimi");
+             // tämä aliohjlema pitää palauta osoitinmuutuja joka osoittaa linkitettylistaan ensimmäiseen alkion osoteesee
+            pAlku = lueTiedosto(pAlku, luettavaTNimi);
+        }else if (iValinta == 2)
+        {
+            if(pAlku != NULL){
+                kirjoitettavaTNimiEtu = kysyNimi("Anna kirjoitettavan tiedoston nimi");
+                tallennaEtuperin(pAlku, kirjoitettavaTNimiEtu);
+            }else{
+                printf("Lue tiedosto ennen kirjoitusta!");
+            }
+            
+
+        } else if(iValinta == 3){
+            if(pAlku != NULL){
+                kirjoitettavaTNimiTaka = kysyNimi("Anna kirjoitettavan tiedoston nimi");
+                tallennaTakaperin(pAlku, kirjoitettavaTNimiTaka);
+            }else{
+                printf("Lue tiedosto ennen kirjoitusta!");
+            }
+            
+
+        }else if(iValinta == 4){
+            // kokeillaan vapauta
+            pAlku = tyhjennaLista(pAlku);
+        } else if(iValinta == 0){
+            printf("Lopetetaan.\n");
+
+        } else{
+            printf("Tuntematon valinta, yritä uudestaan.\n");
+        }
+        printf("\n");
+    } while (iValinta != 0);
     
 
-    luettavaTNimi = kysyNimi("Anna luettavan tiedoston nimi");
-    printf("\n");
 
-    // tämä aliohjlema pitää palauta osoitinmuutuja joka osoittaa linkitettylistaan ensimmäiseen alkion osoteesee
-    pAlku = lueTiedosto(pAlku, luettavaTNimi);
-    
-    // kokeillaan tulosta
-    tulostaAlkiot(pAlku);
+   
+    printf("Kiitos ohjelman käytöstä.\n");
 
-    // kokeillaan vapauta
-    pAlku = tyhjennaLista(pAlku);
     // vapautetaan muistit
     free(luettavaTNimi);
     luettavaTNimi = NULL;
 
-    printf("Kiitos ohjelman käytöstä.\n");
+    free(kirjoitettavaTNimiEtu);
+    kirjoitettavaTNimiEtu = NULL;
+
+    free(kirjoitettavaTNimiTaka);
+    kirjoitettavaTNimiTaka = NULL;
+    
     return(0);
 }
