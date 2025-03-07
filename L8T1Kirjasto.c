@@ -118,13 +118,7 @@ TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi) {
     
 }
 
-<<<<<<< HEAD
-
-
-void tulostaAlkiot(TIETO *pA) {
-=======
 void tallennaEtuperin(TIETO *pA, char *tiedostonNimi) {
->>>>>>> 4ff6f3bf831959665ddda4aa44d5b6b535d72f6a
     TIETO *ptr = pA;
     FILE *Tiedosto = NULL;
 
