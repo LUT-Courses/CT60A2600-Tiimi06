@@ -22,12 +22,22 @@ int main(void) {
             pAlku = lueTiedosto(pAlku, luettavaTNimi);
         }else if (iValinta == 2)
         {
-            kirjoitettavaTNimiEtu = kysyNimi("Anna kirjoitettavan tiedoston nimi:");
-            tallennaEtuperin(pAlku, kirjoitettavaTNimiEtu);
+            if(pAlku != NULL){
+                kirjoitettavaTNimiEtu = kysyNimi("Anna kirjoitettavan tiedoston nimi");
+                tallennaEtuperin(pAlku, kirjoitettavaTNimiEtu);
+            }else{
+                printf("Lue tiedosto ennen kirjoitusta!");
+            }
+            
 
         } else if(iValinta == 3){
-            kirjoitettavaTNimiTaka = kysyNimi("Anna kirjoitettavan tiedoston nimi:");
-            tallennaTakaperin(pAlku, kirjoitettavaTNimiTaka);
+            if(pAlku != NULL){
+                kirjoitettavaTNimiTaka = kysyNimi("Anna kirjoitettavan tiedoston nimi");
+                tallennaTakaperin(pAlku, kirjoitettavaTNimiTaka);
+            }else{
+                printf("Lue tiedosto ennen kirjoitusta!");
+            }
+            
 
         }else if(iValinta == 4){
             // kokeillaan vapauta
