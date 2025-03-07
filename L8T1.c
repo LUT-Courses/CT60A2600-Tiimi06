@@ -35,7 +35,7 @@ int main(void) {
             pAlku = tyhjennaLista(pAlku);
         } else if(iValinta == 0){
             printf("Lopetetaan.\n");
-            exit(0);
+
         } else{
             printf("Tuntematon valinta, yritä uudestaan.\n");
         }
