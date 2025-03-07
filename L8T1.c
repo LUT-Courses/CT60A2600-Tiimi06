@@ -7,7 +7,7 @@
 int main(void) {
     // osoittaa linkitetty listaan ensimmäiseen alkion osoiteeseen
     TIETO *pAlku = NULL;
-    char *luettavaTNimi = NULL;
+    char *luettavaTNimi = NULL, *kirjoitettavaTNimiEtu = NULL, *kirjoitettavaTNimiTaka = NULL;
     int iValinta = 0;
 
 
@@ -22,12 +22,12 @@ int main(void) {
             pAlku = lueTiedosto(pAlku, luettavaTNimi);
         }else if (iValinta == 2)
         {
-            
-            tallennaEtuperin(pAlku);
+            kirjoitettavaTNimiEtu = kysyNimi("Anna kirjoitettavan tiedoston nimi:");
+            tallennaEtuperin(pAlku, kirjoitettavaTNimiEtu);
 
         } else if(iValinta == 3){
-
-            tallennaTakaperin(pAlku);
+            kirjoitettavaTNimiTaka = kysyNimi("Anna kirjoitettavan tiedoston nimi:");
+            tallennaTakaperin(pAlku, kirjoitettavaTNimiTaka);
 
         }else if(iValinta == 4){
             // kokeillaan vapauta
@@ -50,6 +50,11 @@ int main(void) {
     free(luettavaTNimi);
     luettavaTNimi = NULL;
 
+    free(kirjoitettavaTNimiEtu);
+    kirjoitettavaTNimiEtu = NULL;
+
+    free(kirjoitettavaTNimiTaka);
+    kirjoitettavaTNimiTaka = NULL;
     
     return(0);
 }

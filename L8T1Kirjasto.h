@@ -17,8 +17,8 @@ char *kysyNimi(char *pPromtti);
 int valikko();
 TIETO *lisaaAlkio(TIETO *pAlku, char *sukuNimi, int lkm);
 TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi);
-void tallennaEtuperin(TIETO *pA) ;
-void tallennaTakaperin(TIETO *pA);
+void tallennaEtuperin(TIETO *pA, char *tiedostonNimi) ;
+void tallennaTakaperin(TIETO *pA, char *tiedostonNimi);
 TIETO *tyhjennaLista(TIETO *pA);
 
 

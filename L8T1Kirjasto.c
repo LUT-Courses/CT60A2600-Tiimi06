@@ -118,17 +118,14 @@ TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi) {
     
 }
 
-void tallennaEtuperin(TIETO *pA) {
+void tallennaEtuperin(TIETO *pA, char *tiedostonNimi) {
     TIETO *ptr = pA;
     FILE *Tiedosto = NULL;
-    char aTiedNimi [TIEDOSTONKOKO];
 
-    //Kysytään ja tallennetaan tiedoston nimi
-    printf("Anna kirjoitettavan tiedoston nimi: ");
-    scanf("%s", aTiedNimi);
-    getchar();
+    
+ 
     //Virheentarkistus
-    if ((Tiedosto = fopen(aTiedNimi, "w")) == NULL) {
+    if ((Tiedosto = fopen(tiedostonNimi, "w")) == NULL) {
         perror("Tiedoston avaaminen lukemiseen varten ei onnistunut, lopetetaan.");
         exit(0);
     }
@@ -144,17 +141,12 @@ void tallennaEtuperin(TIETO *pA) {
     return;
 
 }
-void tallennaTakaperin(TIETO *pA) {
+void tallennaTakaperin(TIETO *pA, char *tiedostonNimi) {
     TIETO *ptr = pA;
     FILE *Tiedosto = NULL;
-    char aTiedNimi [TIEDOSTONKOKO];
 
-    //Kysytään ja tallennetaan tiedoston nimi
-    printf("Anna kirjoitettavan tiedoston nimi: ");
-    scanf("%s", aTiedNimi);
-    getchar();
     //Virheentarkistus
-    if ((Tiedosto = fopen(aTiedNimi, "w")) == NULL) {
+    if ((Tiedosto = fopen(tiedostonNimi, "w")) == NULL) {
         perror("Tiedoston avaaminen lukemiseen varten ei onnistunut, lopetetaan.");
         exit(0);
     }
