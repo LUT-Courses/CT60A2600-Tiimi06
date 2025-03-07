@@ -122,7 +122,6 @@ void tallennaEtuperin(TIETO *pA) {
     TIETO *ptr = pA;
     FILE *Tiedosto = NULL;
     char aTiedNimi [TIEDOSTONKOKO];
-    printf("Tallennetan etuperin");
 
     //Kysytään ja tallennetaan tiedoston nimi
     printf("Anna kirjoitettavan tiedoston nimi: ");
@@ -149,7 +148,6 @@ void tallennaTakaperin(TIETO *pA) {
     TIETO *ptr = pA;
     FILE *Tiedosto = NULL;
     char aTiedNimi [TIEDOSTONKOKO];
-        printf("Tallennetan takaperin");
 
     //Kysytään ja tallennetaan tiedoston nimi
     printf("Anna kirjoitettavan tiedoston nimi: ");

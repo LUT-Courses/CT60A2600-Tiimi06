@@ -22,11 +22,9 @@ int main(void) {
             pAlku = lueTiedosto(pAlku, luettavaTNimi);
         }else if (iValinta == 2)
         {
-            printf("Main tallennetaan etuperin");
             tallennaEtuperin(pAlku);
 
         } else if(iValinta == 3){
-            printf("Main tallennetaan takaperin");
 
             tallennaTakaperin(pAlku);
 
@@ -46,11 +44,12 @@ int main(void) {
     printf("\n");
 
    
-   
+    printf("Kiitos ohjelman käytöstä.\n");
+
     // vapautetaan muistit
     free(luettavaTNimi);
     luettavaTNimi = NULL;
 
-    printf("Kiitos ohjelman käytöstä.\n");
+    
     return(0);
 }
