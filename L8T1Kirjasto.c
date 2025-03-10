@@ -31,7 +31,7 @@ int valikko() {
     printf("3) Tallenna lista takaperin\n");
     printf("4) Lajittele lista nousevaan järjestykseen\n");
     printf("5) Lajittele listaa laskevaan järjestykseen\n");
-    printf("6) Tulosta tilastoja\n");
+    printf("6) Tulosta satunnainen tilastofakta\n");
     printf("7) Tyhjennä lista\n");
     printf("0) Lopeta\n");
     printf("Anna valintasi: ");
@@ -186,7 +186,7 @@ void tilastoFaktaApoja(TIETO *pA) {
     srand(time(NULL));
 
     // Arvotaan satunnainen luku
-    int arpa = rand() % 6; // 0 - 4 (5 erilaista faktatyyppiä)
+    int arpa = rand() % 6; // 0 - 5 (6 erilaista faktatyyppiä)
 
     switch (arpa) {
         case 0:
