@@ -4,13 +4,8 @@
 #define SUKUNIMIKOKO 30
 #define TIEDOSTONKOKO 30
 
-typedef struct tieto {
-    char sukunimi[SUKUNIMIKOKO];
-    int lukumaara;
-    struct tieto *pSeuraava;  //talennetaan tähän linkitetty listaan seuraavan alkion osoite
-    struct tieto *pEdellinen; // talennetaan tähän linkitetty listaan edellisen alkion osoite
+#include "TIETO.h"
 
-} TIETO;
 
 
 char *kysyNimi(char *pPromtti);

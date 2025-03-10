@@ -3,6 +3,8 @@
 #include <string.h>
 
 #include "L8T1Kirjasto.h"
+#include "TilastoFaktatKirjasto.h"
+#include "TIETO.h"
 
 int main(void) {
     // osoittaa linkitetty listaan ensimmäiseen alkion osoiteeseen
@@ -40,7 +42,8 @@ int main(void) {
             
 
         }else if(iValinta == 6){
-            // kokeillaan vapauta
+            keskiarvoLkm(pAlku);
+        }else if(iValinta == 7){
             pAlku = tyhjennaLista(pAlku);
         } else if(iValinta == 0){
             printf("Lopetetaan.\n");
