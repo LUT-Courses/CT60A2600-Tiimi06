@@ -5,6 +5,7 @@
 #define TIEDOSTONKOKO 30
 
 #include "TIETO.h"
+#include "TilastoFaktatKirjasto.h"
 
 
 
@@ -15,7 +16,7 @@ TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi);
 void tallennaEtuperin(TIETO *pA, char *tiedostonNimi) ;
 void tallennaTakaperin(TIETO *pA, char *tiedostonNimi);
 TIETO *tyhjennaLista(TIETO *pA);
-void tilastoFaktaApoja(TIETO *pA);
+void tilastoFaktaArpoja(TIETO *pA);
 
 
 

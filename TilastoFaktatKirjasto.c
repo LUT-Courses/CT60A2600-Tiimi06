@@ -129,6 +129,6 @@ void samatAlkukirjaimet(TIETO *pA){
         pA = pA -> pSeuraava;
     }
 
-    printf("Nimien lukumäärä, jotka alkavat samalla kirjaimella kuin yleisin nimi '%s' on: %d", yleisinNimi, iLkm);
+    printf("Nimien lukumäärä, jotka alkavat samalla kirjaimella kuin yleisin nimi '%s' on: %d\n", yleisinNimi, iLkm);
 }
 

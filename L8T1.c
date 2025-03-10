@@ -44,7 +44,7 @@ int main(void) {
         }else if(iValinta == 6){
 
             if(pAlku != NULL){
-                tilastoFaktaApoja(pAlku);
+                tilastoFaktaArpoja(pAlku);
             }else{
                 printf("Lue tiedosto ennen tilastojen tulostusta!\n");
             }

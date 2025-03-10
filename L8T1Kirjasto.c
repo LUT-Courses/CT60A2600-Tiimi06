@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "L8T1Kirjasto.h"
+#include "TilastoFaktatKirjasto.h"
+#include "TIETO.h"
 
 char *kysyNimi(char *pPromtti) {
     char valiaikainenMuutuja[TIEDOSTONKOKO] = "";
@@ -182,7 +185,7 @@ TIETO *tyhjennaLista(TIETO *pA) {
     return(pA);
 }
 //Arpoo satunnaisen tilastofaktan tulostettavaksi
-void tilastoFaktaApoja(TIETO *pA) {
+void tilastoFaktaArpoja(TIETO *pA) {
     srand(time(NULL));
 
     // Arvotaan satunnainen luku
@@ -190,19 +193,19 @@ void tilastoFaktaApoja(TIETO *pA) {
 
     switch (arpa) {
         case 0:
-            enitenEsiintyva(pA);
+            keskiarvoLkm(pA);
             break;
         case 1:
-            vahanEsiintyva(pA);
+            yliKeskiarvonLkm(pA);
             break;
         case 2:
-            keskiarvoEsiintymiset(pA);
+            alleKeskiarvonLkm(pA);
             break;
         case 3:
-            yhteensaNimia(pA);
+            parillisetLkm(pA);
             break;
         case 4:
-            yhteensaEsiintymisia(pA);
+            parittomatLkm(pA);
             break;
         case 5:
             samatAlkukirjaimet(pA);
