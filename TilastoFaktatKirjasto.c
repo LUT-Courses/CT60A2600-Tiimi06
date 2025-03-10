@@ -22,3 +22,56 @@ void keskiarvoLkm (TIETO *pA){
     
 
 }
+
+
+void yliKeskiarvonLkm (TIETO *pA){
+
+    int iSumma = 0;
+    int iLkm = 0;
+    int iYli = 0;
+    TIETO *ptr = pA;
+
+    while(ptr != NULL){
+        iLkm ++;
+        iSumma += ptr -> lukumaara;
+        ptr = ptr -> pSeuraava;
+    }
+
+    double fKeskiarvo = (double) iSumma / iLkm;
+
+    while(pA){
+        if(pA -> lukumaara > fKeskiarvo){
+            iYli ++;
+        }
+        pA = pA -> pSeuraava;
+    }
+
+    printf("Yli keskiarvon (%.2f) olevien nimien lukumäärä on: %d\n", fKeskiarvo ,iYli);
+
+}
+
+void alleKeskiarvonLkm (TIETO *pA){
+
+    int iSumma = 0;
+    int iLkm = 0;
+    int iAli = 0;
+    TIETO *ptr = pA;
+
+    while(ptr != NULL){
+        iLkm ++;
+        iSumma += ptr -> lukumaara;
+        ptr = ptr -> pSeuraava;
+    }
+
+    double fKeskiarvo = (double) iSumma / iLkm;
+
+    while(pA){
+        if(pA -> lukumaara < fKeskiarvo){
+            iAli ++;
+        }
+        pA = pA -> pSeuraava;
+    }
+
+    printf("Alle keskiarvon (%.2f) olevien nimien lukumäärä on: %d\n", fKeskiarvo ,iAli);
+
+}

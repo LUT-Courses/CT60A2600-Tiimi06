@@ -43,6 +43,8 @@ int main(void) {
 
         }else if(iValinta == 6){
             keskiarvoLkm(pAlku);
+            yliKeskiarvonLkm(pAlku);
+            alleKeskiarvonLkm(pAlku);
         }else if(iValinta == 7){
             pAlku = tyhjennaLista(pAlku);
         } else if(iValinta == 0){

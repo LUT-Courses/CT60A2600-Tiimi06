@@ -8,5 +8,7 @@
 
 
 void keskiarvoLkm (TIETO *pA);
+void alleKeskiarvonLkm (TIETO *pA);
+void yliKeskiarvonLkm (TIETO *pA);
 
 #endif 
