@@ -181,3 +181,33 @@ TIETO *tyhjennaLista(TIETO *pA) {
 
     return(pA);
 }
+//Arpoo satunnaisen tilastofaktan tulostettavaksi
+void tilastoFaktaApoja(TIETO *pA) {
+    srand(time(NULL));
+
+    // Arvotaan satunnainen luku
+    int arpa = rand() % 6; // 0 - 4 (5 erilaista faktatyyppiä)
+
+    switch (arpa) {
+        case 0:
+            enitenEsiintyva(pA);
+            break;
+        case 1:
+            vahanEsiintyva(pA);
+            break;
+        case 2:
+            keskiarvoEsiintymiset(pA);
+            break;
+        case 3:
+            yhteensaNimia(pA);
+            break;
+        case 4:
+            yhteensaEsiintymisia(pA);
+            break;
+        case 5:
+            samatAlkukirjaimet(pA);
+            break;
+        default:
+            printf("Jokin meni pieleen faktan arpomisen aikana.\n");
+    }
+}

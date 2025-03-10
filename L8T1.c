@@ -44,12 +44,7 @@ int main(void) {
         }else if(iValinta == 6){
 
             if(pAlku != NULL){
-                keskiarvoLkm(pAlku);
-                yliKeskiarvonLkm(pAlku);
-                alleKeskiarvonLkm(pAlku);
-                parittomatLkm(pAlku);
-                parillisetLkm(pAlku);
-                samatAlkukirjaimet(pAlku);
+                tilastoFaktaApoja(pAlku);
             }else{
                 printf("Lue tiedosto ennen tilastojen tulostusta!\n");
             }

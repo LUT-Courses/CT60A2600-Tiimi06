@@ -15,6 +15,7 @@ TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi);
 void tallennaEtuperin(TIETO *pA, char *tiedostonNimi) ;
 void tallennaTakaperin(TIETO *pA, char *tiedostonNimi);
 TIETO *tyhjennaLista(TIETO *pA);
+void tilastoFaktaApoja(TIETO *pA);
 
 
 
