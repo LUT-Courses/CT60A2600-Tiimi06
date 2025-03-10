@@ -39,7 +39,7 @@ int main(void) {
             }
             
 
-        }else if(iValinta == 4){
+        }else if(iValinta == 6){
             // kokeillaan vapauta
             pAlku = tyhjennaLista(pAlku);
         } else if(iValinta == 0){
