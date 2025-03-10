@@ -11,5 +11,7 @@ void keskiarvoLkm (TIETO *pA);
 void alleKeskiarvonLkm (TIETO *pA);
 void yliKeskiarvonLkm (TIETO *pA);
 void parittomatLkm(TIETO *pA);
+void parillisetLkm(TIETO *pA);
+void samatAlkukirjaimet(TIETO *pA);
 
 #endif 

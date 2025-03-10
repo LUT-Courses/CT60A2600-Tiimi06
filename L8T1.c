@@ -42,10 +42,18 @@ int main(void) {
             
 
         }else if(iValinta == 6){
-            keskiarvoLkm(pAlku);
-            yliKeskiarvonLkm(pAlku);
-            alleKeskiarvonLkm(pAlku);
-            parittomatLkm(pAlku);
+
+            if(pAlku != NULL){
+                keskiarvoLkm(pAlku);
+                yliKeskiarvonLkm(pAlku);
+                alleKeskiarvonLkm(pAlku);
+                parittomatLkm(pAlku);
+                parillisetLkm(pAlku);
+                samatAlkukirjaimet(pAlku);
+            }else{
+                printf("Lue tiedosto ennen tilastojen tulostusta!\n");
+            }
+            
         }else if(iValinta == 7){
             pAlku = tyhjennaLista(pAlku);
         } else if(iValinta == 0){

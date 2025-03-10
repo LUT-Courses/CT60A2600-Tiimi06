@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
+#include <string.h>
 
 
 
@@ -86,4 +87,43 @@ void parittomatLkm(TIETO *pA){
     }
 
     printf("Nimet joiden esiintyvyys on pariton, lukumäärä on: %d\n", iLkm);
+}
+
+void parillisetLkm(TIETO *pA){
+    int iLkm = 0;
+    while(pA){
+        if(pA -> lukumaara % 2 == 0){
+            iLkm ++;
+        }
+        pA = pA -> pSeuraava;
+    }
+
+    printf("Nimet joiden esiintyvyys on parillinen, lukumäärä on: %d\n", iLkm);
+}
+
+void samatAlkukirjaimet(TIETO *pA){
+    char cKirjain;
+    int max = INT_MIN;
+    char yleisinNimi[SUKUNIMIKOKO];
+    TIETO *ptr = pA;
+
+    while(ptr != NULL){
+        if(ptr -> lukumaara> max){
+            max = ptr -> lukumaara;
+            cKirjain = ptr -> sukunimi[0];
+            strcpy(yleisinNimi,  ptr -> sukunimi);
+
+        }
+        ptr = ptr -> pSeuraava;
+    }
+    
+    int iLkm = 0;
+    while(pA){
+        if(pA -> sukunimi[0] == cKirjain){
+            iLkm ++;
+        }
+        pA = pA -> pSeuraava;
+    }
+
+    printf("Nimien lukumäärä, jotka alkavat samalla kirjaimella kuin yleisin nimi '%s' on: %d", yleisinNimi, iLkm);
 }
