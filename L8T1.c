@@ -45,6 +45,7 @@ int main(void) {
             keskiarvoLkm(pAlku);
             yliKeskiarvonLkm(pAlku);
             alleKeskiarvonLkm(pAlku);
+            parittomatLkm(pAlku);
         }else if(iValinta == 7){
             pAlku = tyhjennaLista(pAlku);
         } else if(iValinta == 0){

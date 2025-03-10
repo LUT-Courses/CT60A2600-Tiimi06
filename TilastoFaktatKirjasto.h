@@ -10,5 +10,6 @@
 void keskiarvoLkm (TIETO *pA);
 void alleKeskiarvonLkm (TIETO *pA);
 void yliKeskiarvonLkm (TIETO *pA);
+void parittomatLkm(TIETO *pA);
 
 #endif 

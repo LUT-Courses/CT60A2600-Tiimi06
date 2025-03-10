@@ -75,3 +75,15 @@ void alleKeskiarvonLkm (TIETO *pA){
     printf("Alle keskiarvon (%.2f) olevien nimien lukumäärä on: %d\n", fKeskiarvo ,iAli);
 
 }
+
+void parittomatLkm(TIETO *pA){
+    int iLkm = 0;
+    while(pA){
+        if(pA -> lukumaara % 2 != 0){
+            iLkm ++;
+        }
+        pA = pA -> pSeuraava;
+    }
+
+    printf("Nimet joiden esiintyvyys on pariton, lukumäärä on: %d\n", iLkm);
+}
