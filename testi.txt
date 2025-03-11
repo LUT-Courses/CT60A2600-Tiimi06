@@ -1,8 +1,7 @@
 Sukunimi;Yhteensä
-Korhonen;21419
-Virtanen;20691
-Mäkinen;19140
-Nieminen;18915
-Mäkelä;18278
-Hämäläinen;17415
-Laine;17282
+Korhonen;500
+Virtanen;800
+Llena;300
+Mäkinen;600
+Gorbacheva;300
+
