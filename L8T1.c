@@ -4,6 +4,7 @@
 
 #include "L8T1Kirjasto.h"
 #include "TilastoFaktatKirjasto.h"
+#include "MergeSortLaskevaJKirjasto.h"
 #include "TIETO.h"
 
 int main(void) {
@@ -41,7 +42,10 @@ int main(void) {
             }
             
 
-        }else if(iValinta == 6){
+        } else if(iValinta == 5) {
+            pAlku = mergeSortLaskeva(pAlku);
+
+        } else if(iValinta == 6){
 
             if(pAlku != NULL){
                 tilastoFaktaArpoja(pAlku);
@@ -49,8 +53,9 @@ int main(void) {
                 printf("Lue tiedosto ennen tilastojen tulostusta!\n");
             }
             
-        }else if(iValinta == 7){
+        } else if(iValinta == 7){
             pAlku = tyhjennaLista(pAlku);
+
         } else if(iValinta == 0){
             printf("Lopetetaan.\n");
 

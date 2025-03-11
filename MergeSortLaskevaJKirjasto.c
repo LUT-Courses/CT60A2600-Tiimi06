@@ -1,4 +1,5 @@
 #include "MergeSortLaskevaJKirjasto.h"
+#include "TIETO.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

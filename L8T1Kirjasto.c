@@ -5,6 +5,7 @@
 
 #include "L8T1Kirjasto.h"
 #include "TilastoFaktatKirjasto.h"
+#include "MergeSortLaskevaJKirjasto.h"
 #include "TIETO.h"
 
 char *kysyNimi(char *pPromtti) {
