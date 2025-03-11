@@ -7,6 +7,7 @@ TIETO *puolita(TIETO *pAlku) {
     TIETO *pHidas = pAlku;
 
     /* 
-    Siirtää nopeampaa osoitinta kaksi askelta eteenpäin, ja hitaampaa yhden askelen verran, kunnes saavutetaan lopetusehto
+    Siirtää nopeampaa osoitinta kaksi askelta eteenpäin, ja hitaampaa yhden askelen verran, kunnes saavutetaan listan loppua.
     */
+   while (pNopea != NULL &&)
 }
