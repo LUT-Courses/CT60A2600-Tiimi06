@@ -1,66 +1,68 @@
-#include "TIETO.h"
 #include "MergeSortNousevaKirjasto.h"
+#include "TIETO.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-TIETO *puolita(TIETO *pAlku) {
+// Apufunktio listan puolittamiseen
+static TIETO *puolittaa(TIETO *pAlku) {
     TIETO *pNopea = pAlku;
     TIETO *pHidas = pAlku;
 
-    /* 
-    Siirtää nopeampaa osoitinta kaksi askelta eteenpäin, ja hitaampaa yhden askelen verran, kunnes saavutetaan listan loppua.
-    */
-   while (pNopea != NULL && pNopea -> pSeuraava != NULL && pNopea -> pSeuraava -> pSeuraava != NULL) {
+    while (pNopea != NULL && pNopea->pSeuraava != NULL && pNopea->pSeuraava->pSeuraava != NULL) {
+        pNopea = pNopea->pSeuraava->pSeuraava;
+        pHidas = pHidas->pSeuraava;
+    }
 
-    pNopea = pNopea -> pSeuraava -> pSeuraava;
-    pHidas = pHidas -> pSeuraava; 
-   }
-   TIETO *pValiaikainen = pHidas -> pSeuraava;
-   pHidas -> pSeuraava = NULL;
+    TIETO *pToinenOsa = pHidas->pSeuraava;
+    pHidas->pSeuraava = NULL;
 
-   if(pValiaikainen != NULL) {
-    pValiaikainen -> pEdellinen = NULL;
-   }
+    if (pToinenOsa != NULL) {
+        pToinenOsa->pEdellinen = NULL;
+    }
 
-   return pValiaikainen;
+    return pToinenOsa;
 }
 
-TIETO *yhdista(TIETO *pEnsimmainen, TIETO *pToinen) {
-    //Jos jompikumpi listoista on tyhjä, palauta toinen
-    if (pEnsimmainen == NULL) {
-        return pToinen;
-    }
-    if (pToinen == NULL) {
-        return pEnsimmainen;
-    }
-    //Valitse pienempi arvo
-    if(pEnsimmainen -> lukumaara < pToinen -> lukumaara) {
-        pEnsimmainen -> pSeuraava = yhdista(pEnsimmainen -> pSeuraava, pToinen);
-        if (pEnsimmainen -> pSeuraava != NULL) {
-            pEnsimmainen -> pSeuraava -> pEdellinen = pEnsimmainen;
+// Yhdistää kaksi järjestettyä listaa (nouseva järjestys)
+static TIETO *yhdistä(TIETO *pEka, TIETO *pToka) {
+    if (pEka == NULL) return pToka;
+    if (pToka == NULL) return pEka;
+
+    if (pEka->lukumaara < pToka->lukumaara) {
+        pEka->pSeuraava = yhdistä(pEka->pSeuraava, pToka);
+        pEka->pSeuraava->pEdellinen = pEka;
+        pEka->pEdellinen = NULL;
+        return pEka;
+    } else if (pEka->lukumaara > pToka->lukumaara) {
+        pToka->pSeuraava = yhdistä(pEka, pToka->pSeuraava);
+        pToka->pSeuraava->pEdellinen = pToka;
+        pToka->pEdellinen = NULL;
+        return pToka;
+    } else {
+        if (strcmp(pEka->sukunimi, pToka->sukunimi) < 0) {
+            pEka->pSeuraava = yhdistä(pEka->pSeuraava, pToka);
+            pEka->pSeuraava->pEdellinen = pEka;
+            pEka->pEdellinen = NULL;
+            return pEka;
+        } else {
+            pToka->pSeuraava = yhdistä(pEka, pToka->pSeuraava);
+            pToka->pSeuraava->pEdellinen = pToka;
+            pToka->pEdellinen = NULL;
+            return pToka;
         }
-        pEnsimmainen -> pEdellinen = NULL;
-        return pEnsimmainen;
-    }else{
-        pToinen -> pSeuraava = yhdista(pEnsimmainen, pToinen -> pSeuraava);
-        if(pToinen -> pSeuraava != NULL) {
-            pToinen -> pSeuraava -> pEdellinen = pToinen;
-        }
-        pToinen -> pEdellinen = NULL;
-        return pToinen;
     }
-
 }
 
-TIETO *mergeSort(TIETO *pAlku) {
-    if(pAlku == NULL || pAlku -> pSeuraava == NULL) {
-        return pAlku;
+// Pääfunktio merge sortille (nouseva)
+TIETO *mergeSortNouseva(TIETO *pA) {
+    if (pA == NULL || pA->pSeuraava == NULL) {
+        return pA;
     }
 
-    TIETO *pToinen = puolita(pAlku);
+    TIETO *pToinenOsa = puolittaa(pA);
+    pA = mergeSortNouseva(pA);
+    pToinenOsa = mergeSortNouseva(pToinenOsa);
 
-    pAlku = mergeSort(pAlku);
-    pToinen = mergeSort(pToinen);
-
-    pAlku = mergeSort
+    return yhdistä(pA, pToinenOsa);
 }
-

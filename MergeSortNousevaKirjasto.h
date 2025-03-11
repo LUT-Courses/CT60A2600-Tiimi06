@@ -1,10 +1,9 @@
-#ifndef MERGESORTNOUSEVAJKIRJASTO_H
-#define MERGESORTNOUSEVAJKIRJASTO_H
+#ifndef MERGESORTNOUSEVAKIRJASTO_H
+#define MERGESORTNOUSEVAKIRJASTO_H
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "TIETO.h"
 
-
+// Julkisen funktion prototyyppi
+TIETO *mergeSortNouseva(TIETO *pA);
 
 #endif
