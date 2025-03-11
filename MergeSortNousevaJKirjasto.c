@@ -48,5 +48,19 @@ TIETO *yhdista(TIETO *pEnsimmainen, TIETO *pToinen) {
         pToinen -> pEdellinen = NULL;
         return pToinen;
     }
+
+}
+
+TIETO *mergeSort(TIETO *pAlku) {
+    if(pAlku == NULL || pAlku -> pSeuraava == NULL) {
+        return pAlku;
+    }
+
+    TIETO *pToinen = puolita(pAlku);
+
+    pAlku = mergeSort(pAlku);
+    pToinen = mergeSort(pToinen);
+
+    pAlku = mergeSort
 }
 
