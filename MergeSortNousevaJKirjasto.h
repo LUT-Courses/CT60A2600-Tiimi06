@@ -1,0 +1,8 @@
+#ifndef MERGESORTNOUSEVAJKIRJASTO_H
+#define MERGESORTNOUSEVAJKIRJASTO_H
+
+#include "TIETO.h"
+
+TIETO *mergeSortNouseva(TIETO *pA);
+
+#endif

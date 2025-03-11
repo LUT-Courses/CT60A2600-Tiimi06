@@ -1,7 +1,7 @@
 # Makefile for L8T1
 
 # Pääohjelma
-projekti: L8T1.o L8T1Kirjasto.o TilastoFaktatKirjasto.o MergeSortLaskevaJKirjasto.o
+projekti: L8T1.o L8T1Kirjasto.o TilastoFaktatKirjasto.o MergeSortLaskevaJKirjasto.o MergeSortNousevaJKirjasto.o
 	gcc -o projekti L8T1.o L8T1Kirjasto.o TilastoFaktatKirjasto.o MergeSortLaskevaJKirjasto.o MergeSortNousevaJKirjasto.o
 
 # Pääohjelman objektitiedosto
@@ -21,4 +21,4 @@ MergeSortNousevaJKirjasto.o: MergeSortNousevaJKirjasto.c MergeSortNousevaJKirjas
 	gcc -c MergeSortNousevaJKirjasto.c -std=c99 -pedantic -Wall
 
 MergeSortLaskevaJKirjasto.o: MergeSortLaskevaJKirjasto.c MergeSortLaskevaJKirjasto.h 
-	gcc -c MergeSortLaskevaJKirjasto.c -std=c99 -pedantic -Wall
+	gcc -c MergeSortLaskevaJKirjasto.c -std=c99 -pedantic

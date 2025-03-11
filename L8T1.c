@@ -5,6 +5,7 @@
 #include "L8T1Kirjasto.h"
 #include "TilastoFaktatKirjasto.h"
 #include "MergeSortLaskevaJKirjasto.h"
+#include "MergeSortNousevaJKirjasto.h"
 #include "TIETO.h"
 
 int main(void) {
@@ -42,8 +43,15 @@ int main(void) {
             }
             
 
-        } else if(iValinta == 5) {
+        }
+        else if(iValinta == 4) {
+            pAlku = mergeSortNouseva(pAlku);
+            printf("Lista lajiteltu nousevaan järjestykseen.\n");
+
+        }
+         else if(iValinta == 5) {
             pAlku = mergeSortLaskeva(pAlku);
+            printf("Lista lajitelty laskevaan järjestykseen.\n");
 
         } else if(iValinta == 6){
 
