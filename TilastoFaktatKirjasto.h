@@ -1,5 +1,5 @@
-#ifndef FUNFACTLIBRARY_H
-#define FUNFACTLIBRARY_H
+#ifndef TILASTOFAKTATKIRJASTO_H
+#define TILASTOFAKTATKIRJASTO_H
 
 #include <stdio.h>
 #include <stdlib.h>
