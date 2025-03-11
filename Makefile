@@ -15,3 +15,6 @@ L8T1Kirjasto.o: L8T1Kirjasto.c L8T1Kirjasto.h TilastoFaktatKirjasto.h
 # TilastoFaktatKirjasto objektitiedosto
 TilastoFaktatKirjasto.o: TilastoFaktatKirjasto.c TilastoFaktatKirjasto.h
 	gcc -c TilastoFaktatKirjasto.c -std=c99 -pedantic -Wall
+
+# MergeSortNousevaJKirjasto objektitiedosto
+	gcc -c MergeSortNousevaJKirjasto.c -std=c99 -pedantic -Wall
