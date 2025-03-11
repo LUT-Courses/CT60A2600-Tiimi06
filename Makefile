@@ -17,4 +17,5 @@ TilastoFaktatKirjasto.o: TilastoFaktatKirjasto.c TilastoFaktatKirjasto.h
 	gcc -c TilastoFaktatKirjasto.c -std=c99 -pedantic -Wall
 
 # MergeSortNousevaJKirjasto objektitiedosto
+MergeSortNousevaJKirjasto.o: MergeSortNousevaJKirjasto.c MergeSortNousevaJKirjasto.h
 	gcc -c MergeSortNousevaJKirjasto.c -std=c99 -pedantic -Wall
