@@ -23,3 +23,8 @@ MergeSortNousevaJKirjasto.o: MergeSortNousevaJKirjasto.c MergeSortNousevaJKirjas
 # MergeSortLaskevaJKirjasto objektitiedosto
 MergeSortLaskevaJKirjasto.o: MergeSortLaskevaJKirjasto.c MergeSortLaskevaJKirjasto.h
 	gcc -c MergeSortLaskevaJKirjasto.c -std=c99 -pedantic -Wall
+
+# PITÄÄ AINA LISÄTÄ TÄTÄ et ei tuu ongelma kääntämiseen kanssa
+clean:
+	rm -f *.o projekti
+
