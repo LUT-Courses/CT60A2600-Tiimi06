@@ -92,6 +92,7 @@ int main(void) {
             
 
         } else if(iValinta == 0){
+            pAlku = tyhjennaLista(pAlku);
             printf("Lopetetaan.\n");
 
         } else{
