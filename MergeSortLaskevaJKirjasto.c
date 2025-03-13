@@ -56,8 +56,8 @@ TIETO *merge(TIETO *ekaOsa, TIETO *tokaOsa) {
         return tokaOsa;
     } else {
        
-        if (strcmp(ekaOsa->sukunimi, tokaOsa->sukunimi) < 0) {
-           
+        if (strcmp(ekaOsa->sukunimi, tokaOsa->sukunimi) > 0) {
+            // ekaOsa on 'isompi' aakkosissa, joten valitse ekaOsa ensin
             ekaOsa->pSeuraava = merge(ekaOsa->pSeuraava, tokaOsa);
             if (ekaOsa->pSeuraava != NULL) {
                 ekaOsa->pSeuraava->pEdellinen = ekaOsa;
@@ -65,7 +65,7 @@ TIETO *merge(TIETO *ekaOsa, TIETO *tokaOsa) {
             ekaOsa->pEdellinen = NULL;
             return ekaOsa;
         } else {
-     
+            // tokaOsa on 'isompi' tai sama
             tokaOsa->pSeuraava = merge(ekaOsa, tokaOsa->pSeuraava);
             if (tokaOsa->pSeuraava != NULL) {
                 tokaOsa->pSeuraava->pEdellinen = tokaOsa;

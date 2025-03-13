@@ -1,0 +1,3 @@
+Laajasalo,300
+Pigg,255
+Backa,255
