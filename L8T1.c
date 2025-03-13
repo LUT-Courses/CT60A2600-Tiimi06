@@ -60,7 +60,7 @@ int main(void) {
             // Järjestä nousevaan järjestykseen
             pAlku = mergeSortNouseva(pAlku);
             printf("Lista lajiteltu nousevaan järjestykseen.\n");
-            tyhjennaLista(pAlku);
+            
             pAlku = NULL;
             /*
             pAlku = mergeSortLaskeva(pAlku);
@@ -71,7 +71,7 @@ int main(void) {
             // Järjestä laskevaan järjestykseen
             pAlku = mergeSortLaskeva(pAlku);
             printf("Lista lajitelty laskevaan järjestykseen.\n");
-            tyhjennaLista(pAlku);
+            
             pAlku = NULL;
 
             /*
