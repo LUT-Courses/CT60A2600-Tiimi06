@@ -34,10 +34,10 @@ int valikko() {
     printf("1) Lue tiedosto\n");
     printf("2) Tallenna lista etuperin\n");
     printf("3) Tallenna lista takaperin\n");
-    printf("4) Lajittele lista nousevaan järjestykseen\n");
-    printf("5) Lajittele listaa laskevaan järjestykseen\n");
-    printf("6) Tulosta satunnainen tilastofakta\n");
-    printf("7) Tyhjennä lista\n");
+    printf("4) Tyhjennä lista\n");
+    printf("5) Järjestä nousevaan järjestykseen\n");
+    printf("6) Järjestä laskevaan järjestykseen\n");
+    printf("7) Tilastofaktat\n");
     printf("0) Lopeta\n");
     printf("Anna valintasi: ");
     scanf("%d", &iValinta);

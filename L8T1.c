@@ -45,15 +45,39 @@ int main(void) {
 
         }
         else if(iValinta == 4) {
+            // tähän pitää laittaa tyhjennä lista
+            pAlku = tyhjennaLista(pAlku);
+
+
+            
+            /*
             pAlku = mergeSortNouseva(pAlku);
             printf("Lista lajiteltu nousevaan järjestykseen.\n");
-
+            */
         }
          else if(iValinta == 5) {
+            // Järjestä nousevaan järjestykseen
+            pAlku = mergeSortNouseva(pAlku);
+            printf("Lista lajiteltu nousevaan järjestykseen.\n");
+            /*
+            pAlku = mergeSortLaskeva(pAlku);
+            printf("Lista lajitelty laskevaan järjestykseen.\n");
+            */
+
+        } else if(iValinta == 6){
+            // Järjestä laskevaan järjestykseen
             pAlku = mergeSortLaskeva(pAlku);
             printf("Lista lajitelty laskevaan järjestykseen.\n");
 
-        } else if(iValinta == 6){
+            /*
+            if(pAlku != NULL){
+                tilastoFaktaArpoja(pAlku);
+            }else{
+                printf("Lue tiedosto ennen tilastojen tulostusta!\n");
+            }
+            */
+        } else if(iValinta == 7){
+            //Tilastofakta
 
             if(pAlku != NULL){
                 tilastoFaktaArpoja(pAlku);
@@ -61,8 +85,6 @@ int main(void) {
                 printf("Lue tiedosto ennen tilastojen tulostusta!\n");
             }
             
-        } else if(iValinta == 7){
-            pAlku = tyhjennaLista(pAlku);
 
         } else if(iValinta == 0){
             printf("Lopetetaan.\n");
@@ -70,7 +92,7 @@ int main(void) {
         } else{
             printf("Tuntematon valinta, yritä uudestaan.\n");
         }
-        printf("\n");
+        printf("\n"); 
     } while (iValinta != 0);
     
 
