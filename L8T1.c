@@ -47,6 +47,7 @@ int main(void) {
         else if(iValinta == 4) {
             // tähän pitää laittaa tyhjennä lista
             pAlku = tyhjennaLista(pAlku);
+            printf("Lista tyhjennetty.\n");
 
 
             
