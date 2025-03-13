@@ -25,28 +25,28 @@ static TIETO *puolittaa(TIETO *pAlku) {
 }
 
 // Yhdistää kaksi järjestettyä listaa (nouseva järjestys)
-static TIETO *yhdistä(TIETO *pEka, TIETO *pToka) {
+static TIETO *yhdista(TIETO *pEka, TIETO *pToka) {
     if (pEka == NULL) return pToka;
     if (pToka == NULL) return pEka;
 
     if (pEka->lukumaara < pToka->lukumaara) {
-        pEka->pSeuraava = yhdistä(pEka->pSeuraava, pToka);
+        pEka->pSeuraava = yhdista(pEka->pSeuraava, pToka);
         pEka->pSeuraava->pEdellinen = pEka;
         pEka->pEdellinen = NULL;
         return pEka;
     } else if (pEka->lukumaara > pToka->lukumaara) {
-        pToka->pSeuraava = yhdistä(pEka, pToka->pSeuraava);
+        pToka->pSeuraava = yhdista(pEka, pToka->pSeuraava);
         pToka->pSeuraava->pEdellinen = pToka;
         pToka->pEdellinen = NULL;
         return pToka;
     } else {
         if (strcmp(pEka->sukunimi, pToka->sukunimi) < 0) {
-            pEka->pSeuraava = yhdistä(pEka->pSeuraava, pToka);
+            pEka->pSeuraava = yhdista(pEka->pSeuraava, pToka);
             pEka->pSeuraava->pEdellinen = pEka;
             pEka->pEdellinen = NULL;
             return pEka;
         } else {
-            pToka->pSeuraava = yhdistä(pEka, pToka->pSeuraava);
+            pToka->pSeuraava = yhdista(pEka, pToka->pSeuraava);
             pToka->pSeuraava->pEdellinen = pToka;
             pToka->pEdellinen = NULL;
             return pToka;
@@ -64,5 +64,5 @@ TIETO *mergeSortNouseva(TIETO *pA) {
     pA = mergeSortNouseva(pA);
     pToinenOsa = mergeSortNouseva(pToinenOsa);
 
-    return yhdistä(pA, pToinenOsa);
+    return yhdista(pA, pToinenOsa);
 }
