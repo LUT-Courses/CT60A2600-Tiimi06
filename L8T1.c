@@ -118,3 +118,5 @@ int main(void) {
     
     return(0);
 }
+
+//TÄMÄ ON KORJATTUS VERSIO
