@@ -1,4 +1,0 @@
-Korhonen;255
-Laajasalo;300
-Backa;255
-Pigg;255

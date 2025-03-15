@@ -1,6 +1,0 @@
-Lastname;123
-Aine;300
-Bobsqueeze;500
-Mohibby;600
-Laine;300
-Llena;100

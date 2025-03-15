@@ -1,7 +1,0 @@
-Sukunimi;Yhteensä
-Korhonen;500
-Virtanen;800
-Llena;300
-Mäkinen;600
-Gorbacheva;300
-

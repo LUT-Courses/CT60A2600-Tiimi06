@@ -1,5 +1,0 @@
-Llena,100
-Aine,300
-Laine,300
-Bobsqueeze,500
-Mohibby,600
