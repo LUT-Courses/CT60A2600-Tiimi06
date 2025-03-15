@@ -91,18 +91,8 @@ int main(void) {
 
    
     printf("Kiitos ohjelman käytöstä.\n");
-    /*
-    // vapautetaan muistit
-    free(luettavaTNimi);
-    luettavaTNimi = NULL;
-
-    free(kirjoitettavaTNimiEtu);
-    kirjoitettavaTNimiEtu = NULL;
-
-    free(kirjoitettavaTNimiTaka);
-    kirjoitettavaTNimiTaka = NULL;
-    */
-    // ehkä korjaa ongelman?
+    // lisätään lopussa tyhjennalista kutsu, joten vaikka käyttäjä ei tyhjentäis listan
+    // lista tyhjennetään automaattisesti
     pAlku = tyhjennaLista(pAlku);
     
     return(0);
