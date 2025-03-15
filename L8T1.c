@@ -54,45 +54,23 @@ int main(void) {
 
         }
         else if(iValinta == 4) {
-            // tähän pitää laittaa tyhjennä lista
+            // tyhjentää listan
             pAlku = tyhjennaLista(pAlku);
             printf("Lista tyhjennetty.\n");
 
-
-            
-            /*
-            pAlku = mergeSortNouseva(pAlku);
-            printf("Lista lajiteltu nousevaan järjestykseen.\n");
-            */
         }
          else if(iValinta == 5) {
             // Järjestä nousevaan järjestykseen
             pAlku = mergeSortNouseva(pAlku);
             printf("Lista lajiteltu nousevaan järjestykseen.\n");
-            //tyhjennaLista(pAlku); Listan tyhjennys, mutta ei läpäise codegradea.
-            //pAlku = NULL;
-            /*
-            pAlku = mergeSortLaskeva(pAlku);
-            printf("Lista lajitelty laskevaan järjestykseen.\n");
-            */
 
         } else if(iValinta == 6){
             // Järjestä laskevaan järjestykseen
             pAlku = mergeSortLaskeva(pAlku);
             printf("Lista lajiteltu laskevaan järjestykseen.\n");
-            //tyhjennaLista(pAlku); Listan tyhjennys, mutta ei läpäise codegradea.
-            //pAlku = NULL;
-
-            /*
-            if(pAlku != NULL){
-                tilastoFaktaArpoja(pAlku);
-            }else{
-                printf("Lue tiedosto ennen tilastojen tulostusta!\n");
-            }
-            */
+           
         } else if(iValinta == 7){
             //Tilastofakta
-
             if(pAlku != NULL){
                 tilastoFaktaArpoja(pAlku);
             }else{
@@ -113,7 +91,7 @@ int main(void) {
 
    
     printf("Kiitos ohjelman käytöstä.\n");
-
+    /*
     // vapautetaan muistit
     free(luettavaTNimi);
     luettavaTNimi = NULL;
@@ -123,10 +101,10 @@ int main(void) {
 
     free(kirjoitettavaTNimiTaka);
     kirjoitettavaTNimiTaka = NULL;
+    */
     // ehkä korjaa ongelman?
     pAlku = tyhjennaLista(pAlku);
     
     return(0);
 }
 
-//TÄMÄ ON KORJATTUS VERSIO
