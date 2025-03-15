@@ -24,11 +24,17 @@ int main(void) {
             luettavaTNimi = kysyNimi("Anna luettavan tiedoston nimi");
              // tämä aliohjlema pitää palauta osoitinmuutuja joka osoittaa linkitettylistaan ensimmäiseen alkion osoteesee
             pAlku = lueTiedosto(pAlku, luettavaTNimi);
+            //muutos1
+            free(luettavaTNimi);
+            luettavaTNimi = NULL;
         }else if (iValinta == 2)
         {
             if(pAlku != NULL){
                 kirjoitettavaTNimiEtu = kysyNimi("Anna kirjoitettavan tiedoston nimi");
                 tallennaEtuperin(pAlku, kirjoitettavaTNimiEtu);
+                //muutos2
+                free(kirjoitettavaTNimiEtu);
+                kirjoitettavaTNimiEtu = NULL;
             }else{
                 printf("Lue tiedosto ennen kirjoitusta!");
             }
@@ -38,6 +44,9 @@ int main(void) {
             if(pAlku != NULL){
                 kirjoitettavaTNimiTaka = kysyNimi("Anna kirjoitettavan tiedoston nimi");
                 tallennaTakaperin(pAlku, kirjoitettavaTNimiTaka);
+                //muutos3
+                free(kirjoitettavaTNimiTaka);
+                kirjoitettavaTNimiTaka = NULL;
             }else{
                 printf("Lue tiedosto ennen kirjoitusta!");
             }
