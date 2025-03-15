@@ -92,8 +92,6 @@ int main(void) {
             
 
         } else if(iValinta == 0){
-            // ehkä korjaa ongelman?
-            pAlku = tyhjennaLista(pAlku);
             printf("Lopetetaan.\n");
 
         } else{
@@ -116,6 +114,8 @@ int main(void) {
 
     free(kirjoitettavaTNimiTaka);
     kirjoitettavaTNimiTaka = NULL;
+    // ehkä korjaa ongelman?
+    pAlku = tyhjennaLista(pAlku);
     
     return(0);
 }
