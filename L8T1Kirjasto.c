@@ -118,7 +118,7 @@ TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi) {
             // luo sellainen aliohjelma lisaaAlkio(TIETO *pA, char *sukuNimi, int lukuMaara), tämä palauta pA
         }
     }
-    printf("Tiedosto '%s' luettu.\n", tiedostonNimi);
+    // printf("Tiedosto '%s' luettu.\n", tiedostonNimi);
 
     fclose(Tiedosto);
 
