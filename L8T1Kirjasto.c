@@ -37,7 +37,7 @@ int valikko() {
     printf("4) Tyhjennä lista\n");
     printf("5) Järjestä nousevaan järjestykseen\n");
     printf("6) Järjestä laskevaan järjestykseen\n");
-    printf("7) Tilastofaktat\n");
+    // printf("7) Tilastofaktat\n");
     printf("0) Lopeta\n");
     printf("Anna valintasi: ");
     scanf("%d", &iValinta);

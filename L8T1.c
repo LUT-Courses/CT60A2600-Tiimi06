@@ -79,7 +79,7 @@ int main(void) {
         } else if(iValinta == 6){
             // Järjestä laskevaan järjestykseen
             pAlku = mergeSortLaskeva(pAlku);
-            printf("Lista lajitelty laskevaan järjestykseen.\n");
+            printf("Lista lajiteltu laskevaan järjestykseen.\n");
             //tyhjennaLista(pAlku); Listan tyhjennys, mutta ei läpäise codegradea.
             //pAlku = NULL;
 
