@@ -9,7 +9,7 @@
 #include "MergeSortLaskevaJKirjasto.h"
 
 
-
+int binaariValikko(void);
 char *kysyNimi(char *pPromtti);
 int valikko();
 TIETO *lisaaAlkio(TIETO *pAlku, char *sukuNimi, int lkm);
@@ -18,6 +18,10 @@ void tallennaEtuperin(TIETO *pA, char *tiedostonNimi) ;
 void tallennaTakaperin(TIETO *pA, char *tiedostonNimi);
 TIETO *tyhjennaLista(TIETO *pA);
 void tilastoFaktaArpoja(TIETO *pA);
+int paaValikko(void);
+int linkitettyValikko(void);
+int binaariValikko(void); // Poista parametri
+
 
 
 

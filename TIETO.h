@@ -10,17 +10,4 @@ typedef struct tieto {
     struct tieto *pEdellinen;
 } TIETO;
 
-typedef struct Node{ 
-    char name[50];
-    int maara;
-    struct Node *vasen;
-    struct Node *oikea;
-} NODE;
-
-
-typedef struct QueueNode{
-    NODE *data;
-    struct Queuenode *pSeuraava;
-} QUEUENODE;
-
-#endif
+#endif // TIETO_H

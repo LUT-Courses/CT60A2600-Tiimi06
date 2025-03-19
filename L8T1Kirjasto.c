@@ -207,19 +207,19 @@ void tilastoFaktaArpoja(TIETO *pA) {
 
 int paaValikko() {
     int paaValinta = 0;
-    printf("Valitse käsiteltävä tietorakenne:\n");
+    printf("\nValitse käsiteltävä tietorakenne:\n");
     printf("1) Linkitetty lista\n");
-    printf("2) Binääripuu");
+    printf("2) Binääripuu\n"); // Lisätty puuttuva \n
     printf("0) Lopeta\n");
     printf("Anna valintasi: ");
-
-    scanf("%d", paaValinta);
+    scanf("%d", &paaValinta); // Lisätty &
     getchar();
+    return paaValinta;
 }
 
 int linkitettyValikko() {
     int linkitettyValinta = 0;
-    printf("Valitse haluamasi toiminto:\n");
+    printf("\nValitse haluamasi toiminto:\n");
     printf("1) Lue tiedosto\n");
     printf("2) Tallenna lista etuperin\n");
     printf("3) Tallenna lista takaperin\n");
@@ -227,26 +227,23 @@ int linkitettyValikko() {
     printf("5) Järjestä nousevaan järjestykseen\n");
     printf("6) Järjestä laskevaan järjestykseen\n");
     printf("7) Tilastofaktat\n");
-    printf("0) Lopeta\n");
+    printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &linkitettyValinta);
     getchar();
     return(linkitettyValinta);
 }
 
-int binaariValikko(NODE **root) {
-    int takaisin = 0;
+int binaariValikko() { // Poista parametri
     int iValinta = 0;
-    while(!takaisin) {
-        printf("\nValitse haluamasi toiminto (binääripuu):\n"
-               "1) Lue tiedosto\n"
-               "2) Kirjoita puun arvot tiedostoon\n"
-               "3) Syvyyshaku\n"
-               "4) Leveyshaku\n"
-               "0) Palaa\n"
-               "Anna valintasi: ");
-               scanf("%d", &iValinta);
-               getchar();
-    }
+    printf("\nValitse haluamasi toiminto (binääripuu):\n");
+    printf("1) Lue tiedosto\n");
+    printf("2) Kirjoita puun arvot tiedostoon\n");
+    printf("3) Syvyyshaku\n");
+    printf("4) Leveyshaku\n");
+    printf("0) Palaa\n");
+    printf("Anna valintasi: ");
+    scanf("%d", &iValinta);
+    getchar();
     return iValinta;
 }
