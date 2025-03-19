@@ -95,4 +95,3 @@ TIETO *mergeSortLaskeva(TIETO *pA) {
     // yhdistetään sortattu puolikkaat
     return merge(pA, toinenOsa);
 }
-
