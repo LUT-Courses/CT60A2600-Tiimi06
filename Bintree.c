@@ -15,18 +15,24 @@ typedef struct Jono {
     JONOSOLMU *pTaakse;
 } JONO;
 
-/* Poistettu static-määreet ja korvattu calloc mallocilla */
-JONO* jono_luo() {
-    JONO *pUusiJono = malloc(sizeof(JONO));
-    if (pUusiJono) {
-        pUusiJono->pEteen = NULL;
-        pUusiJono->pTaakse = NULL;
+
+JONO* jonoLuo() {
+    JONO *pUusiJono;
+    if ((pUusiJono = (JONO*)malloc(sizeof(JONO))) == NULL) {
+        perror("Muistin varaus epäonnistui, lopetetaan");
+        exit(0);
     }
+    pUusiJono->pEteen = NULL;
+    pUusiJono->pTaakse = NULL;
     return pUusiJono;
 }
 
-void jono_lisaa(JONO *pJono, BNODE *pData) {
-    JONOSOLMU *pUusiSolmu = malloc(sizeof(JONOSOLMU));
+void jonoLisaa(JONO *pJono, BNODE *pData) {
+    JONOSOLMU *pUusiSolmu;
+    if ((pUusiSolmu = (JONOSOLMU*)malloc(sizeof(JONOSOLMU))) == NULL) {
+        perror("Muistin varaus epäonnistui, lopetetaan");
+        exit(0);
+    }
     pUusiSolmu->data = pData;
     pUusiSolmu->pSeuraava = NULL;
     
@@ -38,7 +44,7 @@ void jono_lisaa(JONO *pJono, BNODE *pData) {
     }
 }
 
-BNODE* jono_poista(JONO *pJono) {
+BNODE* jonoPoista(JONO *pJono) {
     if (!pJono->pEteen) return NULL;
     
     JONOSOLMU *pTemp = pJono->pEteen;
@@ -50,23 +56,23 @@ BNODE* jono_poista(JONO *pJono) {
     return pData;
 }
 
-void jono_vapauta(JONO *pJono) {
-    while (pJono->pEteen) jono_poista(pJono);
+void jonoVapauta(JONO *pJono) {
+    while (pJono->pEteen) jonoPoista(pJono);
     free(pJono);
 }
 
 
 /* Binääripuun toteutus */
-BNODE* binaariLuoNode(const char *pNimi, int iLukumaara) {
+BNODE* binaariLuoNode(char *pNimi, int iLukumaara) {
     if (!pNimi || strlen(pNimi) == 0) {
         printf("Virhe: Tyhjä nimi!\n");
         return NULL;
     }
     
-    BNODE *pUusiNode = malloc(sizeof(BNODE));
-    if (!pUusiNode) {
-        perror("Muistinvaraus epäonnistui");
-        return NULL;
+    BNODE *pUusiNode;
+    if ((pUusiNode = (BNODE*)malloc(sizeof(BNODE))) == NULL) {
+        perror("Muistin varaus epäonnistui, lopetetaan");
+        exit(0);
     }
     
     strncpy(pUusiNode->name, pNimi, 49);
@@ -76,6 +82,7 @@ BNODE* binaariLuoNode(const char *pNimi, int iLukumaara) {
     
     return pUusiNode;
 }
+
 BNODE* binaariInsert(BNODE *pJuuri, const char *pNimi, int iLukumaara) {
     if (!pJuuri) return binaariLuoNode(pNimi, iLukumaara);
     
@@ -103,8 +110,7 @@ BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi) {
         perror("Tiedoston avaaminen epäonnistui");
         return pJuuri; // Älä sulje ohjelmaa, palauta nykyinen juuri
     }
-
-    // Ohita otsikko turvallisesti
+    // ohita otsikko
     if (fgets(aRivi, sizeof(aRivi), pTiedosto) == NULL) {
         fclose(pTiedosto);
         return pJuuri;
@@ -131,12 +137,12 @@ BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi) {
     return pJuuri;
 }
 
-/* In-order traversal tiedostoon */
-static void kirjoita_jarjestyksessa_rekursiivinen(BNODE *pJuuri, FILE *pTiedosto) {
+// In-order traversal tiedostoon 
+static void kirjoitaJarjestyksessa(BNODE *pJuuri, FILE *pTiedosto) {
     if (!pJuuri) return;
-    kirjoita_jarjestyksessa_rekursiivinen(pJuuri->pVasen, pTiedosto);
+    kirjoitaJarjestyksessa(pJuuri->pVasen, pTiedosto);
     fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count);
-    kirjoita_jarjestyksessa_rekursiivinen(pJuuri->pOikea, pTiedosto);
+    kirjoitaJarjestyksessa(pJuuri->pOikea, pTiedosto);
 }
 
 void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
@@ -145,17 +151,17 @@ void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
         perror ("Tiedoston kirjoitttamisessa virhe, lopetetaan.");
         exit(0);
     }
-    kirjoita_jarjestyksessa_rekursiivinen(pJuuri, pTiedosto);
+    kirjoitaJarjestyksessa(pJuuri, pTiedosto);
     fclose(pTiedosto);
 }
 
-/* Syvyyshaku (in-order) */
-static int syvyyshaku_rekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi) {
+// Syvyyshaku (in-order) 
+static int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi) {
     if (!pJuuri || *loytyi) return 0;
     
     // Tutki vasenta lasta vain jos arvoa ei ole löytynyt
     if (!*loytyi) {
-        syvyyshaku_rekursiivinen(pJuuri->pVasen, iHaettava, pTiedosto, loytyi, loydettyNimi);
+        syvyyshakuRekursiivinen(pJuuri->pVasen, iHaettava, pTiedosto, loytyi, loydettyNimi);
     }
     
     // Kirjoita aina tiedostoon
@@ -170,7 +176,7 @@ static int syvyyshaku_rekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedost
     
     // Tutki oikeaa lasta vain jos arvoa ei löytynyt
     if (!*loytyi) {
-        syvyyshaku_rekursiivinen(pJuuri->pOikea, iHaettava, pTiedosto, loytyi, loydettyNimi);
+        syvyyshakuRekursiivinen(pJuuri->pOikea, iHaettava, pTiedosto, loytyi, loydettyNimi);
     }
     
     return *loytyi;
@@ -184,7 +190,7 @@ int syvyysHaku(BNODE *pJuuri, int iHaettava, const char *pTiedostonNimi, char *l
     }
 
     int loytyi = 0;
-    syvyyshaku_rekursiivinen(pJuuri, iHaettava, pTiedosto, &loytyi, loydettyNimi);
+    syvyyshakuRekursiivinen(pJuuri, iHaettava, pTiedosto, &loytyi, loydettyNimi);
     fclose(pTiedosto);
     return loytyi;
 }
@@ -193,7 +199,7 @@ int syvyysHaku(BNODE *pJuuri, int iHaettava, const char *pTiedostonNimi, char *l
 int leveysHaku(BNODE *pJuuri, const char *pHaettavaNimi, const char *pTiedostonNimi, int *loydettyLkm) {
     if (!pJuuri) return 0;
     
-    JONO *pJono = jono_luo();
+    JONO *pJono = jonoLuo();
     FILE *pTiedosto = fopen(pTiedostonNimi, "w");
     if (!pTiedosto) {
         perror("Tiedoston avaaminen epäonnistui");
@@ -201,29 +207,22 @@ int leveysHaku(BNODE *pJuuri, const char *pHaettavaNimi, const char *pTiedostonN
     }
 
     int loytyi = 0;
-    jono_lisaa(pJono, pJuuri);
+    jonoLisaa(pJono, pJuuri);
 
     while (pJono->pEteen && !loytyi) {
-        BNODE *pNykyinen = jono_poista(pJono);
+        BNODE *pNykyinen = jonoPoista(pJono);
         fprintf(pTiedosto, "%s,%d\n", pNykyinen->name, pNykyinen->count);
         
         if (strcmp(pNykyinen->name, pHaettavaNimi) == 0) {
             loytyi = 1;
             *loydettyLkm = pNykyinen->count;
         } else {
-            if (pNykyinen->pVasen) jono_lisaa(pJono, pNykyinen->pVasen);
-            if (pNykyinen->pOikea) jono_lisaa(pJono, pNykyinen->pOikea);
+            if (pNykyinen->pVasen) jonoLisaa(pJono, pNykyinen->pVasen);
+            if (pNykyinen->pOikea) jonoLisaa(pJono, pNykyinen->pOikea);
         }
     }
     
     fclose(pTiedosto);
-    jono_vapauta(pJono);
+    jonoVapauta(pJono);
     return loytyi;
-}
-void tulostaPuunRakenne(BNODE *pJuuri, int taso) {
-    if (!pJuuri) return;
-    tulostaPuunRakenne(pJuuri->pOikea, taso + 1);
-    for (int i = 0; i < taso; i++) printf("    ");
-    printf("%s (%d)\n", pJuuri->name, pJuuri->count);
-    tulostaPuunRakenne(pJuuri->pVasen, taso + 1);
 }
