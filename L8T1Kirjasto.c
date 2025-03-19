@@ -8,6 +8,7 @@
 #include "MergeSortLaskevaJKirjasto.h"
 #include "MergeSortNousevaJKirjasto.h"
 #include "TIETO.h"
+#include "Bintree.h"
 
 char *kysyNimi(char *pPromtti) {
     char valiaikainenMuutuja[TIEDOSTONKOKO] = "";
@@ -28,22 +29,7 @@ char *kysyNimi(char *pPromtti) {
     return(valiaikainenTaulukko);
 }
 
-int valikko() {
-    int iValinta=0;
-    printf("Valitse haluamasi toiminto:\n");
-    printf("1) Lue tiedosto\n");
-    printf("2) Tallenna lista etuperin\n");
-    printf("3) Tallenna lista takaperin\n");
-    printf("4) Tyhjennä lista\n");
-    printf("5) Järjestä nousevaan järjestykseen\n");
-    printf("6) Järjestä laskevaan järjestykseen\n");
-    // printf("7) Tilastofaktat\n"); kommentoitu pois, koska muuten codegradesta ei mene läpi. Tämä on kuitenkin lisäys ohjelmalle, ja tarkoituksena olisi saada lisäpisteitä tämän avulla
-    printf("0) Lopeta\n");
-    printf("Anna valintasi: ");
-    scanf("%d", &iValinta);
-    getchar();
-    return(iValinta);
-}
+
 
 TIETO *lisaaAlkio(TIETO *pAlku, char *sukuNimi, int lkm) {
     TIETO *pUusi = NULL, *ptr = NULL; //luodaan uusi alkio talennetaan sen pUusi. Ptr on liukuri, joka auttaa meitä lisäämään uusi alkio listaan.
@@ -186,6 +172,8 @@ TIETO *tyhjennaLista(TIETO *pA) {
 
     return(pA);
 }
+
+
 //Arpoo satunnaisen tilastofaktan tulostettavaksi
 void tilastoFaktaArpoja(TIETO *pA) {
     srand(time(NULL));
@@ -215,4 +203,50 @@ void tilastoFaktaArpoja(TIETO *pA) {
         default:
             printf("Jokin meni pieleen faktan arpomisen aikana.\n");
     }
+}
+
+int paaValikko() {
+    int paaValinta = 0;
+    printf("Valitse käsiteltävä tietorakenne:\n");
+    printf("1) Linkitetty lista\n");
+    printf("2) Binääripuu");
+    printf("0) Lopeta\n");
+    printf("Anna valintasi: ");
+
+    scanf("%d", paaValinta);
+    getchar();
+}
+
+int linkitettyValikko() {
+    int linkitettyValinta = 0;
+    printf("Valitse haluamasi toiminto:\n");
+    printf("1) Lue tiedosto\n");
+    printf("2) Tallenna lista etuperin\n");
+    printf("3) Tallenna lista takaperin\n");
+    printf("4) Tyhjennä lista\n");
+    printf("5) Järjestä nousevaan järjestykseen\n");
+    printf("6) Järjestä laskevaan järjestykseen\n");
+    printf("7) Tilastofaktat\n");
+    printf("0) Lopeta\n");
+    printf("Anna valintasi: ");
+    scanf("%d", &linkitettyValinta);
+    getchar();
+    return(linkitettyValinta);
+}
+
+int binaariValikko(NODE **root) {
+    int takaisin = 0;
+    int iValinta = 0;
+    while(!takaisin) {
+        printf("\nValitse haluamasi toiminto (binääripuu):\n"
+               "1) Lue tiedosto\n"
+               "2) Kirjoita puun arvot tiedostoon\n"
+               "3) Syvyyshaku\n"
+               "4) Leveyshaku\n"
+               "0) Palaa\n"
+               "Anna valintasi: ");
+               scanf("%d", &iValinta);
+               getchar();
+    }
+    return iValinta;
 }
