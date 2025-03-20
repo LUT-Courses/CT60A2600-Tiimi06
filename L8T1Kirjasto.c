@@ -219,7 +219,7 @@ int paaValikko() {
 
 int linkitettyValikko() {
     int linkitettyValinta = 0;
-    printf("\nValitse haluamasi toiminto:\n");
+    printf("\nValitse haluamasi toiminto (linkitetty lista):\n");
     printf("1) Lue tiedosto\n");
     printf("2) Tallenna lista etuperin\n");
     printf("3) Tallenna lista takaperin\n");
