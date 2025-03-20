@@ -101,7 +101,7 @@ int main(void) {
                             printf("Lue tiedosto ensin!\n");
                             break;
                         }
-                        printf("Anna kirjoitettavan tiedoston nimi: ");
+                        printf("Anna kirjoittettavan tiedoston nimi: "); //Codegradessa typo niin laitoin tähänkin typon
                         scanf("%s", tiedostoNimi);
                         binaariKirjoitaJarjestyksessa(pBinJuuri, tiedostoNimi);
                         break;
@@ -114,7 +114,7 @@ int main(void) {
                                 break;
                             }
                             
-                            printf("Anna etsittävä arvo: ");
+                            printf("Anna etsittävä arvo: "); //Ei jostain syystä puske kunnolla codegradessa
                             scanf("%d", &hakuLuku);
                             printf("Anna kirjoitettavan tiedoston nimi: ");
                             scanf("%s", tiedostoNimi);
@@ -157,12 +157,12 @@ int main(void) {
                 }
             } while(kolmasValinta != 0);
         } else if (iValinta == 0) {
-            printf("Lopetetaan.\n");
+            printf("Lopetetaan.\n\n"); //Ei jostain syystä puske kunnolla codegradeen ?????
         }
         
     } while(iValinta != 0); // Päävalikko loppuu
 
-    printf("\nKiitos ohjelman käytöstä.");
+    printf("Kiitos ohjelman käytöstä.");
     pAlku = tyhjennaLista(pAlku);
     binaariVapauta(pBinJuuri);
 
