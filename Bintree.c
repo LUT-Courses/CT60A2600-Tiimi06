@@ -5,6 +5,7 @@
 #include <string.h>
 
 //Funktioiden esittely
+void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto);
 void kirjoitaJarjestyksessa(BNODE *pJuuri, FILE *pTiedosto);
 int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi);
 
@@ -141,21 +142,20 @@ BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi) {
     return pJuuri;
 }
 
-// In-order traversal tiedostoon 
-void kirjoitaJarjestyksessa(BNODE *pJuuri, FILE *pTiedosto) {
+void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto) {
     if (!pJuuri) return;
-    kirjoitaJarjestyksessa(pJuuri->pVasen, pTiedosto);
-    fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count);
-    kirjoitaJarjestyksessa(pJuuri->pOikea, pTiedosto);
+    fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count); // Juuri ensin
+    kirjoitaPreOrder(pJuuri->pVasen, pTiedosto); // Vasen alipuu
+    kirjoitaPreOrder(pJuuri->pOikea, pTiedosto); // Oikea alipuu
 }
 
 void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
-    FILE *pTiedosto = NULL;
-    if ((pTiedosto = fopen (pTiedostonNimi, "w")) == NULL) {
-        perror ("Tiedoston kirjoitttamisessa virhe, lopetetaan.");
+    FILE *pTiedosto = fopen(pTiedostonNimi, "w");
+    if (!pTiedosto) {
+        perror("Tiedoston kirjoittamisessa virhe");
         exit(0);
     }
-    kirjoitaJarjestyksessa(pJuuri, pTiedosto);
+    kirjoitaPreOrder(pJuuri, pTiedosto); // Muutettu tähän
     fclose(pTiedosto);
 }
 

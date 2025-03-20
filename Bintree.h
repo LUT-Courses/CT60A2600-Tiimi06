@@ -1,8 +1,9 @@
 #ifndef BINTREE_H
 #define BINTREE_H
+#define NIMIPITUUS 50
 
 typedef struct BinNode {
-    char name[50];
+    char name[NIMIPITUUS];
     int count;
     struct BinNode *pVasen;
     struct BinNode *pOikea;
