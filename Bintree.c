@@ -7,7 +7,6 @@
 //Funktioiden esittely
 void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto);
 void kirjoitaJarjestyksessa(BNODE *pJuuri, FILE *pTiedosto);
-int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi);
 
 /* Leveyshaulle tarvittava jono */
 typedef struct JonoSolmu {
@@ -160,29 +159,30 @@ void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
 }
 
 // Syvyyshaku (in-order) 
+// Syvyyshaku (PRE-ORDER)
 int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi) {
     if (!pJuuri || *loytyi) return 0;
-    
-    // Tutki vasenta lasta vain jos arvoa ei ole löytynyt
-    if (!*loytyi) {
-        syvyyshakuRekursiivinen(pJuuri->pVasen, iHaettava, pTiedosto, loytyi, loydettyNimi);
-    }
-    
-    // Kirjoita aina tiedostoon
+
+    // 1. Kirjoita NYKYINEN solmu aina ensin (pre-order)
     fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count);
-    
-    // Tarkista löytyikö arvo
+
+    // 2. Tarkista löytyikö arvo
     if (pJuuri->count == iHaettava) {
         *loytyi = 1;
         strcpy(loydettyNimi, pJuuri->name);
-        return 1; // Keskeytä välittömästi
+        return 1;
     }
-    
-    // Tutki oikeaa lasta vain jos arvoa ei löytynyt
+
+    // 3. Tutki vasenta lasta vain jos ei vielä löytynyt
+    if (!*loytyi) {
+        syvyyshakuRekursiivinen(pJuuri->pVasen, iHaettava, pTiedosto, loytyi, loydettyNimi);
+    }
+
+    // 4. Tutki oikeaa lasta vain jos ei vielä löytynyt
     if (!*loytyi) {
         syvyyshakuRekursiivinen(pJuuri->pOikea, iHaettava, pTiedosto, loytyi, loydettyNimi);
     }
-    
+
     return *loytyi;
 }
 
