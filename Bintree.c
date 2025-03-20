@@ -6,7 +6,7 @@
 
 //Funktioiden esittely
 void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto);
-void kirjoitaJarjestyksessa(BNODE *pJuuri, FILE *pTiedosto);
+
 
 /* Leveyshaulle tarvittava jono */
 typedef struct JonoSolmu {
@@ -88,7 +88,9 @@ BNODE* binaariLuoNode(const char *pNimi, int iLukumaara) {
 }
 
 BNODE* binaariInsert(BNODE *pJuuri, const char *pNimi, int iLukumaara) {
-    if (!pJuuri) return binaariLuoNode(pNimi, iLukumaara);
+    if (!pJuuri) {
+        return binaariLuoNode(pNimi, iLukumaara);
+    }
     
     if (iLukumaara < pJuuri->count) {
         pJuuri->pVasen = binaariInsert(pJuuri->pVasen, pNimi, iLukumaara);
@@ -159,7 +161,7 @@ void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
 }
 
 // Syvyyshaku (in-order) 
-// Syvyyshaku (PRE-ORDER)
+// Syvyyshaku (PRE-ORDER) ei toiminut ainakaan codegraden mukaisesti
 int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi) {
     if (!pJuuri || *loytyi) return 0;
 
