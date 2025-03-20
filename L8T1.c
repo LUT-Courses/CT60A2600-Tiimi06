@@ -8,6 +8,9 @@
 #include "TIETO.h"
 #include "Bintree.h"
 
+int leveysHaku(BNODE *pJuuri, const char *pHaettavaNimi, const char *pTiedostonNimi, int *loydettyLkm);
+void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi);
+int syvyysHaku(BNODE *pJuuri, int iHaettava, const char *pTiedostonNimi, char *loydettyNimi);
 
 int main(void) {
     TIETO *pAlku = NULL;
@@ -104,7 +107,6 @@ int main(void) {
                         // Syvyyshaun käsittely
                         case 3: {
                             char loydettyNimi[50] = "";
-                            int hakuLuku;
                             if (pBinJuuri == NULL) {
                                 printf("Lue tiedosto ensin!\n");
                                 break;
@@ -125,7 +127,6 @@ int main(void) {
 
                         // Leveyshaun käsittely
                         case 4: {
-                            char hakuNimi[50];
                             int loydettyLkm = 0;
                             if (pBinJuuri == NULL) {
                                 printf("Lue tiedosto ensin!\n");
