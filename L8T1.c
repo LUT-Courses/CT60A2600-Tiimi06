@@ -116,7 +116,7 @@ int main(void) {
                             
                             printf("Anna etsittävä arvo: "); //Ei jostain syystä puske kunnolla codegradessa
                             scanf("%d", &hakuLuku);
-                            printf("Anna kirjoitettavan tiedoston nimi: ");
+                            printf("Anna kirjoittettavan tiedoston nimi: ");
                             scanf("%s", tiedostoNimi);
                             
                             if (syvyysHaku(pBinJuuri, hakuLuku, tiedostoNimi, loydettyNimi)) {
@@ -137,7 +137,7 @@ int main(void) {
                             
                             printf("Anna etsittävä arvo: ");
                             scanf("%s", hakuNimi);
-                            printf("Anna kirjoitettavan tiedoston nimi: ");
+                            printf("Anna kirjoittettavan tiedoston nimi: "); //Codegraden typo
                             scanf("%s", tiedostoNimi);
                             
                             if (leveysHaku(pBinJuuri, hakuNimi, tiedostoNimi, &loydettyLkm)) {
