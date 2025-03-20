@@ -69,8 +69,10 @@ int main(void) {
                     } else {
                         printf("Lue tiedosto ennen tilastojen tulostusta!\n");
                     }
+                } else if (toinenValinta == 0) {
+                    printf("Palataan päävalikkoon.\n");
                 } 
-                else if (toinenValinta != 0) {
+                else{
                     printf("Tuntematon valinta, yritä uudestaan.\n");
                 }
                 

@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+//Funktioiden esittely
+void kirjoitaJarjestyksessa(BNODE *pJuuri, FILE *pTiedosto);
+int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi);
+
 /* Leveyshaulle tarvittava jono */
 typedef struct JonoSolmu {
     BNODE *data;
@@ -63,7 +67,7 @@ void jonoVapauta(JONO *pJono) {
 
 
 /* Binääripuun toteutus */
-BNODE* binaariLuoNode(char *pNimi, int iLukumaara) {
+BNODE* binaariLuoNode(const char *pNimi, int iLukumaara) {
     if (!pNimi || strlen(pNimi) == 0) {
         printf("Virhe: Tyhjä nimi!\n");
         return NULL;
@@ -138,7 +142,7 @@ BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi) {
 }
 
 // In-order traversal tiedostoon 
-static void kirjoitaJarjestyksessa(BNODE *pJuuri, FILE *pTiedosto) {
+void kirjoitaJarjestyksessa(BNODE *pJuuri, FILE *pTiedosto) {
     if (!pJuuri) return;
     kirjoitaJarjestyksessa(pJuuri->pVasen, pTiedosto);
     fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count);
@@ -156,7 +160,7 @@ void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
 }
 
 // Syvyyshaku (in-order) 
-static int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi) {
+int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi) {
     if (!pJuuri || *loytyi) return 0;
     
     // Tutki vasenta lasta vain jos arvoa ei ole löytynyt

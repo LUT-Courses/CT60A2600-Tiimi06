@@ -15,4 +15,5 @@ void binaariVapauta(BNODE *pJuuri);
 BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi);
 
 
+
 #endif // BINTREE_H
