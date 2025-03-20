@@ -226,7 +226,7 @@ int linkitettyValikko() {
     printf("4) Tyhjennä lista\n");
     printf("5) Järjestä nousevaan järjestykseen\n");
     printf("6) Järjestä laskevaan järjestykseen\n");
-    printf("7) Tilastofaktat\n");
+    printf("7) Joku muu hieno toiminto\n");
     printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &linkitettyValinta);
@@ -241,8 +241,8 @@ int binaariValikko() { // Poista parametri
     printf("2) Kirjoita puun arvot tiedostoon\n");
     printf("3) Syvyyshaku\n");
     printf("4) Leveyshaku\n");
-    printf("5) Tulosta puumaisessa muodossa\n");
-    printf("6)Joku muu hieno toiminto\n");
+    printf("5) Tulosta puumaisemmassa muodossa\n");
+    printf("6) Joku muu hieno toiminto\n");
     printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &iValinta);

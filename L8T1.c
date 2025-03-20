@@ -112,7 +112,7 @@ int main(void) {
                                 break;
                             }
                             
-                            printf("Anna etsittävä lukumäärä: ");
+                            printf("Anna etsittävä arvo: ");
                             scanf("%d", &hakuLuku);
                             printf("Anna kirjoitettavan tiedoston nimi: ");
                             scanf("%s", tiedostoNimi);
@@ -133,7 +133,7 @@ int main(void) {
                                 break;
                             }
                             
-                            printf("Anna etsittävä nimi: ");
+                            printf("Anna etsittävä arvo: ");
                             scanf("%s", hakuNimi);
                             printf("Anna kirjoitettavan tiedoston nimi: ");
                             scanf("%s", tiedostoNimi);
