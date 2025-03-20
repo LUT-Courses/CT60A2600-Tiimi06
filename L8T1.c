@@ -73,7 +73,7 @@ int main(void) {
                         printf("Lue tiedosto ennen tilastojen tulostusta!\n");
                     }
                 } else if (toinenValinta == 0) {
-                    printf("Palataan päävalikkoon.\n");
+                    printf("Palataan päävalikkoon.\n\n");
                 } 
                 else{
                     printf("Tuntematon valinta, yritä uudestaan.\n");
@@ -147,7 +147,7 @@ int main(void) {
                         }
                         
                     case 0: // Palaa päävalikkoon
-                        printf("Palataan päävalikkoon.\n");
+                        printf("Palataan päävalikkoon.\n\n");
                         break;
                         
                     default:

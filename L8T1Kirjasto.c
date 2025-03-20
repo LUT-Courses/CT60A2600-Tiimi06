@@ -207,7 +207,7 @@ void tilastoFaktaArpoja(TIETO *pA) {
 
 int paaValikko() {
     int paaValinta = 0;
-    printf("\nValitse käsiteltävä tietorakenne:\n");
+    printf("Valitse käsiteltävä tietorakenne:\n");
     printf("1) Linkitetty lista\n");
     printf("2) Binääripuu\n"); // Lisätty puuttuva \n
     printf("0) Lopeta\n");
@@ -241,6 +241,8 @@ int binaariValikko() { // Poista parametri
     printf("2) Kirjoita puun arvot tiedostoon\n");
     printf("3) Syvyyshaku\n");
     printf("4) Leveyshaku\n");
+    printf("5) Tulosta puumaisessa muodossa\n");
+    printf("6)Joku muu hieno toiminto\n");
     printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &iValinta);
