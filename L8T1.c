@@ -8,6 +8,8 @@
 #include "TIETO.h"
 #include "Bintree.h"
 
+//Lisään kommentin tähän, koska jostain syystä osa puskusta toimi edellisella kerralla ja osa ei puskennut.
+
 int leveysHaku(BNODE *pJuuri, const char *pHaettavaNimi, const char *pTiedostonNimi, int *loydettyLkm);
 void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi);
 int syvyysHaku(BNODE *pJuuri, int iHaettava, const char *pTiedostonNimi, char *loydettyNimi);
