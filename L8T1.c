@@ -154,11 +154,13 @@ int main(void) {
                         printf("Virheellinen valinta!\n");
                 }
             } while(kolmasValinta != 0);
+        } else if (iValinta == 0) {
+            printf("Lopetetaan.\n");
         }
         
     } while(iValinta != 0); // Päävalikko loppuu
 
-    printf("Kiitos ohjelman käytöstä.\n");
+    printf("\nKiitos ohjelman käytöstä.");
     pAlku = tyhjennaLista(pAlku);
     binaariVapauta(pBinJuuri);
 
