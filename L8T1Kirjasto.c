@@ -242,7 +242,6 @@ int binaariValikko() { // Poista parametri
     printf("3) Syvyyshaku\n");
     printf("4) Leveyshaku\n");
     printf("5) Tulosta puumaisemmassa muodossa\n");
-    printf("6) Joku muu hieno toiminto\n");
     printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &iValinta);
