@@ -189,10 +189,11 @@ int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *
 }
 
 int syvyysHaku(BNODE *pJuuri, int iHaettava, const char *pTiedostonNimi, char *loydettyNimi) {
-    FILE *pTiedosto = fopen(pTiedostonNimi, "w");
-    if (!pTiedosto) {
-        perror("Tiedoston avaaminen epäonnistui");
-        return 0;
+    FILE *pTiedosto = NULL;
+
+    if((pTiedosto = fopen(pTiedostonNimi, "w")) == NULL) {
+        perror("Tiedoston kirjoittamisessa virhe, lopetetaan.");
+        exit(0);
     }
 
     int loytyi = 0;
@@ -206,10 +207,10 @@ int leveysHaku(BNODE *pJuuri, const char *pHaettavaNimi, const char *pTiedostonN
     if (!pJuuri) return 0;
     
     JONO *pJono = jonoLuo();
-    FILE *pTiedosto = fopen(pTiedostonNimi, "w");
-    if (!pTiedosto) {
-        perror("Tiedoston avaaminen epäonnistui");
-        return 0;
+    FILE *pTiedosto = NULL;
+    if ((pTiedosto = fopen(pTiedostonNimi,"w")) == NULL) {
+        perror("Tiedoston kirjoittamisessa virhe, lopetetaan.");
+        exit(0);
     }
 
     int loytyi = 0;
