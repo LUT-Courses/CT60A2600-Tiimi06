@@ -140,9 +140,38 @@ void alleKeskiarvonLkmBin(BNODE *pJuuri) {
 
 // Laskee nimien lukumäärän, jotka esiintyvät parittomasti binääripuussa
 void parittomatLkmBin(BNODE *pJuuri) {
-    
+
     int iLkm = 0;
     laskeParittomat(pJuuri, &iLkm);
 
     printf("Nimet joiden esiintyvyys on pariton, lukumäärä on: %d\n", iLkm);
 }
+
+
+
+// Laskee nimien lukumäärän, jotka esiintyvät parillisesti binääripuussa
+void parillisetLkmBin(BNODE *pJuuri) {
+    int iLkm = 0;
+    laskeParilliset(pJuuri, &iLkm);
+
+
+    printf("Nimet joiden esiintyvyys on parillinen, lukumäärä on: %d\n", iLkm);
+
+}
+
+// Laskee nimien lukumäärän, joilla on sama alkukirjain kuin yleisimmällä nimellä binääripuussa
+void samatAlkukirjaimetBin(BNODE *pJuuri) {
+
+    char cKirjain;
+    int max = INT_MIN;
+    char yleisinNimi[NIMIPITUUS];
+
+
+    etsiYleisin(pJuuri, &max, &cKirjain, yleisinNimi);
+    int iLkm = 0;
+    laskeSamatAlkukirjaimet(pJuuri, cKirjain, &iLkm);
+
+
+    printf("Nimien lukumäärä, jotka alkavat samalla kirjaimella kuin yleisin nimi '%s' on: %d\n", yleisinNimi, iLkm);
+}
+
