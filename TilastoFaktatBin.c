@@ -86,6 +86,63 @@ static void laskeSamatAlkukirjaimet(BNODE *pNode, char cKirjain, int *iLkm) {
     } 
     laskeSamatAlkukirjaimet(pNode->pVasen, cKirjain, iLkm);
 
-    
+
     laskeSamatAlkukirjaimet(pNode->pOikea, cKirjain, iLkm);
+}
+
+
+// Ohjelma laskee nimien esiintymismäärän mukaan keskiarvon
+
+void keskiarvoLkmBin(BNODE *pJuuri) {
+
+    int iLkm = 0;
+    int iSumma = 0;
+
+
+    laskeKeskiarvo(pJuuri, &iLkm, &iSumma);
+
+    double fKeskiarvo = (double)iSumma / iLkm;
+    printf("Nimien keskimääräinen esiintymismäärä on: %.2f\n", fKeskiarvo);
+}
+
+// Laskee nimien lukumäärän, jotka esiintyvät keskiarvon yläpuolella binääripuussa
+void yliKeskiarvonLkmBin(BNODE *pJuuri) {
+    int iSumma = 0;
+
+    int iLkm = 0;
+    int iYli = 0;
+    laskeKeskiarvo(pJuuri, &iLkm, &iSumma);
+
+
+    double fKeskiarvo = (double)iSumma / iLkm;
+    laskeYliKeskiarvon(pJuuri, fKeskiarvo, &iYli);
+
+
+    printf("Yli keskiarvon (%.2f) olevien nimien lukumäärä on: %d\n", fKeskiarvo, iYli);
+}
+
+// Laskee nimien lukumäärän, jotka esiintyvät keskiarvon alapuolella binääripuussa
+void alleKeskiarvonLkmBin(BNODE *pJuuri) {
+
+    int iSumma = 0;
+    int iLkm = 0;
+    int iAli = 0;
+
+
+    laskeKeskiarvo(pJuuri, &iLkm, &iSumma);
+    double fKeskiarvo = (double)iSumma / iLkm;
+    laskeAlleKeskiarvon(pJuuri, fKeskiarvo, &iAli);
+
+
+
+    printf("Alle keskiarvon (%.2f) olevien nimien lukumäärä on: %d\n", fKeskiarvo, iAli);
+}
+
+// Laskee nimien lukumäärän, jotka esiintyvät parittomasti binääripuussa
+void parittomatLkmBin(BNODE *pJuuri) {
+    
+    int iLkm = 0;
+    laskeParittomat(pJuuri, &iLkm);
+
+    printf("Nimet joiden esiintyvyys on pariton, lukumäärä on: %d\n", iLkm);
 }
