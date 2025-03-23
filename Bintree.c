@@ -6,6 +6,7 @@
 
 //Funktioiden esittely
 void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto);
+void tulostaPuu(BNODE *pJuuri, int taso);
 
 
 /* Leveyshaulle tarvittava jono */
@@ -19,7 +20,20 @@ typedef struct Jono {
     JONOSOLMU *pTaakse;
 } JONO;
 
+void tulostaPuu(BNODE *pJuuri, int taso) {
+    if (pJuuri == NULL) {
+        return;
+    }
 
+    tulostaPuu(pJuuri->pOikea, taso + 1);
+
+    for (int i = 0; i < taso; i++) {
+        printf("|   ");
+    }
+    printf("|-- %s (%d)\n", pJuuri->name, pJuuri->count);
+
+    tulostaPuu(pJuuri->pVasen, taso + 1);
+}
 JONO* jonoLuo() {
     JONO *pUusiJono;
     if ((pUusiJono = (JONO*)malloc(sizeof(JONO))) == NULL) {

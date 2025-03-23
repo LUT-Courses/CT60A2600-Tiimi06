@@ -6,6 +6,7 @@
 
 // Luodaan apufuktiot eri tilastofaktoja varten.
 static void laskeKeskiarvo(BNODE *pNode, int *iLkm, int *iSumma) {
+    if (pNode == NULL) return;
 
 
     (*iLkm)++;
@@ -18,6 +19,7 @@ static void laskeKeskiarvo(BNODE *pNode, int *iLkm, int *iSumma) {
 
 static void laskeYliKeskiarvon(BNODE *pNode, double fKeskiarvo, int *iYli){
 
+    if (pNode == NULL) return;
 
     if (pNode->count > fKeskiarvo) {
         (*iYli)++;
@@ -29,7 +31,8 @@ static void laskeYliKeskiarvon(BNODE *pNode, double fKeskiarvo, int *iYli){
 }
 
 static void laskeAlleKeskiarvon(BNODE *pNode, double fKeskiarvo, int *iAli) {
- 
+     if (pNode == NULL) return;
+
 
     if (pNode->count < fKeskiarvo){
             (*iAli)++;
@@ -42,6 +45,7 @@ static void laskeAlleKeskiarvon(BNODE *pNode, double fKeskiarvo, int *iAli) {
 }
 
 static void laskeParittomat(BNODE *pNode, int *iLkm) {
+    if (pNode == NULL) return;
 
     
     if (pNode->count % 2 != 0){
@@ -57,6 +61,7 @@ static void laskeParittomat(BNODE *pNode, int *iLkm) {
 
 
 static void laskeParilliset(BNODE *pNode, int *iLkm) {
+    if (pNode == NULL) return;
 
     if (pNode->count % 2 == 0) {
         (*iLkm)++;
@@ -69,6 +74,7 @@ static void laskeParilliset(BNODE *pNode, int *iLkm) {
 
 
 static void etsiYleisin(BNODE *pNode, int *max, char *cKirjain, char *yleisinNimi) {
+    if (pNode == NULL) return;
 
     if (pNode->count > *max) {
         *max = pNode->count;
@@ -80,6 +86,8 @@ static void etsiYleisin(BNODE *pNode, int *max, char *cKirjain, char *yleisinNim
 }
 
 static void laskeSamatAlkukirjaimet(BNODE *pNode, char cKirjain, int *iLkm) {
+        if (pNode == NULL) return;
+
     if (pNode->name[0] == cKirjain){
         (*iLkm)++;
 
@@ -107,6 +115,7 @@ void keskiarvoLkmBin(BNODE *pJuuri) {
 
 // Laskee nimien lukumäärän, jotka esiintyvät keskiarvon yläpuolella binääripuussa
 void yliKeskiarvonLkmBin(BNODE *pJuuri) {
+
     int iSumma = 0;
 
     int iLkm = 0;
@@ -151,6 +160,7 @@ void parittomatLkmBin(BNODE *pJuuri) {
 
 // Laskee nimien lukumäärän, jotka esiintyvät parillisesti binääripuussa
 void parillisetLkmBin(BNODE *pJuuri) {
+
     int iLkm = 0;
     laskeParilliset(pJuuri, &iLkm);
 
@@ -173,5 +183,6 @@ void samatAlkukirjaimetBin(BNODE *pJuuri) {
 
 
     printf("Nimien lukumäärä, jotka alkavat samalla kirjaimella kuin yleisin nimi '%s' on: %d\n", yleisinNimi, iLkm);
+
 }
 

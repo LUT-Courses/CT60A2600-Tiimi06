@@ -9,7 +9,7 @@ L8T1.o: L8T1.c L8T1Kirjasto.h TilastoFaktatLista.h MergeSortLaskevaJKirjasto.h M
 	gcc -c L8T1.c -std=c99 -pedantic -Wall
 
 # Kirjaston objektitiedosto
-L8T1Kirjasto.o: L8T1Kirjasto.c L8T1Kirjasto.h TilastoFaktatLista.h MergeSortLaskevaJKirjasto.h MergeSortNousevaJKirjasto.h TilastoFaktatBin.h
+L8T1Kirjasto.o: L8T1Kirjasto.c L8T1Kirjasto.h TilastoFaktatLista.h MergeSortLaskevaJKirjasto.h MergeSortNousevaJKirjasto.h Bintree.h TilastoFaktatBin.h
 	gcc -c L8T1Kirjasto.c -std=c99 -pedantic -Wall
 
 # TilastoFaktatLista objektitiedosto

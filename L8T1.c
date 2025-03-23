@@ -70,7 +70,7 @@ int main(void) {
                 } 
                 else if (toinenValinta == 7) {
                     if(pAlku != NULL) {
-                        tilastoFaktaArpoja(pAlku, iValinta);
+                        tilastoFaktaArpojaLista(pAlku);                    
                     } else {
                         printf("Lue tiedosto ennen tilastojen tulostusta!\n");
                     }
@@ -149,11 +149,23 @@ int main(void) {
                         }
                         case 5: {
                             if(pBinJuuri != NULL) {
-                            tilastoFaktaArpoja(pBinJuuri, iValinta);
+                            tulostaPuu(pBinJuuri, 0);
+                            
+                        } else {
+                            printf("Lue tiedosto ennen puun tulostusta!\n");
+                        }
+                        break;
+                        }
+
+                        case 6: {
+                            if(pBinJuuri != NULL) {
+                            tilastoFaktaArpojaBin(pBinJuuri);
                         } else {
                             printf("Lue tiedosto ennen tilastojen tulostusta!\n");
                         }
-                            }
+                        break;
+                        }
+
                         
                     case 0: // Palaa päävalikkoon
                         printf("Palataan päävalikkoon.\n\n");

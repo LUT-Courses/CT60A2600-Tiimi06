@@ -14,7 +14,9 @@ BNODE* binaariLuoNode(const char *pNimi, int iLukumaara);
 BNODE* binaariInsert(BNODE *pJuuri, const char *pNimi, int iLukumaara);
 void binaariVapauta(BNODE *pJuuri);
 BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi);
+void tulostaPuu(BNODE *pJuuri, int taso);
 
 
 
-#endif // BINTREE_H
+
+#endif 

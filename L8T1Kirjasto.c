@@ -176,62 +176,73 @@ TIETO *tyhjennaLista(TIETO *pA) {
 
 
 //Arpoo satunnaisen tilastofaktan tulostettavaksi
-void tilastoFaktaArpoja(void *pA, int iTietorakenneValinta) {
+void tilastoFaktaArpojaLista(TIETO *pA) {
+    if (pA == NULL) {
+        printf("Virhe: tietorakenne on tyhjä.\n");
+        return;
+    }
+    
     srand(time(NULL));
 
     // Arvotaan satunnainen luku
     int arpa = rand() % 6; // 0 - 5 (6 erilaista faktatyyppiä)
-    if(iTietorakenneValinta == 1){
-        TIETO *pA = (TIETO*)pA;
-        switch (arpa) {
-                case 0:
-                    keskiarvoLkm(pA);
-                    break;
-                case 1:
-                    yliKeskiarvonLkm(pA);
-                    break;
-                case 2:
-                    alleKeskiarvonLkm(pA);
-                    break;
-                case 3:
-                    parillisetLkm(pA);
-                    break;
-                case 4:
-                    parittomatLkm(pA);
-                    break;
-                case 5:
-                    samatAlkukirjaimet(pA);
-                    break;
-                default:
-                    printf("Jokin meni pieleen faktan arpomisen aikana.\n");
-            }
-    }else if(iTietorakenneValinta == 2){
-        BNODE *pBNode = (BNODE *)pA;
+    switch (arpa) {
+        case 0:
+            keskiarvoLkm(pA);
+            break;
+        case 1:
+            yliKeskiarvonLkm(pA);
+            break;
+        case 2:
+            alleKeskiarvonLkm(pA);
+            break;
+        case 3:
+            parillisetLkm(pA);
+            break;
+        case 4:
+            parittomatLkm(pA);
+            break;
+        case 5:
+            samatAlkukirjaimet(pA);
+            break;
+        default:
+            printf("Jokin meni pieleen faktan arpomisen aikana.\n");
+    }
+}
 
-        switch (arpa) {
-                case 0:
-                    keskiarvoLkmBin(pA);
-                    break;
-                case 1:
-                    yliKeskiarvonLkmBin(pA);
-                    break;
-                case 2:
-                    alleKeskiarvonLkmBin(pA);
-                    break;
-                case 3:
-                    parillisetLkmBin(pA);
-                    break;
-                case 4:
-                    parittomatLkmBin(pA);
-                    break;
-                case 5:
-                    samatAlkukirjaimetBin(pA);
-                    break;
-                default:
-                    printf("Jokin meni pieleen faktan arpomisen aikana.\n");
-            }
+// Arpoo satunnaisen tilastofaktan tulostettavaksi binääripuulle
+void tilastoFaktaArpojaBin(BNODE *pA) {
+    if (pA == NULL) {
+        printf("Virhe: tietorakenne on tyhjä.\n");
+        return;
     }
     
+    srand(time(NULL));
+
+    // Arvotaan satunnainen luku
+    int arpa = rand() % 6; // 0 - 5 (6 erilaista faktatyyppiä)
+    switch (arpa) {
+        case 0:
+            keskiarvoLkmBin(pA);
+            break;
+        case 1:
+            yliKeskiarvonLkmBin(pA);
+            break;
+        case 2:
+            alleKeskiarvonLkmBin(pA);
+            break;
+        case 3:
+            parillisetLkmBin(pA);
+            break;
+        case 4:
+            parittomatLkmBin(pA);
+            break;
+        case 5:
+            samatAlkukirjaimetBin(pA);
+            break;
+        default:
+            printf("Jokin meni pieleen faktan arpomisen aikana.\n");
+    }
 }
 
 int paaValikko() {
@@ -271,6 +282,7 @@ int binaariValikko() { // Poista parametri
     printf("3) Syvyyshaku\n");
     printf("4) Leveyshaku\n");
     printf("5) Tulosta puumaisemmassa muodossa\n");
+    printf("6) Tulosta tilastofakta\n");
     printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &iValinta);
