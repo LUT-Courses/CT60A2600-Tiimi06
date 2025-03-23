@@ -4,7 +4,7 @@
 #include <time.h>
 
 #include "L8T1Kirjasto.h"
-#include "TilastoFaktatKirjasto.h"
+#include "TilastoFaktatLista.h"
 #include "MergeSortLaskevaJKirjasto.h"
 #include "MergeSortNousevaJKirjasto.h"
 #include "TIETO.h"
@@ -226,7 +226,7 @@ int linkitettyValikko() {
     printf("4) Tyhjennä lista\n");
     printf("5) Järjestä nousevaan järjestykseen\n");
     printf("6) Järjestä laskevaan järjestykseen\n");
-    printf("7) Joku muu hieno toiminto\n");
+    printf("7) Tulosta tilastofakta\n");
     printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &linkitettyValinta);

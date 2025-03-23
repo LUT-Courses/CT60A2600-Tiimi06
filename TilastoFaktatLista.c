@@ -1,8 +1,10 @@
-#include "TilastoFaktatKirjasto.h"
+#include "TilastoFaktatLista.h"
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
 #include <string.h>
+#include "Bintree.h"
+
 
 
 //Laskee nimien esiintymismäärän kskiarvon

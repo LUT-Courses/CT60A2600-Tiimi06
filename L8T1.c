@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "L8T1Kirjasto.h"
-#include "TilastoFaktatKirjasto.h"
+#include "TilastoFaktatLista.h"
 #include "MergeSortLaskevaJKirjasto.h"
 #include "MergeSortNousevaJKirjasto.h"
 #include "TIETO.h"
@@ -146,6 +146,9 @@ int main(void) {
                                 printf("Puussa ei ole arvoa '%s'.\n", hakuNimi);
                             }
                             break;
+                        }
+                        case 5: {
+                            
                         }
                         
                     case 0: // Palaa päävalikkoon

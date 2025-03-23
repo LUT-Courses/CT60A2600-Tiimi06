@@ -5,7 +5,7 @@
 #define TIEDOSTONKOKO 30
 
 #include "TIETO.h"
-#include "TilastoFaktatKirjasto.h"
+#include "TilastoFaktatLista.h"
 #include "MergeSortLaskevaJKirjasto.h"
 
 
