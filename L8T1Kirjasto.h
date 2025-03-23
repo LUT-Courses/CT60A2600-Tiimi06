@@ -17,7 +17,7 @@ TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi);
 void tallennaEtuperin(TIETO *pA, char *tiedostonNimi) ;
 void tallennaTakaperin(TIETO *pA, char *tiedostonNimi);
 TIETO *tyhjennaLista(TIETO *pA);
-void tilastoFaktaArpoja(TIETO *pA);
+void tilastoFaktaArpoja(void *pA, int iTietorakenneValinta);
 int paaValikko(void);
 int linkitettyValikko(void);
 int binaariValikko(void); // Poista parametri

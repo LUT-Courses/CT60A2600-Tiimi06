@@ -70,7 +70,7 @@ int main(void) {
                 } 
                 else if (toinenValinta == 7) {
                     if(pAlku != NULL) {
-                        tilastoFaktaArpoja(pAlku);
+                        tilastoFaktaArpoja(pAlku, iValinta);
                     } else {
                         printf("Lue tiedosto ennen tilastojen tulostusta!\n");
                     }
@@ -148,8 +148,12 @@ int main(void) {
                             break;
                         }
                         case 5: {
-                            
+                            if(pBinJuuri != NULL) {
+                            tilastoFaktaArpoja(pBinJuuri, iValinta);
+                        } else {
+                            printf("Lue tiedosto ennen tilastojen tulostusta!\n");
                         }
+                            }
                         
                     case 0: // Palaa päävalikkoon
                         printf("Palataan päävalikkoon.\n\n");

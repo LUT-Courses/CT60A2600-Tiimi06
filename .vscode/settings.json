@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "l8t1kirjasto.h": "c",
-        "tilastofaktatkirjasto.h": "c"
+        "tilastofaktatkirjasto.h": "c",
+        "time.h": "c",
+        "string.h": "c"
     }
 }
