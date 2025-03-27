@@ -1,5 +1,6 @@
 # Makefile for L8T1
 
+#projekti: Bintree.o 
 # Pääohjelma
 projekti: L8T1.o L8T1Kirjasto.o TilastoFaktatKirjasto.o MergeSortLaskevaJKirjasto.o MergeSortNousevaJKirjasto.o Bintree.o
 	gcc -o projekti L8T1.o L8T1Kirjasto.o TilastoFaktatKirjasto.o MergeSortLaskevaJKirjasto.o MergeSortNousevaJKirjasto.o Bintree.o

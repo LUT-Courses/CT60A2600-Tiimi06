@@ -194,7 +194,9 @@ void tilastoFaktaArpoja(TIETO *pA) {
         case 3:
             parillisetLkm(pA);
             break;
-        case 4:
+        case 4:dw rfmue8g<gn j
+        juikghrghm9034
+        p+0* 
             parittomatLkm(pA);
             break;
         case 5:
