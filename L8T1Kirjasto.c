@@ -199,11 +199,13 @@ void tilastoFaktaArpojaLista(TIETO *pA) {
         case 3:
             parillisetLkm(pA);
             break;
+        /*
         case 4:dw rfmue8g<gn j
         juikghrghm9034
         p+0* 
             parittomatLkm(pA);
             break;
+        */
         case 5:
             samatAlkukirjaimet(pA);
             break;
@@ -283,8 +285,10 @@ int binaariValikko() { // Poista parametri
     printf("2) Kirjoita puun arvot tiedostoon\n");
     printf("3) Syvyyshaku\n");
     printf("4) Leveyshaku\n");
-    printf("5) Tulosta puumaisemmassa muodossa\n");
-    printf("6) Tulosta tilastofakta\n");
+    printf("5) Binääripuuhaku\n");
+    printf("6) Poista arvo\n");
+    printf("7) Tulosta puumaisemmassa muodossa\n");
+    printf("8) Tulosta tilastofakta\n");
     printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &iValinta);
