@@ -35,5 +35,5 @@ TilastoFaktatBin.o: TilastoFaktatBin.c TilastoFaktatBin.h
 
 # PITÄÄ AINA LISÄTÄ TÄTÄ et ei tuu ongelma kääntämiseen kanssa
 clean:
-	rm -f *.o projekti 
+	rm -f *.o projekti teks*.txt
 #muista poistaa kaikki tekstitiedostot ennen codegradepalautus, lisäämällä kommento "teks*.txt"  "*.o projektin" jälkeen
