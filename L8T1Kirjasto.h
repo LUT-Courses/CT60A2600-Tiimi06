@@ -5,8 +5,9 @@
 #define TIEDOSTONKOKO 30
 
 #include "TIETO.h"
-#include "TilastoFaktatKirjasto.h"
+#include "TilastoFaktatLista.h"
 #include "MergeSortLaskevaJKirjasto.h"
+#include "Bintree.h" 
 
 
 int binaariValikko(void);
@@ -17,7 +18,8 @@ TIETO *lueTiedosto(TIETO *pA, char *tiedostonNimi);
 void tallennaEtuperin(TIETO *pA, char *tiedostonNimi) ;
 void tallennaTakaperin(TIETO *pA, char *tiedostonNimi);
 TIETO *tyhjennaLista(TIETO *pA);
-void tilastoFaktaArpoja(TIETO *pA);
+void tilastoFaktaArpojaLista(TIETO *pA);
+void tilastoFaktaArpojaBin(BNODE *pA);
 int paaValikko(void);
 int linkitettyValikko(void);
 int binaariValikko(void); // Poista parametri

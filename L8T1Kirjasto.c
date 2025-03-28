@@ -4,11 +4,12 @@
 #include <time.h>
 
 #include "L8T1Kirjasto.h"
-#include "TilastoFaktatKirjasto.h"
+#include "TilastoFaktatLista.h"
 #include "MergeSortLaskevaJKirjasto.h"
 #include "MergeSortNousevaJKirjasto.h"
 #include "TIETO.h"
 #include "Bintree.h"
+#include "TilastoFaktatBin.h"
 
 char *kysyNimi(char *pPromtti) {
     char valiaikainenMuutuja[TIEDOSTONKOKO] = "";
@@ -175,12 +176,16 @@ TIETO *tyhjennaLista(TIETO *pA) {
 
 
 //Arpoo satunnaisen tilastofaktan tulostettavaksi
-void tilastoFaktaArpoja(TIETO *pA) {
+void tilastoFaktaArpojaLista(TIETO *pA) {
+    if (pA == NULL) {
+        printf("Virhe: tietorakenne on tyhjä.\n");
+        return;
+    }
+    
     srand(time(NULL));
 
     // Arvotaan satunnainen luku
     int arpa = rand() % 6; // 0 - 5 (6 erilaista faktatyyppiä)
-
     switch (arpa) {
         case 0:
             keskiarvoLkm(pA);
@@ -207,9 +212,44 @@ void tilastoFaktaArpoja(TIETO *pA) {
     }
 }
 
+// Arpoo satunnaisen tilastofaktan tulostettavaksi binääripuulle
+void tilastoFaktaArpojaBin(BNODE *pA) {
+    if (pA == NULL) {
+        printf("Virhe: tietorakenne on tyhjä.\n");
+        return;
+    }
+    
+    srand(time(NULL));
+
+    // Arvotaan satunnainen luku
+    int arpa = rand() % 6; // 0 - 5 (6 erilaista faktatyyppiä)
+    switch (arpa) {
+        case 0:
+            keskiarvoLkmBin(pA);
+            break;
+        case 1:
+            yliKeskiarvonLkmBin(pA);
+            break;
+        case 2:
+            alleKeskiarvonLkmBin(pA);
+            break;
+        case 3:
+            parillisetLkmBin(pA);
+            break;
+        case 4:
+            parittomatLkmBin(pA);
+            break;
+        case 5:
+            samatAlkukirjaimetBin(pA);
+            break;
+        default:
+            printf("Jokin meni pieleen faktan arpomisen aikana.\n");
+    }
+}
+
 int paaValikko() {
     int paaValinta = 0;
-    printf("\nValitse käsiteltävä tietorakenne:\n");
+    printf("Valitse käsiteltävä tietorakenne:\n");
     printf("1) Linkitetty lista\n");
     printf("2) Binääripuu\n"); // Lisätty puuttuva \n
     printf("0) Lopeta\n");
@@ -221,14 +261,14 @@ int paaValikko() {
 
 int linkitettyValikko() {
     int linkitettyValinta = 0;
-    printf("\nValitse haluamasi toiminto:\n");
+    printf("\nValitse haluamasi toiminto (linkitetty lista):\n");
     printf("1) Lue tiedosto\n");
     printf("2) Tallenna lista etuperin\n");
     printf("3) Tallenna lista takaperin\n");
     printf("4) Tyhjennä lista\n");
     printf("5) Järjestä nousevaan järjestykseen\n");
     printf("6) Järjestä laskevaan järjestykseen\n");
-    printf("7) Tilastofaktat\n");
+    printf("7) Tulosta tilastofakta\n");
     printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &linkitettyValinta);
@@ -243,6 +283,8 @@ int binaariValikko() { // Poista parametri
     printf("2) Kirjoita puun arvot tiedostoon\n");
     printf("3) Syvyyshaku\n");
     printf("4) Leveyshaku\n");
+    printf("5) Tulosta puumaisemmassa muodossa\n");
+    printf("6) Tulosta tilastofakta\n");
     printf("0) Palaa\n");
     printf("Anna valintasi: ");
     scanf("%d", &iValinta);

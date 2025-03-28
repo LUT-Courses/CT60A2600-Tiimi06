@@ -4,6 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+//Funktioiden esittely
+void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto);
+void tulostaPuu(BNODE *pJuuri, int taso);
+
+
 /* Leveyshaulle tarvittava jono */
 typedef struct JonoSolmu {
     BNODE *data;
@@ -15,7 +20,20 @@ typedef struct Jono {
     JONOSOLMU *pTaakse;
 } JONO;
 
+void tulostaPuu(BNODE *pJuuri, int taso) {
+    if (pJuuri == NULL) {
+        return;
+    }
 
+    tulostaPuu(pJuuri->pOikea, taso + 1);
+
+    for (int i = 0; i < taso; i++) {
+        printf("|   ");
+    }
+    printf("|-- %s (%d)\n", pJuuri->name, pJuuri->count);
+
+    tulostaPuu(pJuuri->pVasen, taso + 1);
+}
 JONO* jonoLuo() {
     JONO *pUusiJono;
     if ((pUusiJono = (JONO*)malloc(sizeof(JONO))) == NULL) {
@@ -63,7 +81,7 @@ void jonoVapauta(JONO *pJono) {
 
 
 /* Binääripuun toteutus */
-BNODE* binaariLuoNode(char *pNimi, int iLukumaara) {
+BNODE* binaariLuoNode(const char *pNimi, int iLukumaara) {
     if (!pNimi || strlen(pNimi) == 0) {
         printf("Virhe: Tyhjä nimi!\n");
         return NULL;
@@ -84,7 +102,9 @@ BNODE* binaariLuoNode(char *pNimi, int iLukumaara) {
 }
 
 BNODE* binaariInsert(BNODE *pJuuri, const char *pNimi, int iLukumaara) {
-    if (!pJuuri) return binaariLuoNode(pNimi, iLukumaara);
+    if (!pJuuri) {
+        return binaariLuoNode(pNimi, iLukumaara);
+    }
     
     if (iLukumaara < pJuuri->count) {
         pJuuri->pVasen = binaariInsert(pJuuri->pVasen, pNimi, iLukumaara);
@@ -137,56 +157,57 @@ BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi) {
     return pJuuri;
 }
 
-// In-order traversal tiedostoon 
-static void kirjoitaJarjestyksessa(BNODE *pJuuri, FILE *pTiedosto) {
+void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto) {
     if (!pJuuri) return;
-    kirjoitaJarjestyksessa(pJuuri->pVasen, pTiedosto);
-    fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count);
-    kirjoitaJarjestyksessa(pJuuri->pOikea, pTiedosto);
+    fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count); // Juuri ensin
+    kirjoitaPreOrder(pJuuri->pVasen, pTiedosto); // Vasen alipuu
+    kirjoitaPreOrder(pJuuri->pOikea, pTiedosto); // Oikea alipuu
 }
 
 void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
-    FILE *pTiedosto = NULL;
-    if ((pTiedosto = fopen (pTiedostonNimi, "w")) == NULL) {
-        perror ("Tiedoston kirjoitttamisessa virhe, lopetetaan.");
+    FILE *pTiedosto = fopen(pTiedostonNimi, "w");
+    if (!pTiedosto) {
+        perror("Tiedoston kirjoittamisessa virhe");
         exit(0);
     }
-    kirjoitaJarjestyksessa(pJuuri, pTiedosto);
+    kirjoitaPreOrder(pJuuri, pTiedosto); // Muutettu tähän
     fclose(pTiedosto);
 }
 
 // Syvyyshaku (in-order) 
-static int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi) {
+// Syvyyshaku (PRE-ORDER) ei toiminut ainakaan codegraden mukaisesti
+int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi) {
     if (!pJuuri || *loytyi) return 0;
-    
-    // Tutki vasenta lasta vain jos arvoa ei ole löytynyt
-    if (!*loytyi) {
-        syvyyshakuRekursiivinen(pJuuri->pVasen, iHaettava, pTiedosto, loytyi, loydettyNimi);
-    }
-    
-    // Kirjoita aina tiedostoon
+
+    // 1. Kirjoita NYKYINEN solmu aina ensin (pre-order)
     fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count);
-    
-    // Tarkista löytyikö arvo
+
+    // 2. Tarkista löytyikö arvo
     if (pJuuri->count == iHaettava) {
         *loytyi = 1;
         strcpy(loydettyNimi, pJuuri->name);
-        return 1; // Keskeytä välittömästi
+        return 1;
     }
-    
-    // Tutki oikeaa lasta vain jos arvoa ei löytynyt
+
+    // 3. Tutki vasenta lasta vain jos ei vielä löytynyt
+    if (!*loytyi) {
+        syvyyshakuRekursiivinen(pJuuri->pVasen, iHaettava, pTiedosto, loytyi, loydettyNimi);
+    }
+
+    // 4. Tutki oikeaa lasta vain jos ei vielä löytynyt
     if (!*loytyi) {
         syvyyshakuRekursiivinen(pJuuri->pOikea, iHaettava, pTiedosto, loytyi, loydettyNimi);
     }
-    
+
     return *loytyi;
 }
 
 int syvyysHaku(BNODE *pJuuri, int iHaettava, const char *pTiedostonNimi, char *loydettyNimi) {
-    FILE *pTiedosto = fopen(pTiedostonNimi, "w");
-    if (!pTiedosto) {
-        perror("Tiedoston avaaminen epäonnistui");
-        return 0;
+    FILE *pTiedosto = NULL;
+
+    if((pTiedosto = fopen(pTiedostonNimi, "w")) == NULL) {
+        perror("Tiedoston kirjoittamisessa virhe, lopetetaan.");
+        exit(0);
     }
 
     int loytyi = 0;
@@ -200,10 +221,10 @@ int leveysHaku(BNODE *pJuuri, const char *pHaettavaNimi, const char *pTiedostonN
     if (!pJuuri) return 0;
     
     JONO *pJono = jonoLuo();
-    FILE *pTiedosto = fopen(pTiedostonNimi, "w");
-    if (!pTiedosto) {
-        perror("Tiedoston avaaminen epäonnistui");
-        return 0;
+    FILE *pTiedosto = NULL;
+    if ((pTiedosto = fopen(pTiedostonNimi,"w")) == NULL) {
+        perror("Tiedoston kirjoittamisessa virhe, lopetetaan.");
+        exit(0);
     }
 
     int loytyi = 0;

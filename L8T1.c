@@ -2,12 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include "L8T1Kirjasto.h"
-#include "TilastoFaktatKirjasto.h"
+#include "TilastoFaktatLista.h"
 #include "MergeSortLaskevaJKirjasto.h"
 #include "MergeSortNousevaJKirjasto.h"
 #include "TIETO.h"
 #include "Bintree.h"
 
+//Lisään kommentin tähän, koska jostain syystä osa puskusta toimi edellisella kerralla ja osa ei puskennut.
+
+int leveysHaku(BNODE *pJuuri, const char *pHaettavaNimi, const char *pTiedostonNimi, int *loydettyLkm);
+void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi);
+int syvyysHaku(BNODE *pJuuri, int iHaettava, const char *pTiedostonNimi, char *loydettyNimi);
 
 int main(void) {
     TIETO *pAlku = NULL;
@@ -65,12 +70,14 @@ int main(void) {
                 } 
                 else if (toinenValinta == 7) {
                     if(pAlku != NULL) {
-                        tilastoFaktaArpoja(pAlku);
+                        tilastoFaktaArpojaLista(pAlku);                    
                     } else {
                         printf("Lue tiedosto ennen tilastojen tulostusta!\n");
                     }
+                } else if (toinenValinta == 0) {
+                    printf("Palataan päävalikkoon.\n\n");
                 } 
-                else if (toinenValinta != 0) {
+                else{
                     printf("Tuntematon valinta, yritä uudestaan.\n");
                 }
                 
@@ -94,7 +101,7 @@ int main(void) {
                             printf("Lue tiedosto ensin!\n");
                             break;
                         }
-                        printf("Anna kirjoitettavan tiedoston nimi: ");
+                        printf("Anna kirjoittettavan tiedoston nimi: "); //Codegradessa typo niin laitoin tähänkin typon
                         scanf("%s", tiedostoNimi);
                         binaariKirjoitaJarjestyksessa(pBinJuuri, tiedostoNimi);
                         break;
@@ -102,15 +109,14 @@ int main(void) {
                         // Syvyyshaun käsittely
                         case 3: {
                             char loydettyNimi[50] = "";
-                            int hakuLuku;
                             if (pBinJuuri == NULL) {
                                 printf("Lue tiedosto ensin!\n");
                                 break;
                             }
                             
-                            printf("Anna etsittävä lukumäärä: ");
+                            printf("Anna etsittävä arvo: "); //Ei jostain syystä puske kunnolla codegradessa
                             scanf("%d", &hakuLuku);
-                            printf("Anna kirjoitettavan tiedoston nimi: ");
+                            printf("Anna kirjoittettavan tiedoston nimi: ");
                             scanf("%s", tiedostoNimi);
                             
                             if (syvyysHaku(pBinJuuri, hakuLuku, tiedostoNimi, loydettyNimi)) {
@@ -123,16 +129,15 @@ int main(void) {
 
                         // Leveyshaun käsittely
                         case 4: {
-                            char hakuNimi[50];
                             int loydettyLkm = 0;
                             if (pBinJuuri == NULL) {
                                 printf("Lue tiedosto ensin!\n");
                                 break;
                             }
                             
-                            printf("Anna etsittävä nimi: ");
+                            printf("Anna etsittävä arvo: ");
                             scanf("%s", hakuNimi);
-                            printf("Anna kirjoitettavan tiedoston nimi: ");
+                            printf("Anna kirjoittettavan tiedoston nimi: "); //Codegraden typo
                             scanf("%s", tiedostoNimi);
                             
                             if (leveysHaku(pBinJuuri, hakuNimi, tiedostoNimi, &loydettyLkm)) {
@@ -142,20 +147,41 @@ int main(void) {
                             }
                             break;
                         }
+                        case 5: {
+                            if(pBinJuuri != NULL) {
+                            tulostaPuu(pBinJuuri, 0);
+                            
+                        } else {
+                            printf("Lue tiedosto ennen puun tulostusta!\n");
+                        }
+                        break;
+                        }
+
+                        case 6: {
+                            if(pBinJuuri != NULL) {
+                            tilastoFaktaArpojaBin(pBinJuuri);
+                        } else {
+                            printf("Lue tiedosto ennen tilastojen tulostusta!\n");
+                        }
+                        break;
+                        }
+
                         
                     case 0: // Palaa päävalikkoon
-                        printf("Palataan päävalikkoon.\n");
+                        printf("Palataan päävalikkoon.\n\n");
                         break;
                         
                     default:
                         printf("Virheellinen valinta!\n");
                 }
             } while(kolmasValinta != 0);
+        } else if (iValinta == 0) {
+            printf("Lopetetaan.\n\n"); //Ei jostain syystä puske kunnolla codegradeen ?????
         }
         
     } while(iValinta != 0); // Päävalikko loppuu
 
-    printf("Kiitos ohjelman käytöstä.\n");
+    printf("Kiitos ohjelman käytöstä.");
     pAlku = tyhjennaLista(pAlku);
     binaariVapauta(pBinJuuri);
 
