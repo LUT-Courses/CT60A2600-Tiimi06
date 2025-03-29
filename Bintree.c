@@ -247,3 +247,99 @@ int leveysHaku(BNODE *pJuuri, const char *pHaettavaNimi, const char *pTiedostonN
     jonoVapauta(pJono);
     return loytyi;
 }
+//uusi lisäys
+int etsiNimiLukumaaranPerusteella(BNODE *pJuuri, int arvo, char *nimi) {
+    if (pJuuri == NULL)
+        return 0;
+    if (pJuuri->count == arvo) {
+        strcpy(nimi, pJuuri->name);
+        return 1;
+    }
+    if (etsiNimiLukumaaranPerusteella(pJuuri->pVasen, arvo, nimi))
+        return 1;
+    if (etsiNimiLukumaaranPerusteella(pJuuri->pOikea, arvo, nimi))
+        return 1;
+    return 0;
+}
+
+/* Poistaa solmun, jonka count vastaa annettua iLukumaaraa */
+BNODE* binaariPoistaLukumaara(BNODE *pJuuri, int iLukumaara) {
+    if (pJuuri == NULL)
+        return NULL;
+    
+    if (iLukumaara < pJuuri->count) {
+        pJuuri->pVasen = binaariPoistaLukumaara(pJuuri->pVasen, iLukumaara);
+    } else if (iLukumaara > pJuuri->count) {
+        pJuuri->pOikea = binaariPoistaLukumaara(pJuuri->pOikea, iLukumaara);
+    } else {
+        // Solmu löytyi: poistetaan se
+        if (pJuuri->pVasen == NULL && pJuuri->pOikea == NULL) {
+            free(pJuuri);
+            return NULL;
+        } else if (pJuuri->pVasen == NULL) {
+            BNODE *temp = pJuuri->pOikea;
+            free(pJuuri);
+            return temp;
+        } else if (pJuuri->pOikea == NULL) {
+            BNODE *temp = pJuuri->pVasen;
+            free(pJuuri);
+            return temp;
+        } else {
+            
+            BNODE *temp = pJuuri->pOikea;
+            while (temp && temp->pVasen != NULL) {
+                temp = temp->pVasen;
+            }
+           
+            strcpy(pJuuri->name, temp->name);
+            pJuuri->count = temp->count;
+          
+            pJuuri->pOikea = binaariPoistaLukumaara(pJuuri->pOikea, temp->count);
+        }
+    }
+    return pJuuri;
+}
+
+/* Apufunktio, joka rekursiivisesti poistaa solmun nimen perusteella.
+   'poistettu' kertoo, onko poistotoimenpide suoritettu.
+*/
+static BNODE* binaariPoistaNimiRekursiivisesti(BNODE *pJuuri, const char *pNimi, int *poistettu) {
+    if (pJuuri == NULL)
+        return NULL;
+    
+    if (!(*poistettu) && strcmp(pJuuri->name, pNimi) == 0) {
+        *poistettu = 1;
+        return binaariPoistaLukumaara(pJuuri, pJuuri->count);
+    }
+    
+    if (!(*poistettu))
+        pJuuri->pVasen = binaariPoistaNimiRekursiivisesti(pJuuri->pVasen, pNimi, poistettu);
+    if (!(*poistettu))
+        pJuuri->pOikea = binaariPoistaNimiRekursiivisesti(pJuuri->pOikea, pNimi, poistettu);
+    
+    return pJuuri;
+}
+
+/* Poistaa solmun nimen perusteella, eli ensimmäisen osuman, joka vastaa annettua pNimi-arvoa */
+BNODE* binaariPoistaNimi(BNODE *pJuuri, const char *pNimi) {
+    int poistettu = 0;
+    return binaariPoistaNimiRekursiivisesti(pJuuri, pNimi, &poistettu);
+}
+
+int etsiLukumaaraNimenPerusteella(BNODE *pJuuri, const char *pNimi, int *arvo) {
+    if (pJuuri == NULL) {
+        return 0;
+    }
+    if (strcmp(pJuuri->name, pNimi) == 0) {
+        *arvo = pJuuri->count;
+        return 1;
+    }
+    if (etsiLukumaaraNimenPerusteella(pJuuri->pVasen, pNimi, arvo)) {
+        return 1;
+    }
+    if (etsiLukumaaraNimenPerusteella(pJuuri->pOikea, pNimi, arvo)) {
+        return 1;
+    }
+    return 0;
+}
+

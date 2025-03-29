@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "L8T1Kirjasto.h"
 #include "TilastoFaktatLista.h"
 #include "MergeSortLaskevaJKirjasto.h"
@@ -17,10 +18,19 @@ int syvyysHaku(BNODE *pJuuri, int iHaettava, const char *pTiedostonNimi, char *l
 int main(void) {
     TIETO *pAlku = NULL;
     BNODE *pBinJuuri = NULL; // Lisätty binääripuun juuri
-    char *luettavaTNimi = NULL, *kirjoitettavaTNimiEtu = NULL, *kirjoitettavaTNimiTaka = NULL;
+    
+    char *luettavaTNimi = NULL, *kirjoitettavaTNimiEtu = NULL, *kirjoitettavaTNimiTaka = NULL, *poistettavaArvo = NULL;
+    // char *poistettavaNimi = NULL;
+    //uusi lisäys
+    char poistettavaNimi[100] = "";
+    //päättyy tähän
     int iValinta = 0;
     int toinenValinta = 0;
     int kolmasValinta = 0;
+    int onNumero = 1;
+    int lukumaara = 0;
+    
+    
 
     
     do {
@@ -151,19 +161,79 @@ int main(void) {
                             if(pBinJuuri != NULL) {
                             tulostaPuu(pBinJuuri, 0);
                             
-                        } else {
-                            printf("Lue tiedosto ennen puun tulostusta!\n");
-                        }
+                            } else {
+                                printf("Lue tiedosto ennen puun tulostusta!\n");
+                            }
                         break;
                         }
 
-                        case 6: {
+                        case 6:
+                            //tarkistetaan ensin että binääripuun juuri ei ole tyhjä
+                            if (pBinJuuri == NULL) {
+                                printf("Lue tiedosto ensin!\n");
+                                break;
+                            }
+
+                            // Alusta onNumero aina 1:ksi ennen syötteen tarkistusta
+                            onNumero = 1;
+                            // kysy käyttäjältä poistettava arvo, syöte voi olla joko numero tai kirjain
+                            poistettavaArvo = kysyNimi("Anna poistettava arvo");
+
+                            for (int i = 0; poistettavaArvo[i] != '\0'; i++) {
+                                if (!isdigit(poistettavaArvo[i])) {
+                                    onNumero = 0;
+                                    break;
+                                }
+                            }
+                            // poisto numerolla: ei toimi ja nimen etsintä ei kanssa toimi
+                            if (onNumero) {
+                                
+                                int arvo = atoi(poistettavaArvo);
+                
+                                // Haetaan ensin solmun nimi, jonka count vastaa annettua lukua
+                                if (etsiNimiLukumaaranPerusteella(pBinJuuri, arvo, poistettavaNimi)) {
+                                    printf("Poistetaan arvoa %s, %d... ", poistettavaNimi, arvo);
+                                    //test1
+                                    printf("Numero\n");
+                                } else {
+                                    printf("Lukua %d vastaavaa solmua ei löytynyt, poistaminen ei suoritettu.\n", arvo);
+                                    free(poistettavaArvo);
+                                    break;
+                                }
+                                pBinJuuri = binaariPoistaLukumaara(pBinJuuri, arvo);
+                                printf("Poisto suoritettu.\n");
+                                
+                            // poisto nimellä: toimii kokonaan
+                            } else {
+                                if (etsiLukumaaraNimenPerusteella(pBinJuuri, poistettavaArvo, &lukumaara)) {
+                                    // Jos nimi löytyy tulostetaan myös sen lukumäärä
+                                    printf("Poistetaan arvoa %s, %d... ", poistettavaArvo, lukumaara);
+                                } else {
+                                    // Jos nimeä ei löytynyt ollenkaan
+                                    printf("Nimeä '%s' vastaavaa solmua ei löytynyt, poistaminen ei suoritettu.\n", poistettavaArvo);
+                                    free(poistettavaArvo);
+                                    break;
+                                }
+                                // Nyt poistetaan nimen perusteella
+                                pBinJuuri = binaariPoistaNimi(pBinJuuri, poistettavaArvo);
+                                printf("Poisto suoritettu.\n");
+                            }
+                            //vapautetaan muistit
+                            free(poistettavaArvo);
+                            poistettavaArvo = NULL;
+                            /*
+                            free(poistettavaNimi);
+                            poistettavaNimi = NULL;
+                            */
+                            break;
+
+                        case 8: {
                             if(pBinJuuri != NULL) {
                             tilastoFaktaArpojaBin(pBinJuuri);
-                        } else {
-                            printf("Lue tiedosto ennen tilastojen tulostusta!\n");
-                        }
-                        break;
+                            } else {
+                                printf("Lue tiedosto ennen tilastojen tulostusta!\n");
+                            }
+                            break;
                         }
 
                         

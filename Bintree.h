@@ -16,7 +16,14 @@ void binaariVapauta(BNODE *pJuuri);
 BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi);
 void tulostaPuu(BNODE *pJuuri, int taso);
 
+BNODE* binaariPoistaLukumaara(BNODE *pJuuri, int iLukumaara);
+BNODE* binaariPoistaNimi(BNODE *pJuuri, const char *pNimi);
+int etsiNimiLukumaaranPerusteella(BNODE *pJuuri, int arvo, char *nimi);
 
+/* UUSI apufunktio:
+   Etsii lukumäärän nimen perusteella ja tallentaa sen *arvo-muuttujaan.
+   Palauttaa 1, jos osuma löytyy, muulloin 0.
+*/
+int etsiLukumaaraNimenPerusteella(BNODE *pJuuri, const char *pNimi, int *arvo);
 
-
-#endif 
+#endif
