@@ -303,7 +303,7 @@ BNODE* binaariPoistaLukumaara(BNODE *pJuuri, int iLukumaara) {
 /* Apufunktio, joka rekursiivisesti poistaa solmun nimen perusteella.
    'poistettu' kertoo, onko poistotoimenpide suoritettu.
 */
-static BNODE* binaariPoistaNimiRekursiivisesti(BNODE *pJuuri, const char *pNimi, int *poistettu) {
+BNODE* binaariPoistaNimiRekursiivisesti(BNODE *pJuuri, const char *pNimi, int *poistettu) {
     if (pJuuri == NULL)
         return NULL;
     

@@ -20,10 +20,10 @@ int main(void) {
     BNODE *pBinJuuri = NULL; // Lisätty binääripuun juuri
     
     char *luettavaTNimi = NULL, *kirjoitettavaTNimiEtu = NULL, *kirjoitettavaTNimiTaka = NULL, *poistettavaArvo = NULL;
-    // char *poistettavaNimi = NULL;
-    //uusi lisäys
-    char poistettavaNimi[100] = "";
-    //päättyy tähän
+
+    
+    char poistettavaNimi[NIMIPITUUS] = "";
+  
     int iValinta = 0;
     int toinenValinta = 0;
     int kolmasValinta = 0;
@@ -174,18 +174,20 @@ int main(void) {
                                 break;
                             }
 
-                            // Alusta onNumero aina 1:ksi ennen syötteen tarkistusta
+                            // Alusta onNumero aina 1 ennen syötteen tarkistusta
                             onNumero = 1;
                             // kysy käyttäjältä poistettava arvo, syöte voi olla joko numero tai kirjain
                             poistettavaArvo = kysyNimi("Anna poistettava arvo");
 
+                            // käydään kaikki poistettavaArvon alkiot, jos yksi niistä on merkki niin
+                            //asetetaan onNumero =1; 
                             for (int i = 0; poistettavaArvo[i] != '\0'; i++) {
                                 if (!isdigit(poistettavaArvo[i])) {
                                     onNumero = 0;
                                     break;
                                 }
                             }
-                            // poisto numerolla: ei toimi ja nimen etsintä ei kanssa toimi
+                            // poisto numerolla
                             if (onNumero) {
                                 
                                 int arvo = atoi(poistettavaArvo);
@@ -193,8 +195,7 @@ int main(void) {
                                 // Haetaan ensin solmun nimi, jonka count vastaa annettua lukua
                                 if (etsiNimiLukumaaranPerusteella(pBinJuuri, arvo, poistettavaNimi)) {
                                     printf("Poistetaan arvoa %s, %d... ", poistettavaNimi, arvo);
-                                    //test1
-                                    printf("Numero\n");
+            
                                 } else {
                                     printf("Lukua %d vastaavaa solmua ei löytynyt, poistaminen ei suoritettu.\n", arvo);
                                     free(poistettavaArvo);
@@ -203,7 +204,7 @@ int main(void) {
                                 pBinJuuri = binaariPoistaLukumaara(pBinJuuri, arvo);
                                 printf("Poisto suoritettu.\n");
                                 
-                            // poisto nimellä: toimii kokonaan
+                            // poisto nimellä
                             } else {
                                 if (etsiLukumaaraNimenPerusteella(pBinJuuri, poistettavaArvo, &lukumaara)) {
                                     // Jos nimi löytyy tulostetaan myös sen lukumäärä
@@ -214,7 +215,7 @@ int main(void) {
                                     free(poistettavaArvo);
                                     break;
                                 }
-                                // Nyt poistetaan nimen perusteella
+                               
                                 pBinJuuri = binaariPoistaNimi(pBinJuuri, poistettavaArvo);
                                 printf("Poisto suoritettu.\n");
                             }
