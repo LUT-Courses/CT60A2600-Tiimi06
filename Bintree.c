@@ -110,17 +110,23 @@ BNODE* binaariLuoNode(const char *pNimi, int iLukumaara) {
 
 BNODE* binaariInsert(BNODE *pJuuri, const char *pNimi, int iLukumaara) {
     if (!pJuuri) {
-        BNODE *newNode = binaariLuoNode(pNimi, iLukumaara);
-        newNode->height = 1; // Alustetaan korkeus
-        return newNode;
+        return binaariLuoNode(pNimi, iLukumaara);
     }
 
     if (iLukumaara < pJuuri->count) {
         pJuuri->pVasen = binaariInsert(pJuuri->pVasen, pNimi, iLukumaara);
-    } else if (iLukumaara > pJuuri->count) {
+    } 
+    else if (iLukumaara > pJuuri->count) {
         pJuuri->pOikea = binaariInsert(pJuuri->pOikea, pNimi, iLukumaara);
-    } else {
-        return pJuuri; // Duplikaatit eivät sallittu
+    } 
+    // Jos numerot ovat samat, vertaile NIMIÄ
+    else {
+        int cmp = strcmp(pNimi, pJuuri->name);
+        if (cmp < 0) {
+            pJuuri->pVasen = binaariInsert(pJuuri->pVasen, pNimi, iLukumaara);
+        } else {
+            pJuuri->pOikea = binaariInsert(pJuuri->pOikea, pNimi, iLukumaara);
+        }
     }
 
     // Päivitä solmun korkeus
