@@ -195,11 +195,11 @@ BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi) {
     return pJuuri;
 }
 
-void kirjoitaInOrder(BNODE *pJuuri, FILE *pTiedosto) {
+void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto) {
     if (!pJuuri) return;
-    kirjoitaInOrder(pJuuri->pVasen, pTiedosto);
-    fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count);
-    kirjoitaInOrder(pJuuri->pOikea, pTiedosto);
+    fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count); // Juuri ensin
+    kirjoitaPreOrder(pJuuri->pVasen, pTiedosto); // Vasen alipuu
+    kirjoitaPreOrder(pJuuri->pOikea, pTiedosto); // Oikea alipuu
 }
 
 void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
@@ -396,7 +396,7 @@ void paivitaKorkeus (BNODE *node) {
 }
 
 int tarkistaTasapaino(BNODE *node) {
-    if (node == NULL) return 0;  
+    if (node == NULL) return 0;  // Korjattu return-lauseke
     return tarkistaKorkeus(node->pVasen) - tarkistaKorkeus(node->pOikea);
 }
 
