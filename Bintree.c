@@ -195,11 +195,11 @@ BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi) {
     return pJuuri;
 }
 
-void kirjoitaInOrder(BNODE *pJuuri, FILE *pTiedosto) {
+void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto) {
     if (!pJuuri) return;
-    kirjoitaInOrder(pJuuri->pVasen, pTiedosto);
-    fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count);
-    kirjoitaInOrder(pJuuri->pOikea, pTiedosto);
+    fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count); // Juuri ensin
+    kirjoitaPreOrder(pJuuri->pVasen, pTiedosto); // Vasen alipuu
+    kirjoitaPreOrder(pJuuri->pOikea, pTiedosto); // Oikea alipuu
 }
 
 void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
@@ -208,7 +208,7 @@ void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
         perror("Tiedoston kirjoittamisessa virhe");
         exit(0);
     }
-    kirjoitaInOrder(pJuuri, pTiedosto); // Muutettu tähän
+    kirjoitaPreOrder(pJuuri, pTiedosto); // Muutettu tähän
     fclose(pTiedosto);
 }
 
