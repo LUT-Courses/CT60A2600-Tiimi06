@@ -7,6 +7,12 @@
 //Funktioiden esittely
 void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto);
 void tulostaPuu(BNODE *pJuuri, int taso);
+int max(int a, int b);
+int tarkistaKorkeus(BNODE *node);
+void paivitaKorkeus(BNODE *node);
+int tarkistaTasapaino(BNODE *node);
+BNODE* pyoritaOikealle(BNODE *y);
+BNODE* pyoritaVasemmalle(BNODE *x);
 
 
 /* Leveyshaulle tarvittava jono */
@@ -98,19 +104,51 @@ BNODE* binaariLuoNode(const char *pNimi, int iLukumaara) {
     pUusiNode->count = iLukumaara;
     pUusiNode->pVasen = pUusiNode->pOikea = NULL;
     
+    pUusiNode->height = 1; // Lisätty korkeuden alustus
     return pUusiNode;
 }
 
 BNODE* binaariInsert(BNODE *pJuuri, const char *pNimi, int iLukumaara) {
     if (!pJuuri) {
-        return binaariLuoNode(pNimi, iLukumaara);
+        BNODE *newNode = binaariLuoNode(pNimi, iLukumaara);
+        newNode->height = 1; // Alustetaan korkeus
+        return newNode;
     }
-    
+
     if (iLukumaara < pJuuri->count) {
         pJuuri->pVasen = binaariInsert(pJuuri->pVasen, pNimi, iLukumaara);
     } else if (iLukumaara > pJuuri->count) {
         pJuuri->pOikea = binaariInsert(pJuuri->pOikea, pNimi, iLukumaara);
+    } else {
+        return pJuuri; // Duplikaatit eivät sallittu
     }
+
+    // Päivitä solmun korkeus
+    paivitaKorkeus(pJuuri);
+
+    // Tarkista tasapaino
+    int tasapaino = tarkistaTasapaino(pJuuri); 
+
+    // Vasen Vasen -tapaus
+    if (tasapaino > 1 && iLukumaara < pJuuri->pVasen->count)
+        return pyoritaOikealle(pJuuri);
+
+    // Oikea Oikea -tapaus
+    if (tasapaino < -1 && iLukumaara > pJuuri->pOikea->count)
+        return pyoritaVasemmalle(pJuuri);
+
+    // Vasen Oikea -tapaus
+    if (tasapaino > 1 && iLukumaara > pJuuri->pVasen->count) {
+        pJuuri->pVasen = pyoritaVasemmalle(pJuuri->pVasen);
+        return pyoritaOikealle(pJuuri);
+    }
+
+    // Oikea Vasen -tapaus
+    if (tasapaino < -1 && iLukumaara < pJuuri->pOikea->count) {
+        pJuuri->pOikea = pyoritaOikealle(pJuuri->pOikea);
+        return pyoritaVasemmalle(pJuuri);
+    }
+
     return pJuuri;
 }
 
@@ -343,3 +381,47 @@ int etsiLukumaaraNimenPerusteella(BNODE *pJuuri, const char *pNimi, int *arvo) {
     return 0;
 }
 
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+int tarkistaKorkeus(BNODE *node) {
+    if (node == NULL) return 0;
+    return node -> height;
+}
+
+void paivitaKorkeus (BNODE *node) {
+    if(node == NULL) return;
+    node -> height = 1 + max(tarkistaKorkeus(node -> pVasen), tarkistaKorkeus(node -> pOikea));
+}
+
+int tarkistaTasapaino(BNODE *node) {
+    if (node == NULL) return 0;  
+    return tarkistaKorkeus(node->pVasen) - tarkistaKorkeus(node->pOikea);
+}
+
+BNODE* pyoritaOikealle(BNODE *y) {
+    BNODE *x = y->pVasen;
+    BNODE *T2 = x->pOikea;
+
+    x->pOikea = y;
+    y->pVasen = T2;
+
+    paivitaKorkeus(y);  
+    paivitaKorkeus(x);
+
+    return x;
+}
+
+BNODE* pyoritaVasemmalle(BNODE *x) {
+    BNODE *y = x->pOikea;
+    BNODE *T2 = y->pVasen;
+
+    y->pVasen = x;
+    x->pOikea = T2;
+
+    paivitaKorkeus(x);  
+    paivitaKorkeus(y);
+
+    return y;
+}

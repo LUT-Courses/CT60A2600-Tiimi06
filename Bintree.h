@@ -7,6 +7,7 @@ typedef struct BinNode {
     int count;
     struct BinNode *pVasen;
     struct BinNode *pOikea;
+    int height;
 } BNODE;
 
 /* Prototyypit */
