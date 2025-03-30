@@ -158,12 +158,26 @@ int main(void) {
                             break;
                         }
                         case 5: {
-                            if(pBinJuuri != NULL) {
-                            tulostaPuu(pBinJuuri, 0);
-                            
-                            } else {
-                                printf("Lue tiedosto ennen puun tulostusta!\n");
+                            if (pBinJuuri == NULL) {
+                                printf("Lue tiedosto ensin!\n");
+                                break;
                             }
+
+                            int iHaettavaArvo;
+                            printf("Anna etsittävä arvo (numero): ");
+                            scanf("%d", &iHaettavaArvo);
+
+                            BNODE *tulos = binaariHaku(pBinJuuri, iHaettavaArvo);
+
+                            if (tulos != NULL) {
+
+
+                                printf("Arvo löytyi: %s, %d\n", tulos->name, tulos->count);
+                            } else {
+
+                                printf("Arvoa %d ei löytynyt binääripuusta.\n", iHaettavaArvo);
+                            }
+
                         break;
                         }
 
@@ -227,6 +241,15 @@ int main(void) {
                             poistettavaNimi = NULL;
                             */
                             break;
+                        case 7: {
+                            if(pBinJuuri != NULL) {
+                            tulostaPuu(pBinJuuri, 0);
+                            
+                            } else {
+                                printf("Lue tiedosto ennen puun tulostusta!\n");
+                            }
+                        break;
+                        }
 
                         case 8: {
                             if(pBinJuuri != NULL) {

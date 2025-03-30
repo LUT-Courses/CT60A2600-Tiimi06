@@ -19,6 +19,7 @@ void tulostaPuu(BNODE *pJuuri, int taso);
 
 BNODE* binaariPoistaLukumaara(BNODE *pJuuri, int iLukumaara);
 BNODE* binaariPoistaNimi(BNODE *pJuuri, const char *pNimi);
+BNODE* binaariHaku(BNODE *pJuuri, int haettavaArvo);
 int etsiNimiLukumaaranPerusteella(BNODE *pJuuri, int arvo, char *nimi);
 
 /* UUSI apufunktio:
