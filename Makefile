@@ -1,17 +1,17 @@
-# Makefile for L8T1
+# Makefile for Main
 
 #projekti: Bintree.o 
 # Pääohjelma
-projekti: L8T1.o L8T1Kirjasto.o TilastoFaktatLista.o MergeSortLaskevaJKirjasto.o MergeSortNousevaJKirjasto.o Bintree.o TilastoFaktatBin.o
-	gcc -o projekti L8T1.o L8T1Kirjasto.o TilastoFaktatLista.o MergeSortLaskevaJKirjasto.o MergeSortNousevaJKirjasto.o Bintree.o TilastoFaktatBin.o
+projekti: Main.o MainKirjasto.o TilastoFaktatLista.o MergeSortLaskevaJKirjasto.o MergeSortNousevaJKirjasto.o Bintree.o TilastoFaktatBin.o
+	gcc -o projekti Main.o MainKirjasto.o TilastoFaktatLista.o MergeSortLaskevaJKirjasto.o MergeSortNousevaJKirjasto.o Bintree.o TilastoFaktatBin.o
 
 # Pääohjelman objektitiedosto
-L8T1.o: L8T1.c L8T1Kirjasto.h TilastoFaktatLista.h MergeSortLaskevaJKirjasto.h MergeSortNousevaJKirjasto.h Bintree.h TilastoFaktatBin.h
-	gcc -c L8T1.c -std=c99 -pedantic -Wall
+Main.o: Main.c MainKirjasto.h TilastoFaktatLista.h MergeSortLaskevaJKirjasto.h MergeSortNousevaJKirjasto.h Bintree.h TilastoFaktatBin.h
+	gcc -c Main.c -std=c99 -pedantic -Wall
 
 # Kirjaston objektitiedosto
-L8T1Kirjasto.o: L8T1Kirjasto.c L8T1Kirjasto.h TilastoFaktatLista.h MergeSortLaskevaJKirjasto.h MergeSortNousevaJKirjasto.h Bintree.h TilastoFaktatBin.h
-	gcc -c L8T1Kirjasto.c -std=c99 -pedantic -Wall
+MainKirjasto.o: MainKirjasto.c MainKirjasto.h TilastoFaktatLista.h MergeSortLaskevaJKirjasto.h MergeSortNousevaJKirjasto.h Bintree.h TilastoFaktatBin.h
+	gcc -c MainKirjasto.c -std=c99 -pedantic -Wall
 
 # TilastoFaktatLista objektitiedosto
 TilastoFaktatLista.o: TilastoFaktatLista.c TilastoFaktatLista.h
