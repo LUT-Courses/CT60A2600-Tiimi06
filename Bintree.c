@@ -13,6 +13,7 @@ void paivitaKorkeus(BNODE *node);
 int tarkistaTasapaino(BNODE *node);
 BNODE* pyoritaOikealle(BNODE *y);
 BNODE* pyoritaVasemmalle(BNODE *x);
+BNODE* binaariHaku(BNODE *pJuuri, int haettavaArvo);
 
 
 /* Leveyshaulle tarvittava jono */
@@ -430,4 +431,25 @@ BNODE* pyoritaVasemmalle(BNODE *x) {
     paivitaKorkeus(y);
 
     return y;
+}
+
+// Binäärihaun toteutus
+BNODE* binaariHaku(BNODE *pJuuri, int iHaettavaArvo) {
+    if (pJuuri == NULL) {
+        return NULL; 
+    }
+
+    if (iHaettavaArvo == pJuuri->count) {
+
+
+        return pJuuri; 
+    } 
+
+    else if (iHaettavaArvo < pJuuri->count) {
+
+        return binaariHaku(pJuuri->pVasen, iHaettavaArvo); 
+    } else {
+
+        return binaariHaku(pJuuri->pOikea, iHaettavaArvo); 
+    }
 }
