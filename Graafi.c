@@ -126,8 +126,9 @@ void graafiLisaaKaari(GRAAFI *g, const char *lahto, const char *kohde, int etais
 // Ensimmäinen rivi on otsikko, joka ohitetaan.
 GRAAFI* graafiLueTiedosto(GRAAFI *g, const char *tiedostonNimi) {
     FILE *Tiedosto = NULL;
-    char rivi[RIVILKM] = "";
-
+    // Käytetään riittävän isoa puskuria; oletetaan, että RIVILKM on määritelty
+    char rivi[100] = "";
+    
     if ((Tiedosto = fopen(tiedostonNimi, "r")) == NULL) {
         perror("Tiedoston avaamisessa virhe, lopetetaan");
         exit(0);
@@ -145,22 +146,19 @@ GRAAFI* graafiLueTiedosto(GRAAFI *g, const char *tiedostonNimi) {
         return g;
     }
     
-    //ehkä pitäisi skipata otsikko riviä?
     // Luetaan rivi kerrallaan
     while (fgets(rivi, sizeof(rivi), Tiedosto)) {
-        char *solmu1 = NULL, *solmu2 = NULL, etaisyysStr = NULL;
         // Poistetaan mahdolliset rivinvaihtomerkit
         rivi[strcspn(rivi, "\r\n")] = '\0';
         
+        char *solmu1 = NULL, *solmu2 = NULL, *etaisyysStr = NULL;
         if ((solmu1 = strtok(rivi, ";\n")) == NULL) {
             printf("Tiedoston pilkkominen ei onnistunut\n");
         }
-
         if ((solmu2 = strtok(NULL, ";\n")) == NULL) {
             printf("Tiedoston pilkkominen ei onnistunut\n");
             exit(0);
         }
-
         if ((etaisyysStr = strtok(NULL, ";\n")) == NULL) {
             printf("Tiedoston pilkkominen ei onnistunut\n");
             exit(0);
@@ -337,7 +335,7 @@ void graafiEtsiLyhinReitti(GRAAFI *g, const char *lahto, const char *kohde, cons
         // Kirjoitetaan tuloste tiedostoon append-tilassa
         FILE *Tiedosto = fopen(tiedostonNimi, "a");
         if (Tiedosto) {
-            Tiedostouts(tuloste, Tiedosto);
+            fputs(tuloste, Tiedosto);
             fclose(Tiedosto);
         } else {
             perror("Reittitiedoston avaaminen epäonnistui");
@@ -347,6 +345,3 @@ void graafiEtsiLyhinReitti(GRAAFI *g, const char *lahto, const char *kohde, cons
     
     free(solmut); free(etaisyys); free(edeltaja); free(valittu);
 }
-
-/////////////////////////////////////////////////////////////////////////
-// Lopuksi graafin vapautus on jo toteutettu yllä graafiVapauta()-funktiolla.

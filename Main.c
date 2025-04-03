@@ -33,6 +33,11 @@ int main(void) {
     int neljasValinta = 0; //graph valikko
     int onNumero = 1;
     int lukumaara = 0;
+
+    // graafin muuttujat
+    char lahto[RIVILKM] = "", kohde[RIVILKM] = "", solmu[RIVILKM] = "";
+    char reittiTiedosto[RIVILKM] = "", lahtoSolmu[RIVILKM] = "", kohdeSolmu[RIVILKM] = "";
+    int etaisyys = 0;
     
     
 
@@ -279,19 +284,21 @@ int main(void) {
                 neljasValinta = graafiValikko();
                 //sisäinen valikko
                 switch(neljasValinta) {
+                    
                     case 1:
                         graafiTNimi = kysyNimi("Anna luettavan tiedoston nimi");
-                                    // Jos graafi on jo olemassa, vapautetaan se ennen uuden lataamista
+                        printf("Luetaan tiedosto: %s\n", graafiTNimi); // Debug-tulostus
                         if (pGraafi != NULL) {
                             graafiVapauta(pGraafi);
                         }
                         pGraafi = graafiLuo();
                         pGraafi = graafiLueTiedosto(pGraafi, graafiTNimi);
+                        free(graafiTNimi);
+                        graafiTNimi = NULL;
                         break;
-                    
+                
                     case 2:
-                        char lahto[RIVILKM], kohde[RIVILKM];
-                        int etaisyys;
+
                         printf("Anna kaari (lähtösolmu;kohdesolmu;etäisyys): ");
                         scanf("%[^;];%[^;];%d", lahto, kohde, &etaisyys);
                         getchar();
@@ -300,7 +307,7 @@ int main(void) {
                         
                     
                     case 3:
-                        char solmu[RIVILKM];
+                        
                         printf("Anna poistettava solmu: ");
                         scanf("%s", solmu);
                         getchar();
@@ -308,7 +315,6 @@ int main(void) {
                         break;
                     
                     case 4:
-                        char reittiTiedosto[RIVILKM], lahtoSolmu[RIVILKM], kohdeSolmu[RIVILKM];
                         printf("Anna reittitiedoston nimi: ");
                         scanf("%s", reittiTiedosto);
                         getchar();
