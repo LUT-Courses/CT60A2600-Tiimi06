@@ -186,21 +186,25 @@ BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi) {
     pJuuri = NULL;
 
     while (fgets(aRivi, sizeof(aRivi), pTiedosto)) {
-        char *pNimi = strtok(aRivi, ";\n");
-        char *pLukumaaraStr = strtok(NULL, ";\n");
-        
-        if (!pNimi || !pLukumaaraStr) {
-            printf("Virheellinen rivi: %s", aRivi);
-            continue;
+        char *p1, *p2;
+        /* Pilkotaan merkkijono käyttäen erottimena puolipistettä ja rivinvaihtoa */
+        if ((p1 = strtok(aRivi, ";")) == NULL) {
+            printf("Merkkijonon '%s' pilkkominen epäonnistui, lopetetaan %s.\n", aRivi, p1);
+            exit(0);
+        }
+        if ((p2 = strtok(NULL, "\n")) == NULL) {
+            printf("Merkkijonon '%s' pilkkominen epäonnistui, lopetetaan %s.\n", aRivi, p2);
+            exit(0);
         }
         
-        int iLukumaara = atoi(pLukumaaraStr);
-        pJuuri = binaariInsert(pJuuri, pNimi, iLukumaara);
+        int iLukumaara = atoi(p2);
+        pJuuri = binaariInsert(pJuuri, p1, iLukumaara);
     }
 
     fclose(pTiedosto);
     return pJuuri;
 }
+
 
 void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto) {
     if (!pJuuri) return;
