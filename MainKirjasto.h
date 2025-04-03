@@ -9,7 +9,7 @@
 #include "MergeSortLaskevaJKirjasto.h"
 #include "Bintree.h" 
 
-
+int graafiValikko(void);
 int binaariValikko(void);
 char *kysyNimi(char *pPromtti);
 int valikko();

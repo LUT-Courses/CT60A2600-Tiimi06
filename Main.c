@@ -27,6 +27,7 @@ int main(void) {
     int iValinta = 0;
     int toinenValinta = 0;
     int kolmasValinta = 0;
+    int neljasValinta = 0; //graph valikko
     int onNumero = 1;
     int lukumaara = 0;
     
@@ -269,8 +270,41 @@ int main(void) {
                         printf("Virheellinen valinta!\n");
                 }
             } while(kolmasValinta != 0);
+
+        } else if (iValinta == 3) {
+            do {
+                neljasValinta = graafiValikko();
+                //sisäinen valikko
+                switch(neljasValinta) {
+                    case 1:
+                        break;
+                    
+                    case 2:
+                        break;
+                    
+                    case 3:
+                        break;
+                    
+                    case 4:
+                        break;
+                    
+                    case 5:
+                        break;
+                    
+                    case 0: // Palaa päävalikkoon
+                        printf("Palataan päävalikkoon.\n\n");
+                        break;
+                    
+                    default:
+                        printf("Virheellinen valinta!\n");
+    
+                }
+    
+
+            } while(neljasValinta != 0);
+           
         } else if (iValinta == 0) {
-            printf("Lopetetaan.\n\n"); //Ei jostain syystä puske kunnolla codegradeen ?????
+            printf("Lopetetaan.\n\n"); 
         }
         
     } while(iValinta != 0); // Päävalikko loppuu
