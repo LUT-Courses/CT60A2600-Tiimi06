@@ -1,0 +1,16 @@
+Etunimi;Lukumäärä
+Juhani;275071
+Olavi;137393
+Tapani;133098
+Antero;131502
+Johannes;130996
+Tapio;112447
+Mikael;106442
+Kalevi;87082
+Matti;75079
+Pekka;74711
+Petteri;73354
+Ilmari;68555
+Matias;64817
+Sakari;62874
+Kristian;54451
