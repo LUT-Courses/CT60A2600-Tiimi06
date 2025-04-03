@@ -8,6 +8,7 @@
 #include "MergeSortNousevaJKirjasto.h"
 #include "TIETO.h"
 #include "Bintree.h"
+#include "Graafi.h"
 
 //Lisään kommentin tähän, koska jostain syystä osa puskusta toimi edellisella kerralla ja osa ei puskennut.
 
@@ -18,8 +19,10 @@ int syvyysHaku(BNODE *pJuuri, int iHaettava, const char *pTiedostonNimi, char *l
 int main(void) {
     TIETO *pAlku = NULL;
     BNODE *pBinJuuri = NULL; // Lisätty binääripuun juuri
+    GRAAFI* pGraafi = NULL;
     
     char *luettavaTNimi = NULL, *kirjoitettavaTNimiEtu = NULL, *kirjoitettavaTNimiTaka = NULL, *poistettavaArvo = NULL;
+    char *graafiTNimi = NULL;
 
     
     char poistettavaNimi[NIMIPITUUS] = "";
@@ -27,8 +30,14 @@ int main(void) {
     int iValinta = 0;
     int toinenValinta = 0;
     int kolmasValinta = 0;
+    int neljasValinta = 0; //graph valikko
     int onNumero = 1;
     int lukumaara = 0;
+
+    // graafin muuttujat
+    char lahto[RIVILKM] = "", kohde[RIVILKM] = "", solmu[RIVILKM] = "";
+    char reittiTiedosto[RIVILKM] = "", lahtoSolmu[RIVILKM] = "", kohdeSolmu[RIVILKM] = "";
+    int etaisyys = 0;
     
     
 
@@ -269,8 +278,73 @@ int main(void) {
                         printf("Virheellinen valinta!\n");
                 }
             } while(kolmasValinta != 0);
+
+        } else if (iValinta == 3) {
+            do {
+                neljasValinta = graafiValikko();
+                //sisäinen valikko
+                switch(neljasValinta) {
+                    
+                    case 1:
+                        graafiTNimi = kysyNimi("Anna luettavan tiedoston nimi");
+                        printf("Luetaan tiedosto: %s\n", graafiTNimi); // Debug-tulostus
+                        if (pGraafi != NULL) {
+                            graafiVapauta(pGraafi);
+                        }
+                        pGraafi = graafiLuo();
+                        pGraafi = graafiLueTiedosto(pGraafi, graafiTNimi);
+                        free(graafiTNimi);
+                        graafiTNimi = NULL;
+                        break;
+                
+                    case 2:
+
+                        printf("Anna kaari (lähtösolmu;kohdesolmu;etäisyys): ");
+                        scanf("%[^;];%[^;];%d", lahto, kohde, &etaisyys);
+                        getchar();
+                        graafiLisaaKaari(pGraafi, lahto, kohde, etaisyys);
+                        break;
+                        
+                    
+                    case 3:
+                        
+                        printf("Anna poistettava solmu: ");
+                        scanf("%s", solmu);
+                        getchar();
+                        pGraafi = graafiPoistaSolmu(pGraafi, solmu);
+                        break;
+                    
+                    case 4:
+                        printf("Anna reittitiedoston nimi: ");
+                        scanf("%s", reittiTiedosto);
+                        getchar();
+                        printf("Anna lähtösolmu: ");
+                        scanf("%s", lahtoSolmu);
+                        getchar();
+                        printf("Anna kohdesolmu: ");
+                        scanf("%s", kohdeSolmu);
+                        getchar();
+                        graafiEtsiLyhinReitti(pGraafi, lahtoSolmu, kohdeSolmu, reittiTiedosto);
+                        break;
+
+                    case 5:
+                        //tilastofakta toiminto
+                        break;
+                    
+                    case 0: // Palaa päävalikkoon
+                        printf("Palataan päävalikkoon.\n\n");
+                        break;
+                    
+                    default:
+                        printf("Virheellinen valinta!\n");
+    
+                }
+    
+
+            } while(neljasValinta != 0);
+           
         } else if (iValinta == 0) {
-            printf("Lopetetaan.\n\n"); //Ei jostain syystä puske kunnolla codegradeen ?????
+            printf("Lopetetaan.\n\n"); 
         }
         
     } while(iValinta != 0); // Päävalikko loppuu

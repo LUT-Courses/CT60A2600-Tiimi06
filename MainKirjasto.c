@@ -254,6 +254,7 @@ int paaValikko() {
     printf("Valitse käsiteltävä tietorakenne:\n");
     printf("1) Linkitetty lista\n");
     printf("2) Binääripuu\n"); // Lisätty puuttuva \n
+    printf("3) Graafi\n");
     printf("0) Lopeta\n");
     printf("Anna valintasi: ");
     scanf("%d", &paaValinta); // Lisätty &
@@ -294,4 +295,21 @@ int binaariValikko() { // Poista parametri
     scanf("%d", &iValinta);
     getchar();
     return iValinta;
+}
+// graafivalinta
+
+int graafiValikko() {
+    int iValinta = 0;
+    printf("\n");
+    printf("Valitse haluamasi toiminto(graafi):\n");
+    printf("1) Lue tiedosto\n");
+    printf("2) Lisää/päivitä kaari\n");
+    printf("3) Poista solmu\n");
+    printf("4) Etsi lyhyin reitti\n");
+    printf("5) Joku muu hieno toiminto\n");
+    printf("0) Palaa\n");
+    printf("Anna valintasi: ");
+    scanf("%d", &iValinta);
+    getchar();
+    return iValinta = 0;
 }
