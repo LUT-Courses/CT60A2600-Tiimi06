@@ -8,6 +8,7 @@
 #include "MergeSortNousevaJKirjasto.h"
 #include "TIETO.h"
 #include "Bintree.h"
+#include "Graafi.h"
 
 //Lisään kommentin tähän, koska jostain syystä osa puskusta toimi edellisella kerralla ja osa ei puskennut.
 
@@ -18,8 +19,10 @@ int syvyysHaku(BNODE *pJuuri, int iHaettava, const char *pTiedostonNimi, char *l
 int main(void) {
     TIETO *pAlku = NULL;
     BNODE *pBinJuuri = NULL; // Lisätty binääripuun juuri
+    GRAAFI* pGraafi = NULL;
     
     char *luettavaTNimi = NULL, *kirjoitettavaTNimiEtu = NULL, *kirjoitettavaTNimiTaka = NULL, *poistettavaArvo = NULL;
+    char *graafiTNimi = NULL;
 
     
     char poistettavaNimi[NIMIPITUUS] = "";
@@ -277,18 +280,49 @@ int main(void) {
                 //sisäinen valikko
                 switch(neljasValinta) {
                     case 1:
+                        graafiTNimi = kysyNimi("Anna luettavan tiedoston nimi");
+                                    // Jos graafi on jo olemassa, vapautetaan se ennen uuden lataamista
+                        if (pGraafi != NULL) {
+                            graafiVapauta(pGraafi);
+                        }
+                        pGraafi = graafiLuo();
+                        pGraafi = graafiLueTiedosto(pGraafi, graafiTNimi);
                         break;
                     
                     case 2:
+                        char lahto[RIVILKM], kohde[RIVILKM];
+                        int etaisyys;
+                        printf("Anna kaari (lähtösolmu;kohdesolmu;etäisyys): ");
+                        scanf("%[^;];%[^;];%d", lahto, kohde, &etaisyys);
+                        getchar();
+                        graafiLisaaKaari(pGraafi, lahto, kohde, etaisyys);
                         break;
+                        
                     
                     case 3:
+                        char solmu[RIVILKM];
+                        printf("Anna poistettava solmu: ");
+                        scanf("%s", solmu);
+                        getchar();
+                        pGraafi = graafiPoistaSolmu(pGraafi, solmu);
                         break;
                     
                     case 4:
+                        char reittiTiedosto[RIVILKM], lahtoSolmu[RIVILKM], kohdeSolmu[RIVILKM];
+                        printf("Anna reittitiedoston nimi: ");
+                        scanf("%s", reittiTiedosto);
+                        getchar();
+                        printf("Anna lähtösolmu: ");
+                        scanf("%s", lahtoSolmu);
+                        getchar();
+                        printf("Anna kohdesolmu: ");
+                        scanf("%s", kohdeSolmu);
+                        getchar();
+                        graafiEtsiLyhinReitti(pGraafi, lahtoSolmu, kohdeSolmu, reittiTiedosto);
                         break;
-                    
+
                     case 5:
+                        //tilastofakta toiminto
                         break;
                     
                     case 0: // Palaa päävalikkoon
