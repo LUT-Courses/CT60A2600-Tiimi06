@@ -187,7 +187,6 @@ BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi) {
 
     while (fgets(aRivi, sizeof(aRivi), pTiedosto)) {
         char *p1, *p2;
-        /* Pilkotaan merkkijono käyttäen erottimena puolipistettä ja rivinvaihtoa */
         if ((p1 = strtok(aRivi, ";")) == NULL) {
             printf("Merkkijonon '%s' pilkkominen epäonnistui, lopetetaan %s.\n", aRivi, p1);
             exit(0);
@@ -214,9 +213,9 @@ void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto) {
 }
 
 void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
-    FILE *pTiedosto = fopen(pTiedostonNimi, "w");
-    if (!pTiedosto) {
-        perror("Tiedoston kirjoittamisessa virhe");
+    FILE *pTiedosto = NULL;
+    if((pTiedosto = fopen (pTiedostonNimi, "w")) == NULL) {
+        perror("Tiedoston kirjoittamisessa virhe, lopetetaan");
         exit(0);
     }
     kirjoitaPreOrder(pJuuri, pTiedosto); // Muutettu tähän
@@ -271,6 +270,7 @@ int leveysHaku(BNODE *pJuuri, const char *pHaettavaNimi, const char *pTiedostonN
     
     JONO *pJono = jonoLuo();
     FILE *pTiedosto = NULL;
+    
     if ((pTiedosto = fopen(pTiedostonNimi,"w")) == NULL) {
         perror("Tiedoston kirjoittamisessa virhe, lopetetaan.");
         exit(0);
