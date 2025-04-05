@@ -311,5 +311,5 @@ int graafiValikko() {
     printf("Anna valintasi: ");
     scanf("%d", &iValinta);
     getchar();
-    return iValinta = 0;
+    return iValinta;
 }
