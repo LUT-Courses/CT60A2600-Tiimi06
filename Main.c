@@ -358,6 +358,9 @@ int main(void) {
     printf("Kiitos ohjelman käytöstä.");
     pAlku = tyhjennaLista(pAlku);
     binaariVapauta(pBinJuuri);
+    if (pGraafi != NULL) {
+        graafiVapauta(pGraafi);
+    }
 
     return 0;
 
