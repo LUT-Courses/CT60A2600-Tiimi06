@@ -314,19 +314,25 @@ int main(void) {
                         pGraafi = graafiPoistaSolmu(pGraafi, solmu);
                         break;
                     
-                    case 4:
-                        printf("Anna reittitiedoston nimi: ");
-                        scanf("%s", reittiTiedosto);
-                        getchar();
-                        printf("Anna lähtösolmu: ");
-                        scanf("%s", lahtoSolmu);
-                        getchar();
-                        printf("Anna kohdesolmu: ");
-                        scanf("%s", kohdeSolmu);
-                        getchar();
-                        graafiEtsiLyhinReitti(pGraafi, lahtoSolmu, kohdeSolmu, reittiTiedosto);
-                        break;
-
+                        case 4: {
+                            static int tiedostoKysyty = 0;  // Lippu, joka kertoo onko nimi jo kysytty
+                            if (!tiedostoKysyty) {
+                                printf("Anna reittitiedoston nimi: ");
+                                scanf("%s", reittiTiedosto);
+                                getchar();
+                                tiedostoKysyty = 1;
+                            } else {
+                                printf("Käytetään edellistä reittitiedoston nimeä: %s\n", reittiTiedosto);
+                            }
+                            printf("Anna lähtösolmu: ");
+                            scanf("%s", lahtoSolmu);
+                            getchar();
+                            printf("Anna kohdesolmu: ");
+                            scanf("%s", kohdeSolmu);
+                            getchar();
+                            graafiEtsiLyhinReitti(pGraafi, lahtoSolmu, kohdeSolmu, reittiTiedosto);
+                            break;
+                        }
                     case 5:
                         //tilastofakta toiminto
                         break;
