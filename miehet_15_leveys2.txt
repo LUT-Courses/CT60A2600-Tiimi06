@@ -1,0 +1,4 @@
+Murtaza,21
+Hannu-Tapani,8
+Ari-Jukka,95
+Taawetti,6

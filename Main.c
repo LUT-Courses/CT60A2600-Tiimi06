@@ -315,7 +315,7 @@ int main(void) {
                         break;
                     
                         case 4: {
-                            static int tiedostoKysyty = 0;  // Lippu, joka kertoo onko nimi jo kysytty
+                             int tiedostoKysyty = 0;  // Lippu, joka kertoo onko nimi jo kysytty
                             if (!tiedostoKysyty) {
                                 printf("Anna reittitiedoston nimi: ");
                                 scanf("%s", reittiTiedosto);

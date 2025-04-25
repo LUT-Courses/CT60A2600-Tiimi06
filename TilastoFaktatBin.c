@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 // Luodaan apufuktiot eri tilastofaktoja varten.
-static void laskeKeskiarvo(BNODE *pNode, int *iLkm, int *iSumma) {
+ void laskeKeskiarvo(BNODE *pNode, int *iLkm, int *iSumma) {
     if (pNode == NULL) return;
 
 
@@ -17,7 +17,7 @@ static void laskeKeskiarvo(BNODE *pNode, int *iLkm, int *iSumma) {
     laskeKeskiarvo(pNode->pOikea, iLkm, iSumma);
 }
 
-static void laskeYliKeskiarvon(BNODE *pNode, double fKeskiarvo, int *iYli){
+ void laskeYliKeskiarvon(BNODE *pNode, double fKeskiarvo, int *iYli){
 
     if (pNode == NULL) return;
 
@@ -30,7 +30,7 @@ static void laskeYliKeskiarvon(BNODE *pNode, double fKeskiarvo, int *iYli){
     laskeYliKeskiarvon(pNode->pOikea, fKeskiarvo, iYli);
 }
 
-static void laskeAlleKeskiarvon(BNODE *pNode, double fKeskiarvo, int *iAli) {
+ void laskeAlleKeskiarvon(BNODE *pNode, double fKeskiarvo, int *iAli) {
      if (pNode == NULL) return;
 
 
@@ -44,7 +44,7 @@ static void laskeAlleKeskiarvon(BNODE *pNode, double fKeskiarvo, int *iAli) {
 
 }
 
-static void laskeParittomat(BNODE *pNode, int *iLkm) {
+ void laskeParittomat(BNODE *pNode, int *iLkm) {
     if (pNode == NULL) return;
 
     
@@ -60,7 +60,7 @@ static void laskeParittomat(BNODE *pNode, int *iLkm) {
 
 
 
-static void laskeParilliset(BNODE *pNode, int *iLkm) {
+ void laskeParilliset(BNODE *pNode, int *iLkm) {
     if (pNode == NULL) return;
 
     if (pNode->count % 2 == 0) {
@@ -73,7 +73,7 @@ static void laskeParilliset(BNODE *pNode, int *iLkm) {
 }
 
 
-static void etsiYleisin(BNODE *pNode, int *max, char *cKirjain, char *yleisinNimi) {
+ void etsiYleisin(BNODE *pNode, int *max, char *cKirjain, char *yleisinNimi) {
     if (pNode == NULL) return;
 
     if (pNode->count > *max) {
@@ -85,7 +85,7 @@ static void etsiYleisin(BNODE *pNode, int *max, char *cKirjain, char *yleisinNim
     etsiYleisin(pNode->pOikea, max, cKirjain, yleisinNimi);
 }
 
-static void laskeSamatAlkukirjaimet(BNODE *pNode, char cKirjain, int *iLkm) {
+ void laskeSamatAlkukirjaimet(BNODE *pNode, char cKirjain, int *iLkm) {
         if (pNode == NULL) return;
 
     if (pNode->name[0] == cKirjain){

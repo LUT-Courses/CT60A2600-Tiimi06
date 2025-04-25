@@ -67,6 +67,7 @@ void jonoLisaa(JONO *pJono, BNODE *pData) {
     } else {
         pJono->pEteen = pJono->pTaakse = pUusiSolmu;
     }
+    return;
 }
 
 BNODE* jonoPoista(JONO *pJono) {
@@ -84,6 +85,7 @@ BNODE* jonoPoista(JONO *pJono) {
 void jonoVapauta(JONO *pJono) {
     while (pJono->pEteen) jonoPoista(pJono);
     free(pJono);
+    return;
 }
 
 
@@ -165,6 +167,7 @@ void binaariVapauta(BNODE *pJuuri) {
         binaariVapauta(pJuuri->pOikea);
         free(pJuuri);
     }
+    return;
 }
 
 BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi) {
@@ -210,6 +213,7 @@ void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto) {
     fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count); // Juuri ensin
     kirjoitaPreOrder(pJuuri->pVasen, pTiedosto); // Vasen alipuu
     kirjoitaPreOrder(pJuuri->pOikea, pTiedosto); // Oikea alipuu
+    return;
 }
 
 void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
@@ -220,9 +224,10 @@ void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
     }
     kirjoitaPreOrder(pJuuri, pTiedosto); // Muutettu tähän
     fclose(pTiedosto);
+    return;
 }
 
-// Syvyyshaku (in-order) 
+
 // Syvyyshaku (PRE-ORDER) ei toiminut ainakaan codegraden mukaisesti
 int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi) {
     if (!pJuuri || *loytyi) return 0;
@@ -444,8 +449,6 @@ BNODE* binaariHaku(BNODE *pJuuri, int iHaettavaArvo) {
     }
 
     if (iHaettavaArvo == pJuuri->count) {
-
-
         return pJuuri; 
     } 
 

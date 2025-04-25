@@ -22,8 +22,7 @@ void keskiarvoLkm (TIETO *pA){
 
     printf("Nimien keskimääräinen esiintymismäärä on: %.2f\n", fKeskiarvo);
 
-    
-
+    return;
 }
 
 // Laskee nimien lukumäärän, jotka esiintyvät keskiarvon yläpuolella
@@ -50,6 +49,7 @@ void yliKeskiarvonLkm (TIETO *pA){
     }
 
     printf("Yli keskiarvon (%.2f) olevien nimien lukumäärä on: %d\n", fKeskiarvo ,iYli);
+    return;
 
 }
 // laskee nimien lukumäärän, jotka esiintyvät keskiarvon alapuolella
@@ -77,6 +77,7 @@ void alleKeskiarvonLkm (TIETO *pA){
     }
 
     printf("Alle keskiarvon (%.2f) olevien nimien lukumäärä on: %d\n", fKeskiarvo ,iAli);
+    return;
 
 }
 
@@ -92,6 +93,7 @@ void parittomatLkm(TIETO *pA){
     }
 
     printf("Nimet joiden esiintyvyys on pariton, lukumäärä on: %d\n", iLkm);
+    return;
 }
 // laskee nimien lukumäärän jotka esiintyvät parillisesti
 void parillisetLkm(TIETO *pA){
@@ -104,6 +106,7 @@ void parillisetLkm(TIETO *pA){
     }
 
     printf("Nimet joiden esiintyvyys on parillinen, lukumäärä on: %d\n", iLkm);
+    return;
 }
 
 // laskee nimien lukumäärän joilla on sama alkukirjain kuin yleisimmällä nimellä
@@ -132,5 +135,6 @@ void samatAlkukirjaimet(TIETO *pA){
     }
 
     printf("Nimien lukumäärä, jotka alkavat samalla kirjaimella kuin yleisin nimi '%s' on: %d\n", yleisinNimi, iLkm);
+    return;
 }
 

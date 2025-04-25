@@ -1,0 +1,10 @@
+Murtaza,21
+Hannu-Tapani,8
+Taawetti,6
+Christel,5
+Mika-Veli,7
+Zaman,18
+Thomasson,10
+Eewert,19
+Ari-Jukka,95
+Jani-Petri,42

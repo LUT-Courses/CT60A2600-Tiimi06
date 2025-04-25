@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 
-/////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////// joona tykkää tehä näit kauttaviivoi
 // Graafin perustoiminnot
 
 // Luo uuden tyhjän graafin
@@ -19,7 +19,7 @@ GRAAFI* graafiLuo(void) {
 }
 
 // Vapauttaa kaaret solmusta
-static void vapautaKaaret(KAARI *k) {
+ void vapautaKaaret(KAARI *k) {
     while (k) {
         KAARI *temp = k;
         k = k->seuraava;
@@ -45,7 +45,7 @@ void graafiVapauta(GRAAFI *g) {
 // Solmujen ja kaarien hallinta
 
 // Apufunktio: Etsii graafista solmun annetun nimen perusteella
-static VERTEX* etsiSolmu(GRAAFI *g, const char *nimi) {
+ VERTEX* etsiSolmu(GRAAFI *g, const char *nimi) {
     VERTEX *s = g->solmut;
     while (s) {
         if (strcmp(s->nimi, nimi) == 0)
@@ -56,7 +56,7 @@ static VERTEX* etsiSolmu(GRAAFI *g, const char *nimi) {
 }
 
 // Apufunktio: Lisää uusi solmu, jos sitä ei löydy; palauttaa solmun osoittimen
-static VERTEX* lisaaSolmu(GRAAFI *g, const char *nimi) {
+ VERTEX* lisaaSolmu(GRAAFI *g, const char *nimi) {
     VERTEX *s = etsiSolmu(g, nimi);
     if (s != NULL)
         return s;
@@ -229,7 +229,7 @@ GRAAFI* graafiPoistaSolmu(GRAAFI *g, const char *solmuNimi) {
 // Lyhimmän reitin etsiminen Dijkstran algoritmilla
 
 // Apufunktio: Laskee graafin solmujen lukumäärän
-static int laskeSolmut(GRAAFI *g) {
+ int laskeSolmut(GRAAFI *g) {
     int n = 0;
     VERTEX *s = g->solmut;
     while (s) {
@@ -240,7 +240,7 @@ static int laskeSolmut(GRAAFI *g) {
 }
 
 // Apufunktio: Hakee solmun indeksin taulukosta
-static int etsiIndeksi(VERTEX **taulukko, int n, VERTEX *s) {
+ int etsiIndeksi(VERTEX **taulukko, int n, VERTEX *s) {
     for (int i = 0; i < n; i++) {
         if (taulukko[i] == s)
             return i;

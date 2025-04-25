@@ -10,7 +10,6 @@ typedef struct BinNode {
     int height;
 } BNODE;
 
-/* Prototyypit */
 BNODE* binaariLuoNode(const char *pNimi, int iLukumaara);
 BNODE* binaariInsert(BNODE *pJuuri, const char *pNimi, int iLukumaara);
 void binaariVapauta(BNODE *pJuuri);

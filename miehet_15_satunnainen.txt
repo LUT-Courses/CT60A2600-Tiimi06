@@ -1,0 +1,16 @@
+Etunimi;Lukumäärä
+Murtaza;21
+Ari-Jukka;95
+Hannu-Tapani;8
+Zaman;18
+Taawetti;6
+Oskar;6552
+Thomasson;10
+Eewert;19
+Jani-Petri;42
+Christel;5
+Mika-Veli;7
+Hessu;36
+Mikko;44156
+Stuart;69
+Kimi;1663
