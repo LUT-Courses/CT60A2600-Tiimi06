@@ -2,29 +2,29 @@
 #define BINTREE_H
 #define NIMIPITUUS 50
 
-typedef struct BinNode {
+typedef struct BinSolmu {
     char name[NIMIPITUUS];
     int count;
-    struct BinNode *pVasen;
-    struct BinNode *pOikea;
+    struct BinSolmu *pVasen;
+    struct BinSolmu *pOikea;
     int height;
-} BNODE;
+} BSOLMU;
 
-BNODE* binaariLuoNode(const char *pNimi, int iLukumaara);
-BNODE* binaariInsert(BNODE *pJuuri, const char *pNimi, int iLukumaara);
-void binaariVapauta(BNODE *pJuuri);
-BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi);
-void tulostaPuu(BNODE *pJuuri, int taso);
+BSOLMU* binaariLuoSolmu(const char *pNimi, int iLukumaara);
+BSOLMU* binaariLisaa(BSOLMU *pJuuri, const char *pNimi, int iLukumaara);
+void binaariVapauta(BSOLMU *pJuuri);
+BSOLMU* binaariLueTiedosto(BSOLMU *pJuuri, const char *pTiedostonNimi);
+void tulostaPuu(BSOLMU *pJuuri, int taso);
 
-BNODE* binaariPoistaLukumaara(BNODE *pJuuri, int iLukumaara);
-BNODE* binaariPoistaNimi(BNODE *pJuuri, const char *pNimi);
-BNODE* binaariHaku(BNODE *pJuuri, int haettavaArvo);
-int etsiNimiLukumaaranPerusteella(BNODE *pJuuri, int arvo, char *nimi);
+BSOLMU* binaariPoistaLukumaara(BSOLMU *pJuuri, int iLukumaara);
+BSOLMU* binaariPoistaNimi(BSOLMU *pJuuri, const char *pNimi);
+BSOLMU* binaariHaku(BSOLMU *pJuuri, int haettavaArvo);
+int etsiNimiLukumaaranPerusteella(BSOLMU *pJuuri, int arvo, char *nimi);
 
 /* UUSI apufunktio:
    Etsii lukumäärän nimen perusteella ja tallentaa sen *arvo-muuttujaan.
    Palauttaa 1, jos osuma löytyy, muulloin 0.
 */
-int etsiLukumaaraNimenPerusteella(BNODE *pJuuri, const char *pNimi, int *arvo);
+int etsiLukumaaraNimenPerusteella(BSOLMU *pJuuri, const char *pNimi, int *arvo);
 
 #endif

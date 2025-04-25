@@ -3,11 +3,11 @@
 
 #include "Bintree.h"
 
-void keskiarvoLkmBin(BNODE *pJuuri);
-void yliKeskiarvonLkmBin(BNODE *pJuuri);
-void alleKeskiarvonLkmBin(BNODE *pJuuri);
-void parittomatLkmBin(BNODE *pJuuri);
-void parillisetLkmBin(BNODE *pJuuri);
-void samatAlkukirjaimetBin(BNODE *pJuuri);
+void keskiarvoLkmBin(BSOLMU *pJuuri);
+void yliKeskiarvonLkmBin(BSOLMU *pJuuri);
+void alleKeskiarvonLkmBin(BSOLMU *pJuuri);
+void parittomatLkmBin(BSOLMU *pJuuri);
+void parillisetLkmBin(BSOLMU *pJuuri);
+void samatAlkukirjaimetBin(BSOLMU *pJuuri);
 
 #endif 

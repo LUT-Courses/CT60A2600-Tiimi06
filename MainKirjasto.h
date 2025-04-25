@@ -19,7 +19,7 @@ void tallennaEtuperin(TIETO *pA, char *tiedostonNimi) ;
 void tallennaTakaperin(TIETO *pA, char *tiedostonNimi);
 TIETO *tyhjennaLista(TIETO *pA);
 void tilastoFaktaArpojaLista(TIETO *pA);
-void tilastoFaktaArpojaBin(BNODE *pA);
+void tilastoFaktaArpojaBin(BSOLMU *pA);
 int paaValikko(void);
 int linkitettyValikko(void);
 int binaariValikko(void); // Poista parametri

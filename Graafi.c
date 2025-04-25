@@ -25,16 +25,17 @@ GRAAFI* graafiLuo(void) {
         k = k->seuraava;
         free(temp);
     }
+    return;
 }
 
 // Vapauttaa graafin ja kaikki sen solmut ja kaaret
 void graafiVapauta(GRAAFI *g) {
     if (g == NULL)
         return;
-    VERTEX *s = g->solmut;
+    KARKI *s = g->solmut;
     while (s) {
         vapautaKaaret(s->kaaret);
-        VERTEX *temp = s;
+        KARKI *temp = s;
         s = s->seuraava;
         free(temp);
     }
@@ -45,8 +46,8 @@ void graafiVapauta(GRAAFI *g) {
 // Solmujen ja kaarien hallinta
 
 // Apufunktio: Etsii graafista solmun annetun nimen perusteella
- VERTEX* etsiSolmu(GRAAFI *g, const char *nimi) {
-    VERTEX *s = g->solmut;
+ KARKI* etsiSolmu(GRAAFI *g, const char *nimi) {
+    KARKI *s = g->solmut;
     while (s) {
         if (strcmp(s->nimi, nimi) == 0)
             return s;
@@ -56,11 +57,11 @@ void graafiVapauta(GRAAFI *g) {
 }
 
 // Apufunktio: Lisää uusi solmu, jos sitä ei löydy; palauttaa solmun osoittimen
- VERTEX* lisaaSolmu(GRAAFI *g, const char *nimi) {
-    VERTEX *s = etsiSolmu(g, nimi);
+ KARKI* lisaaSolmu(GRAAFI *g, const char *nimi) {
+    KARKI *s = etsiSolmu(g, nimi);
     if (s != NULL)
         return s;
-    s = (VERTEX*)malloc(sizeof(VERTEX));
+    s = (KARKI*)malloc(sizeof(KARKI));
     if (s == NULL) {
         perror("Muistin varaus solmulle epäonnistui");
         exit(1);
@@ -75,8 +76,8 @@ void graafiVapauta(GRAAFI *g) {
 
 // Lisää tai päivittää kaaren graafiin
 void graafiLisaaKaari(GRAAFI *g, const char *lahto, const char *kohde, int etaisyys) {
-    VERTEX *sLahto = lisaaSolmu(g, lahto);
-    VERTEX *sKohde = lisaaSolmu(g, kohde);
+    KARKI *sLahto = lisaaSolmu(g, lahto);
+    KARKI *sKohde = lisaaSolmu(g, kohde);
     
     KAARI *k = sLahto->kaaret;
     while (k) {
@@ -116,6 +117,7 @@ void graafiLisaaKaari(GRAAFI *g, const char *lahto, const char *kohde, int etais
     k2->kohde = sLahto;
     k2->seuraava = sKohde->kaaret;
     sKohde->kaaret = k2;
+    return;
 }
 
 /////////////////////////////////////////////////////////////////////////
@@ -182,7 +184,7 @@ GRAAFI* graafiLueTiedosto(GRAAFI *g, const char *tiedostonNimi) {
 
 // Poistaa solmun ja kaikki siihen liittyvät kaaret graafista
 GRAAFI* graafiPoistaSolmu(GRAAFI *g, const char *solmuNimi) {
-    VERTEX *s = g->solmut, *edellinen = NULL;
+    KARKI *s = g->solmut, *edellinen = NULL;
     // Etsi poistettava solmu
     while (s) {
         if (strcmp(s->nimi, solmuNimi) == 0)
@@ -231,7 +233,7 @@ GRAAFI* graafiPoistaSolmu(GRAAFI *g, const char *solmuNimi) {
 // Apufunktio: Laskee graafin solmujen lukumäärän
  int laskeSolmut(GRAAFI *g) {
     int n = 0;
-    VERTEX *s = g->solmut;
+    KARKI *s = g->solmut;
     while (s) {
         n++;
         s = s->seuraava;
@@ -240,7 +242,7 @@ GRAAFI* graafiPoistaSolmu(GRAAFI *g, const char *solmuNimi) {
 }
 
 // Apufunktio: Hakee solmun indeksin taulukosta
- int etsiIndeksi(VERTEX **taulukko, int n, VERTEX *s) {
+ int etsiIndeksi(KARKI **taulukko, int n, KARKI *s) {
     for (int i = 0; i < n; i++) {
         if (taulukko[i] == s)
             return i;
@@ -255,9 +257,9 @@ void graafiEtsiLyhinReitti(GRAAFI *g, const char *lahto, const char *kohde, cons
     if (n == 0) return;
     
     // Luo taulukko kaikista solmuista
-    VERTEX **solmut = (VERTEX**)malloc(n * sizeof(VERTEX*));
+    KARKI **solmut = (KARKI**)malloc(n * sizeof(KARKI*));
     int idx = 0;
-    VERTEX *s = g->solmut;
+    KARKI *s = g->solmut;
     while (s) {
         solmut[idx++] = s;
         s = s->seuraava;

@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 // Luodaan apufuktiot eri tilastofaktoja varten.
- void laskeKeskiarvo(BNODE *pNode, int *iLkm, int *iSumma) {
+ void laskeKeskiarvo(BSOLMU *pNode, int *iLkm, int *iSumma) {
     if (pNode == NULL) return;
 
 
@@ -17,7 +17,7 @@
     laskeKeskiarvo(pNode->pOikea, iLkm, iSumma);
 }
 
- void laskeYliKeskiarvon(BNODE *pNode, double fKeskiarvo, int *iYli){
+ void laskeYliKeskiarvon(BSOLMU *pNode, double fKeskiarvo, int *iYli){
 
     if (pNode == NULL) return;
 
@@ -30,7 +30,7 @@
     laskeYliKeskiarvon(pNode->pOikea, fKeskiarvo, iYli);
 }
 
- void laskeAlleKeskiarvon(BNODE *pNode, double fKeskiarvo, int *iAli) {
+ void laskeAlleKeskiarvon(BSOLMU *pNode, double fKeskiarvo, int *iAli) {
      if (pNode == NULL) return;
 
 
@@ -44,7 +44,7 @@
 
 }
 
- void laskeParittomat(BNODE *pNode, int *iLkm) {
+ void laskeParittomat(BSOLMU *pNode, int *iLkm) {
     if (pNode == NULL) return;
 
     
@@ -60,7 +60,7 @@
 
 
 
- void laskeParilliset(BNODE *pNode, int *iLkm) {
+ void laskeParilliset(BSOLMU *pNode, int *iLkm) {
     if (pNode == NULL) return;
 
     if (pNode->count % 2 == 0) {
@@ -73,7 +73,7 @@
 }
 
 
- void etsiYleisin(BNODE *pNode, int *max, char *cKirjain, char *yleisinNimi) {
+ void etsiYleisin(BSOLMU *pNode, int *max, char *cKirjain, char *yleisinNimi) {
     if (pNode == NULL) return;
 
     if (pNode->count > *max) {
@@ -85,7 +85,7 @@
     etsiYleisin(pNode->pOikea, max, cKirjain, yleisinNimi);
 }
 
- void laskeSamatAlkukirjaimet(BNODE *pNode, char cKirjain, int *iLkm) {
+ void laskeSamatAlkukirjaimet(BSOLMU *pNode, char cKirjain, int *iLkm) {
         if (pNode == NULL) return;
 
     if (pNode->name[0] == cKirjain){
@@ -101,7 +101,7 @@
 
 // Ohjelma laskee nimien esiintymismäärän mukaan keskiarvon
 
-void keskiarvoLkmBin(BNODE *pJuuri) {
+void keskiarvoLkmBin(BSOLMU *pJuuri) {
 
     int iLkm = 0;
     int iSumma = 0;
@@ -114,7 +114,7 @@ void keskiarvoLkmBin(BNODE *pJuuri) {
 }
 
 // Laskee nimien lukumäärän, jotka esiintyvät keskiarvon yläpuolella binääripuussa
-void yliKeskiarvonLkmBin(BNODE *pJuuri) {
+void yliKeskiarvonLkmBin(BSOLMU *pJuuri) {
 
     int iSumma = 0;
 
@@ -131,7 +131,7 @@ void yliKeskiarvonLkmBin(BNODE *pJuuri) {
 }
 
 // Laskee nimien lukumäärän, jotka esiintyvät keskiarvon alapuolella binääripuussa
-void alleKeskiarvonLkmBin(BNODE *pJuuri) {
+void alleKeskiarvonLkmBin(BSOLMU *pJuuri) {
 
     int iSumma = 0;
     int iLkm = 0;
@@ -148,7 +148,7 @@ void alleKeskiarvonLkmBin(BNODE *pJuuri) {
 }
 
 // Laskee nimien lukumäärän, jotka esiintyvät parittomasti binääripuussa
-void parittomatLkmBin(BNODE *pJuuri) {
+void parittomatLkmBin(BSOLMU *pJuuri) {
 
     int iLkm = 0;
     laskeParittomat(pJuuri, &iLkm);
@@ -159,7 +159,7 @@ void parittomatLkmBin(BNODE *pJuuri) {
 
 
 // Laskee nimien lukumäärän, jotka esiintyvät parillisesti binääripuussa
-void parillisetLkmBin(BNODE *pJuuri) {
+void parillisetLkmBin(BSOLMU *pJuuri) {
 
     int iLkm = 0;
     laskeParilliset(pJuuri, &iLkm);
@@ -170,7 +170,7 @@ void parillisetLkmBin(BNODE *pJuuri) {
 }
 
 // Laskee nimien lukumäärän, joilla on sama alkukirjain kuin yleisimmällä nimellä binääripuussa
-void samatAlkukirjaimetBin(BNODE *pJuuri) {
+void samatAlkukirjaimetBin(BSOLMU *pJuuri) {
 
     char cKirjain;
     int max = INT_MIN;
