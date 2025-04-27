@@ -22,4 +22,4 @@ gcc testit.c MainKirjasto.c MergeSortLaskevaJKirjasto.c MergeSortNousevaJKirjast
 
 
 
-Näillä komennoilla saat käännettyä ohjelman ja testit Makefilea käyttäen.
+Näillä komennoilla saat käännettyä ohjelman ja testit.
