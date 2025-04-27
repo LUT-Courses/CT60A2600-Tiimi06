@@ -4,6 +4,7 @@
         "tilastofaktatkirjasto.h": "c",
         "time.h": "c",
         "string.h": "c",
-        "tilastofaktatlista.h": "c"
+        "tilastofaktatlista.h": "c",
+        "mergesortlaskevajkirjasto.h": "c"
     }
 }

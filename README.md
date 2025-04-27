@@ -40,3 +40,10 @@ Projektissa on kaksi vaihtoehtoista pääohjelmaa:
 make
 ./projekti
 make clean
+
+## Cunitin lataaminen ja käyttö
+sudo apt install libcunit1 libcunit1-doc libcunit1-dev
+gcc testit.c MainKirjasto.c MergeSortLaskevaJKirjasto.c MergeSortNousevaJKirjasto.c TilastoFaktatBin.c TilastoFaktatLista.c Bintree.c Graafi.c -o test_program -I/opt/homebrew/include -L/opt/homebrew/lib -lcunit
+./test_program
+
+## Asennusohjeista löytyy tarvittaessa lisätietoa
