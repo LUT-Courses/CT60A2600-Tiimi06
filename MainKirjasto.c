@@ -225,6 +225,10 @@ void tilastoFaktaArpojaLista(TIETO *pA) {
         case 4:
             samatAlkukirjaimet(pA);
             break;
+            
+        case 5:
+            parittomatLkm(pA);
+            break;
         default:
             printf("Jokin meni pieleen faktan arpomisen aikana.\n");
     }
