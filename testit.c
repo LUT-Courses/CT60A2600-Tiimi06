@@ -173,7 +173,7 @@ void test_tiedostonPoisto(void) { CU_PASS("Tiedosto poistettu."); }
 int main(void) {
     if (CU_initialize_registry() != CUE_SUCCESS)
         return CU_get_error();
-    CU_pSuite suite = CU_add_suite("Testit yhteensä 46 kpl", NULL, NULL);
+    CU_pSuite suite = CU_add_suite("Testit yhteensä 37 kpl", NULL, NULL);
 
     // MergeSort
     CU_add_test(suite, "MergeSortLaskeva 1", test_mergeSortLaskeva);

@@ -1,19 +1,25 @@
 Alla ohjeet Makefilea käyttäen:
 
 Puhdista käännöstiedostot:
-→ Suorita komentoriviltä:
+-> Suorita komentoriviltä:
 make clean
 
 Rakennetaan pääohjelma:
-→ Komento:
+-> Komento:
 make projekti
-→ Suorita sitten ohjelma:
+-> Suorita sitten ohjelma:
 ./projekti
 
-Rakennetaan testit:
-→ Komento:
-make test
-→ Suorita testit:
-./test_runner
+-> Ajetaan testit:
+Asenna ensin CUnit:
+sudo apt install libcunit1 libcunit1-doc libcunit1-dev
+
+-> Suorita komento:
+gcc testit.c MainKirjasto.c MergeSortLaskevaJKirjasto.c MergeSortNousevaJKirjasto.c TilastoFaktatBin.c TilastoFaktatLista.c Bintree.c Graafi.c -o test_program -I/opt/homebrew/include -L/opt/homebrew/lib -lcunit
+
+-> Aja testit:
+./test_program
+
+
 
 Näillä komennoilla saat käännettyä ohjelman ja testit Makefilea käyttäen.
