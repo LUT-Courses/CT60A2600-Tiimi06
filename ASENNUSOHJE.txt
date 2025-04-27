@@ -1,0 +1,19 @@
+Alla ohjeet Makefilea käyttäen:
+
+Puhdista käännöstiedostot:
+→ Suorita komentoriviltä:
+make clean
+
+Rakennetaan pääohjelma:
+→ Komento:
+make projekti
+→ Suorita sitten ohjelma:
+./projekti
+
+Rakennetaan testit:
+→ Komento:
+make test
+→ Suorita testit:
+./test_runner
+
+Näillä komennoilla saat käännettyä ohjelman ja testit Makefilea käyttäen.
