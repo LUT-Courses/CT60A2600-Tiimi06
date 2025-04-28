@@ -39,5 +39,5 @@ Graafi.o: Graafi.c Graafi.h
 
 # PITÄÄ AINA LISÄTÄ TÄTÄ et ei tuu ongelma kääntämiseen kanssa
 clean:
-	rm -f *.o projekti teks*.txt
+	rm -f *.o projekti
 #muista poistaa kaikki tekstitiedostot ennen codegradepalautus, lisäämällä kommento "teks*.txt"  "*.o projektin" jälkeen

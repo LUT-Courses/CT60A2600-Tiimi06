@@ -16,11 +16,11 @@ typedef struct Vertex {
     char nimi[SOLMUNPITUUS];
     KAARI *kaaret;
     struct Vertex *seuraava;
-} VERTEX;
+} KARKI;
 
 // Graafi (verkko)
 typedef struct {
-    VERTEX *solmut;
+    KARKI *solmut;
 } GRAAFI;
 
 /* Prototyypit */

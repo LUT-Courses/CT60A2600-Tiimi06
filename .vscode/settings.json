@@ -3,6 +3,8 @@
         "l8t1kirjasto.h": "c",
         "tilastofaktatkirjasto.h": "c",
         "time.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "tilastofaktatlista.h": "c",
+        "mergesortlaskevajkirjasto.h": "c"
     }
 }

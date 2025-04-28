@@ -5,7 +5,7 @@
 #include <string.h>
 
 // Apufunktio listan puolittamiseen
-static TIETO *puolittaa(TIETO *pAlku) {
+TIETO *nousevaPuolita(TIETO *pAlku) {
     TIETO *pNopea = pAlku;
     TIETO *pHidas = pAlku;
 
@@ -25,7 +25,7 @@ static TIETO *puolittaa(TIETO *pAlku) {
 }
 
 // Yhdistää kaksi järjestettyä listaa (nouseva järjestys)
-static TIETO *yhdista(TIETO *pEka, TIETO *pToka) {
+TIETO *yhdista(TIETO *pEka, TIETO *pToka) {
     if (pEka == NULL) return pToka;
     if (pToka == NULL) return pEka;
 
@@ -60,7 +60,7 @@ TIETO *mergeSortNouseva(TIETO *pA) {
         return pA;
     }
 
-    TIETO *pToinenOsa = puolittaa(pA);
+    TIETO *pToinenOsa = nousevaPuolita(pA);
     pA = mergeSortNouseva(pA);
     pToinenOsa = mergeSortNouseva(pToinenOsa);
 

@@ -5,20 +5,20 @@
 #include <string.h>
 
 //Funktioiden esittely
-void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto);
-void tulostaPuu(BNODE *pJuuri, int taso);
-int max(int a, int b);
-int tarkistaKorkeus(BNODE *node);
-void paivitaKorkeus(BNODE *node);
-int tarkistaTasapaino(BNODE *node);
-BNODE* pyoritaOikealle(BNODE *y);
-BNODE* pyoritaVasemmalle(BNODE *x);
-BNODE* binaariHaku(BNODE *pJuuri, int haettavaArvo);
+void kirjoitaEsiJarjestys(BSOLMU *pJuuri, FILE *pTiedosto);
+void tulostaPuu(BSOLMU *pJuuri, int taso);
+int maksimi(int a, int b);
+int tarkistaKorkeus(BSOLMU *node);
+void paivitaKorkeus(BSOLMU *node);
+int tarkistaTasapaino(BSOLMU *node);
+BSOLMU* pyoritaOikealle(BSOLMU *y);
+BSOLMU* pyoritaVasemmalle(BSOLMU *x);
+BSOLMU* binaariHaku(BSOLMU *pJuuri, int haettavaArvo);
 
 
 /* Leveyshaulle tarvittava jono */
 typedef struct JonoSolmu {
-    BNODE *data;
+    BSOLMU *data;
     struct JonoSolmu *pSeuraava;
 } JONOSOLMU;
 
@@ -27,7 +27,7 @@ typedef struct Jono {
     JONOSOLMU *pTaakse;
 } JONO;
 
-void tulostaPuu(BNODE *pJuuri, int taso) {
+void tulostaPuu(BSOLMU *pJuuri, int taso) {
     if (pJuuri == NULL) {
         return;
     }
@@ -52,7 +52,7 @@ JONO* jonoLuo() {
     return pUusiJono;
 }
 
-void jonoLisaa(JONO *pJono, BNODE *pData) {
+void jonoLisaa(JONO *pJono, BSOLMU *pData) {
     JONOSOLMU *pUusiSolmu;
     if ((pUusiSolmu = (JONOSOLMU*)malloc(sizeof(JONOSOLMU))) == NULL) {
         perror("Muistin varaus epäonnistui, lopetetaan");
@@ -67,13 +67,14 @@ void jonoLisaa(JONO *pJono, BNODE *pData) {
     } else {
         pJono->pEteen = pJono->pTaakse = pUusiSolmu;
     }
+    return;
 }
 
-BNODE* jonoPoista(JONO *pJono) {
+BSOLMU* jonoPoista(JONO *pJono) {
     if (!pJono->pEteen) return NULL;
     
     JONOSOLMU *pTemp = pJono->pEteen;
-    BNODE *pData = pTemp->data;
+    BSOLMU *pData = pTemp->data;
     pJono->pEteen = pJono->pEteen->pSeuraava;
     
     if (!pJono->pEteen) pJono->pTaakse = NULL;
@@ -84,18 +85,19 @@ BNODE* jonoPoista(JONO *pJono) {
 void jonoVapauta(JONO *pJono) {
     while (pJono->pEteen) jonoPoista(pJono);
     free(pJono);
+    return;
 }
 
 
 /* Binääripuun toteutus */
-BNODE* binaariLuoNode(const char *pNimi, int iLukumaara) {
+BSOLMU* binaariLuoSolmu(const char *pNimi, int iLukumaara) {
     if (!pNimi || strlen(pNimi) == 0) {
         printf("Virhe: Tyhjä nimi!\n");
         return NULL;
     }
     
-    BNODE *pUusiNode;
-    if ((pUusiNode = (BNODE*)malloc(sizeof(BNODE))) == NULL) {
+    BSOLMU *pUusiNode;
+    if ((pUusiNode = (BSOLMU*)malloc(sizeof(BSOLMU))) == NULL) {
         perror("Muistin varaus epäonnistui, lopetetaan");
         exit(0);
     }
@@ -109,24 +111,24 @@ BNODE* binaariLuoNode(const char *pNimi, int iLukumaara) {
     return pUusiNode;
 }
 
-BNODE* binaariInsert(BNODE *pJuuri, const char *pNimi, int iLukumaara) {
+BSOLMU* binaariLisaa(BSOLMU *pJuuri, const char *pNimi, int iLukumaara) {
     if (!pJuuri) {
-        return binaariLuoNode(pNimi, iLukumaara);
+        return binaariLuoSolmu(pNimi, iLukumaara);
     }
 
     if (iLukumaara < pJuuri->count) {
-        pJuuri->pVasen = binaariInsert(pJuuri->pVasen, pNimi, iLukumaara);
+        pJuuri->pVasen = binaariLisaa(pJuuri->pVasen, pNimi, iLukumaara);
     } 
     else if (iLukumaara > pJuuri->count) {
-        pJuuri->pOikea = binaariInsert(pJuuri->pOikea, pNimi, iLukumaara);
+        pJuuri->pOikea = binaariLisaa(pJuuri->pOikea, pNimi, iLukumaara);
     } 
     // Jos numerot ovat samat, vertaile NIMIÄ
     else {
         int cmp = strcmp(pNimi, pJuuri->name);
         if (cmp < 0) {
-            pJuuri->pVasen = binaariInsert(pJuuri->pVasen, pNimi, iLukumaara);
+            pJuuri->pVasen = binaariLisaa(pJuuri->pVasen, pNimi, iLukumaara);
         } else {
-            pJuuri->pOikea = binaariInsert(pJuuri->pOikea, pNimi, iLukumaara);
+            pJuuri->pOikea = binaariLisaa(pJuuri->pOikea, pNimi, iLukumaara);
         }
     }
 
@@ -159,15 +161,16 @@ BNODE* binaariInsert(BNODE *pJuuri, const char *pNimi, int iLukumaara) {
     return pJuuri;
 }
 
-void binaariVapauta(BNODE *pJuuri) {
+void binaariVapauta(BSOLMU *pJuuri) {
     if (pJuuri) {
         binaariVapauta(pJuuri->pVasen);
         binaariVapauta(pJuuri->pOikea);
         free(pJuuri);
     }
+    return;
 }
 
-BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi) {
+BSOLMU* binaariLueTiedosto(BSOLMU *pJuuri, const char *pTiedostonNimi) {
     FILE *pTiedosto = NULL;
     char aRivi[100] = {0};
     
@@ -197,7 +200,7 @@ BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi) {
         }
         
         int iLukumaara = atoi(p2);
-        pJuuri = binaariInsert(pJuuri, p1, iLukumaara);
+        pJuuri = binaariLisaa(pJuuri, p1, iLukumaara);
     }
 
     fclose(pTiedosto);
@@ -205,26 +208,28 @@ BNODE* binaariLueTiedosto(BNODE *pJuuri, const char *pTiedostonNimi) {
 }
 
 
-void kirjoitaPreOrder(BNODE *pJuuri, FILE *pTiedosto) {
+void kirjoitaEsiJarjestys(BSOLMU *pJuuri, FILE *pTiedosto) {
     if (!pJuuri) return;
     fprintf(pTiedosto, "%s,%d\n", pJuuri->name, pJuuri->count); // Juuri ensin
-    kirjoitaPreOrder(pJuuri->pVasen, pTiedosto); // Vasen alipuu
-    kirjoitaPreOrder(pJuuri->pOikea, pTiedosto); // Oikea alipuu
+    kirjoitaEsiJarjestys(pJuuri->pVasen, pTiedosto); // Vasen alipuu
+    kirjoitaEsiJarjestys(pJuuri->pOikea, pTiedosto); // Oikea alipuu
+    return;
 }
 
-void binaariKirjoitaJarjestyksessa(BNODE *pJuuri, const char *pTiedostonNimi) {
+void binaariKirjoitaJarjestyksessa(BSOLMU *pJuuri, const char *pTiedostonNimi) {
     FILE *pTiedosto = NULL;
     if((pTiedosto = fopen (pTiedostonNimi, "w")) == NULL) {
         perror("Tiedoston kirjoittamisessa virhe, lopetetaan");
         exit(0);
     }
-    kirjoitaPreOrder(pJuuri, pTiedosto); // Muutettu tähän
+    kirjoitaEsiJarjestys(pJuuri, pTiedosto); // Muutettu tähän
     fclose(pTiedosto);
+    return;
 }
 
-// Syvyyshaku (in-order) 
+
 // Syvyyshaku (PRE-ORDER) ei toiminut ainakaan codegraden mukaisesti
-int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi) {
+int syvyyshakuRekursiivinen(BSOLMU *pJuuri, int iHaettava, FILE *pTiedosto, int *loytyi, char *loydettyNimi) {
     if (!pJuuri || *loytyi) return 0;
 
     // 1. Kirjoita NYKYINEN solmu aina ensin (pre-order)
@@ -250,7 +255,7 @@ int syvyyshakuRekursiivinen(BNODE *pJuuri, int iHaettava, FILE *pTiedosto, int *
     return *loytyi;
 }
 
-int syvyysHaku(BNODE *pJuuri, int iHaettava, const char *pTiedostonNimi, char *loydettyNimi) {
+int syvyysHaku(BSOLMU *pJuuri, int iHaettava, const char *pTiedostonNimi, char *loydettyNimi) {
     FILE *pTiedosto = NULL;
 
     if((pTiedosto = fopen(pTiedostonNimi, "w")) == NULL) {
@@ -265,7 +270,7 @@ int syvyysHaku(BNODE *pJuuri, int iHaettava, const char *pTiedostonNimi, char *l
 }
 
 /* Leveyshaku (BFS) */
-int leveysHaku(BNODE *pJuuri, const char *pHaettavaNimi, const char *pTiedostonNimi, int *loydettyLkm) {
+int leveysHaku(BSOLMU *pJuuri, const char *pHaettavaNimi, const char *pTiedostonNimi, int *loydettyLkm) {
     if (!pJuuri) return 0;
     
     JONO *pJono = jonoLuo();
@@ -280,7 +285,7 @@ int leveysHaku(BNODE *pJuuri, const char *pHaettavaNimi, const char *pTiedostonN
     jonoLisaa(pJono, pJuuri);
 
     while (pJono->pEteen && !loytyi) {
-        BNODE *pNykyinen = jonoPoista(pJono);
+        BSOLMU *pNykyinen = jonoPoista(pJono);
         fprintf(pTiedosto, "%s,%d\n", pNykyinen->name, pNykyinen->count);
         
         if (strcmp(pNykyinen->name, pHaettavaNimi) == 0) {
@@ -297,7 +302,7 @@ int leveysHaku(BNODE *pJuuri, const char *pHaettavaNimi, const char *pTiedostonN
     return loytyi;
 }
 //uusi lisäys
-int etsiNimiLukumaaranPerusteella(BNODE *pJuuri, int arvo, char *nimi) {
+int etsiNimiLukumaaranPerusteella(BSOLMU *pJuuri, int arvo, char *nimi) {
     if (pJuuri == NULL)
         return 0;
     if (pJuuri->count == arvo) {
@@ -312,7 +317,7 @@ int etsiNimiLukumaaranPerusteella(BNODE *pJuuri, int arvo, char *nimi) {
 }
 
 /* Poistaa solmun, jonka count vastaa annettua iLukumaaraa */
-BNODE* binaariPoistaLukumaara(BNODE *pJuuri, int iLukumaara) {
+BSOLMU* binaariPoistaLukumaara(BSOLMU *pJuuri, int iLukumaara) {
     if (pJuuri == NULL)
         return NULL;
     
@@ -326,16 +331,16 @@ BNODE* binaariPoistaLukumaara(BNODE *pJuuri, int iLukumaara) {
             free(pJuuri);
             return NULL;
         } else if (pJuuri->pVasen == NULL) {
-            BNODE *temp = pJuuri->pOikea;
+            BSOLMU *temp = pJuuri->pOikea;
             free(pJuuri);
             return temp;
         } else if (pJuuri->pOikea == NULL) {
-            BNODE *temp = pJuuri->pVasen;
+            BSOLMU *temp = pJuuri->pVasen;
             free(pJuuri);
             return temp;
         } else {
             
-            BNODE *temp = pJuuri->pOikea;
+            BSOLMU *temp = pJuuri->pOikea;
             while (temp && temp->pVasen != NULL) {
                 temp = temp->pVasen;
             }
@@ -352,7 +357,7 @@ BNODE* binaariPoistaLukumaara(BNODE *pJuuri, int iLukumaara) {
 /* Apufunktio, joka rekursiivisesti poistaa solmun nimen perusteella.
    'poistettu' kertoo, onko poistotoimenpide suoritettu.
 */
-BNODE* binaariPoistaNimiRekursiivisesti(BNODE *pJuuri, const char *pNimi, int *poistettu) {
+BSOLMU* binaariPoistaNimiRekursiivisesti(BSOLMU *pJuuri, const char *pNimi, int *poistettu) {
     if (pJuuri == NULL)
         return NULL;
     
@@ -370,12 +375,12 @@ BNODE* binaariPoistaNimiRekursiivisesti(BNODE *pJuuri, const char *pNimi, int *p
 }
 
 /* Poistaa solmun nimen perusteella, eli ensimmäisen osuman, joka vastaa annettua pNimi-arvoa */
-BNODE* binaariPoistaNimi(BNODE *pJuuri, const char *pNimi) {
+BSOLMU* binaariPoistaNimi(BSOLMU *pJuuri, const char *pNimi) {
     int poistettu = 0;
     return binaariPoistaNimiRekursiivisesti(pJuuri, pNimi, &poistettu);
 }
 
-int etsiLukumaaraNimenPerusteella(BNODE *pJuuri, const char *pNimi, int *arvo) {
+int etsiLukumaaraNimenPerusteella(BSOLMU *pJuuri, const char *pNimi, int *arvo) {
     if (pJuuri == NULL) {
         return 0;
     }
@@ -392,28 +397,29 @@ int etsiLukumaaraNimenPerusteella(BNODE *pJuuri, const char *pNimi, int *arvo) {
     return 0;
 }
 
-int max(int a, int b) {
+int maksimi(int a, int b) {
     return (a > b) ? a : b;
 }
 
-int tarkistaKorkeus(BNODE *node) {
+int tarkistaKorkeus(BSOLMU *node) {
     if (node == NULL) return 0;
     return node -> height;
 }
 
-void paivitaKorkeus (BNODE *node) {
+void paivitaKorkeus (BSOLMU *node) {
     if(node == NULL) return;
-    node -> height = 1 + max(tarkistaKorkeus(node -> pVasen), tarkistaKorkeus(node -> pOikea));
+    node -> height = 1 + maksimi(tarkistaKorkeus(node -> pVasen), tarkistaKorkeus(node -> pOikea));
+    return;
 }
 
-int tarkistaTasapaino(BNODE *node) {
+int tarkistaTasapaino(BSOLMU *node) {
     if (node == NULL) return 0;  // Korjattu return-lauseke
     return tarkistaKorkeus(node->pVasen) - tarkistaKorkeus(node->pOikea);
 }
 
-BNODE* pyoritaOikealle(BNODE *y) {
-    BNODE *x = y->pVasen;
-    BNODE *T2 = x->pOikea;
+BSOLMU* pyoritaOikealle(BSOLMU *y) {
+    BSOLMU *x = y->pVasen;
+    BSOLMU *T2 = x->pOikea;
 
     x->pOikea = y;
     y->pVasen = T2;
@@ -424,9 +430,9 @@ BNODE* pyoritaOikealle(BNODE *y) {
     return x;
 }
 
-BNODE* pyoritaVasemmalle(BNODE *x) {
-    BNODE *y = x->pOikea;
-    BNODE *T2 = y->pVasen;
+BSOLMU* pyoritaVasemmalle(BSOLMU *x) {
+    BSOLMU *y = x->pOikea;
+    BSOLMU *T2 = y->pVasen;
 
     y->pVasen = x;
     x->pOikea = T2;
@@ -438,14 +444,12 @@ BNODE* pyoritaVasemmalle(BNODE *x) {
 }
 
 // Binäärihaun toteutus
-BNODE* binaariHaku(BNODE *pJuuri, int iHaettavaArvo) {
+BSOLMU* binaariHaku(BSOLMU *pJuuri, int iHaettavaArvo) {
     if (pJuuri == NULL) {
         return NULL; 
     }
 
     if (iHaettavaArvo == pJuuri->count) {
-
-
         return pJuuri; 
     } 
 

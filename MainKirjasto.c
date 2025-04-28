@@ -11,6 +11,28 @@
 #include "Bintree.h"
 #include "TilastoFaktatBin.h"
 
+// Aliohjelmien esittelyt
+
+// --- Päävalikot ---
+int paaValikko(void);
+int linkitettyValikko(void);
+int binaariValikko(void);
+int graafiValikko(void);
+
+// --- Yleiset apufunktiot ---
+char *kysyNimi(char *pPromtti);
+
+// --- Linkitetty lista ---
+TIETO *lisaaAlkio(TIETO *pAlku, char *sukuNimi, int lkm);
+TIETO *lueTiedosto(TIETO *pAlku, char *tiedostonNimi);
+void tallennaEtuperin(TIETO *pAlku, char *tiedostonNimi);
+void tallennaTakaperin(TIETO *pAlku, char *tiedostonNimi);
+TIETO *tyhjennaLista(TIETO *pAlku);
+void tilastoFaktaArpojaLista(TIETO *pAlku);
+
+// --- Binääripuu ---
+void tilastoFaktaArpojaBin(BSOLMU *pJuuri);
+
 char *kysyNimi(char *pPromtti) {
     char valiaikainenMuutuja[TIEDOSTONKOKO] = "";
     char *valiaikainenTaulukko = NULL;
@@ -199,23 +221,22 @@ void tilastoFaktaArpojaLista(TIETO *pA) {
         case 3:
             parillisetLkm(pA);
             break;
-        /*
-        case 4:dw rfmue8g<gn j
-        juikghrghm9034
-        p+0* 
-            parittomatLkm(pA);
-            break;
-        */
-        case 5:
+        
+        case 4:
             samatAlkukirjaimet(pA);
+            break;
+            
+        case 5:
+            parittomatLkm(pA);
             break;
         default:
             printf("Jokin meni pieleen faktan arpomisen aikana.\n");
     }
+    return;
 }
 
 // Arpoo satunnaisen tilastofaktan tulostettavaksi binääripuulle
-void tilastoFaktaArpojaBin(BNODE *pA) {
+void tilastoFaktaArpojaBin(BSOLMU *pA) {
     if (pA == NULL) {
         printf("Virhe: tietorakenne on tyhjä.\n");
         return;
@@ -311,5 +332,5 @@ int graafiValikko() {
     printf("Anna valintasi: ");
     scanf("%d", &iValinta);
     getchar();
-    return iValinta = 0;
+    return iValinta;
 }
